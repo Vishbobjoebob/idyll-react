@@ -17,9 +17,10 @@ footer {
     text-align: center;
 }
 
+/* Copy into new css file */
 @media only screen and (min-width: 1000px) {
     body {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://image.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg') no-repeat center center fixed;
+        background: url('') no-repeat center center fixed;
         background-size: cover;
         height: auto;
     }
@@ -33,6 +34,7 @@ footer {
         height: 100vh;
     }
 }
+/**/
 
 li {
     color: inherit;
@@ -51,44 +53,18 @@ li {
     color: rgb(13, 26, 38);
     position: fixed;
     top: 0;
-    height: 60px;
-    line-height: 60px;
+    height: 87px;
     width: 100vw;
     z-index: 10;
-    -webkit-box-shadow: 0 0px 10px 0px #999;
-    -moz-box-shadow: 0 0px 10px 0px #999;
     box-shadow: 0 0px 10px 0px #999;
 }
-
-.nav-wrapper {
-    margin: auto;
-    text-align: center;
-    width: 70%;
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-@media(max-width: 768px) {
-    .nav-wrapper {
-        width: 90%;
-    }
-}
-
-@media(max-width: 638px) {
-    .nav-wrapper {
-        width: 100%;
-    }
-}
-
 .logo {
-    float: left;
-    margin-left: 28px;
     font-size: 1.5em;
-    height: 60px;
-}
-
-@media(max-width: 768px) {
-    .logo {
-        margin-left: 5px;
-    }
 }
 
 img.logo {
@@ -96,6 +72,11 @@ img.logo {
     left: 10px;
     top: 10px;
     margin: 0px 15px 15px 0px;
+}
+
+#company-name {
+    font-size: 24px;
+    margin-left: 15px;
 }
 
 #navbar ul {

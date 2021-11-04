@@ -26,6 +26,30 @@ app.get("/api/todos", (req, res) => {
     })
 });
 
+app.get("/login", (req, res) => {
+    console.log(req.user);
+    
+})
+
+app.post('/api/signup', (req, res) => {
+    const email = req.user.email;
+    const username = req.user.username
+    const firstName = req.user.firstName;
+    const lastName = req.user.lastName;
+    const phoneNumber = req.user.phoneNumber;
+        
+    (async () => {
+        try {
+          await db.collection('items').doc('/' + req.body.id + '/')
+              .create({item: req.body.item});
+          return res.status(200).send();
+        } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+        }
+      })();
+  });
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })

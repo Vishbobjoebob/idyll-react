@@ -4,90 +4,32 @@ import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import '../css/index.css'
 import '../css/styles.css'
+import logo from '../images/logo.png'
 
-export default function Nav() {
-
-    const [auth, setAuth] = useState(false || window.localStorage.getItem("auth")===true);
-    const [token, setToken] = useState('')
-    const [user, setUser] = useState(firebase.auth().currentUser)
-
-    useEffect(()=> {
-        firebase.auth().onAuthStateChanged((userCred) => {
-        if (userCred) {
-            setAuth(true)
-            window.localStorage.setItem('auth', 'true')
-            userCred.getIdToken().then((token) => {
-            setToken(token)
-            })
-            setUser(firebase.auth().currentUser);
-            console.log(user)
-        }
-        })
-    })
-    const loginWithGoogle = async() => {
-        await firebase
-        .auth()
-        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-        .then((userCred)=> {
-        if (userCred) {
-            setAuth(true);
-            window.localStorage.setItem('auth', 'true')
-            setUser(firebase.auth().currentUser);
-            console.log(user)
-        }
-        console.log(userCred) 
-        })
-    }
-
-    useEffect(() => {
-        if (token) {
-            fetchData(token);
-        }
-    },[token])
-
-    const fetchData = async (token) =>{
-        const res = await axios.get("http://localhost:5000/api/todos", {
-            headers : {
-                Authorization: 'Bearer ' + token,
-            }
-        })
-        console.log(res.data)
-    }
+export default function Nav(props) {
     return (
         <>
-            <nav id="navbar" className="">
-                <div className="nav-wrapper">
-                    {/* Navbar Logo */}
-                    <div className="logo">
-                        {/* Logo Placeholder for Inlustration */}
-                        <a id="image-link" href="/home"><img id="logo" src="images/idylllogo.png" width='20px'/> Idyll </a>
-                    </div>
-
-                    {/* Navbar Links */}
-                        {auth && user!==null ? (
-                            <ul id="menu">
-                            <li><a href="/home">Home</a></li>
-            
-                            <li><a href="/browse">Browse</a></li>
-            
-                            <li><a href="#contact">Contact Us</a></li>
-                            <li><a href="/sell">Sell</a></li>
-                            <li><a href="/logout">Log out</a></li>
-                            <li>
-                                Welcome {user.displayName}
-                            </li>
-                            </ul>
-                        ) : (
-                            <ul id="menu">
-                            <li><a href="/home">Home</a></li>
-                            <li><a href="/browse">Browse</a></li>
-                            <li><a href="#contact">Contact Us</a></li>
-                            <li><a href="/login">Log in</a></li>
-                            <li><a href="/signup">Sign up</a></li>
-                            <button onClick={loginWithGoogle}> Login With Google </button>
-                            </ul>
-                        )}
+            <nav id="navbar" className="d-flex justify-content-xl-center justify-content-lg-center justify-content-md-center justify-content-sm-left align-items-center">
+                {/* Navbar Logo */}
+                <div className="logo">
+                    {/* Logo Placeholder for Inlustration */}
+                    <a id="image-link" href="/home"><img id="logo" src={logo} width='48px'/> <div id="company-name"> Idyll </div> </a>
                 </div>
+
+                {/* Navbar Links */}
+                    {/* {props.auth && props.user!==null ? (
+                        <ul id="menu">
+                        </ul>
+                    ) : (
+                        <ul id="menu">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/browse">Browse</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="/login">Log in</a></li>
+                        <li><a href="/signup">Sign up</a></li>
+                        <button onClick={props.login}> Login With Google </button>
+                        </ul>
+                    )} */} 
             </nav>
 
             {/* Menu Icon */}
@@ -105,6 +47,8 @@ export default function Nav() {
                     <li><a href="/sell">Sell</a></li>
                 </ul>
             </div>
+
+            
         </>
     )
 }

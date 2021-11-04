@@ -5,6 +5,5 @@
      credential: admin.credential.cert(serviceAccount),
      databaseURL: "https://idyll.firebaseio.com"
  });
- const db = admin.firestore();
 
  module.exports = admin;
