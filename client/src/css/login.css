@@ -1,6 +1,23 @@
 body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+}
+
+@media only screen and (min-width: 1000px) {
+    body {
+        background: url('../images/green-vector.jpg') no-repeat center center fixed;
+        background-size: cover;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        background-color: white;
+    }
+    .form-wrapper {
+        
+    }
 }
 
 .container-fluid {
@@ -16,33 +33,80 @@ body {
 }
 
 .form-wrapper {
+    overflow: hidden;
+    position:absolute;
     background-color: white;
-    -webkit-box-shadow: 0 0px 10px 0px #999;
-    -moz-box-shadow: 0 0px 10px 0px #999;
     box-shadow: 0 0px 10px 0px #999;
     margin-left: auto;
-    margin-top: 30px;
-    padding: 60px;
-    height: auto;
+    margin-top: 160px;
+    padding: 40px;
+    width:950px;
     border-radius: 10px;
+    height:588px;
+}
+.form {
+    float:left;
+    width:45%;
 }
 
-.form-control {
-    background-color: #F6F6F6;
+.green-border:focus {
+    border-color: #88E991
 }
 
+#email-label {
+    font-weight:600;
+    margin-top:40px;
+}
+
+#password-label {
+    font-weight:600;
+}
+#email-box {
+    margin-top:10px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    box-sizing: border-box; 
+    height: 48px;
+    width:100%;;
+}
+
+#email-box:focus {
+    background-color:#FFFFFF
+}
+#password-box {
+    margin-top:10px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    box-sizing: border-box; 
+    height: 48px;
+    width:100%;
+}
+#password-box:focus {
+    background-color:#FFFFFF
+}
+#remember-me-label {
+    margin-left: 10px;
+}
+
+#forgot-password {
+    float:right;
+}
+
+#forgot-password:hover {
+    color:#88E991;
+}
+#submit-btn:hover {
+    background-color: #88E991;
+}
 .full-width {
     float: right;
     width: 80%;
     padding: 10px;
 }
 
-
-/* 
-input[type="file"]::-webkit-file-upload-button {
-    width: 100px
-} */
-
+.label-name {}
 #image-link {
     color: black;
     text-decoration: none;
@@ -64,13 +128,26 @@ input[type="file"]::-webkit-file-upload-button {
     float: right;
 }
 
-h1 {
-    font-size: 16px;
+.header1 {
+    margin-top:30px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
     text-align: center;
-    font-weight: bold;
-    margin-bottom: 32px
+
+    color: #000000;
 }
 
+.line {
+    position:absolute;
+    margin-top: 50px;
+    left:50%;
+    height: 310px;
+    width:0.5px;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 #dish-description {
     height: 128px;
 }
@@ -83,9 +160,7 @@ h1 {
     margin-left: 50%;
     visibility: hidden;
     border: 8px solid #f3f3f3;
-    /* Light grey */
     border-top: 5px solid #3498db;
-    /* Blue */
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -102,8 +177,86 @@ h1 {
 }
 
 #submit-btn {
-    float: right;
-    margin: 15px;
+    margin-top:30px;
+    color: white;
+    width:100%;
+    background: #5AC865;
+}
+
+#google-btn {
+    font-family: Inter;
+    margin-top:15%;
+    height:48px;
+    float:right;
+    width:45%;
+    background: #FFFFFF;
+    border: 1px solid #C2B8B8;
+    box-sizing: border-box;
+    border-radius: 10px;
+    
+}
+#google_link {
+    display:flex;
+    justify-content: left;
+    width:100%;
+    height:100%;
+    text-decoration:none;
+    color:black;
+    font-weight:500;
+}
+#google-btn:hover {
+    background: #F5F5F5;
+}
+
+#google_logo {
+
+    margin-left:15px;
+    
+}
+#google_text {
+    margin-left:75px;
+}
+
+#apple-btn {
+    font-family: Inter;
+    margin-top:5%;
+    height:48px;
+    float:right;
+    width:45%;
+    background: #FFFFFF;
+    border: 1px solid #C2B8B8;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#apple_text {
+    margin-left:60px;
+}
+
+
+#apple-btn:hover {
+    background-color: #F5F5F5;
+}
+#registration {
+    position:absolute;
+    bottom:0px;
+    width:100%;
+    margin-left:-40px;
+    margin-bottom:40px;
+    display:flex;
+    justify-content: center;
+    font-family: Inter;
+}
+
+#registration-question {
+    margin-right:10px;
+}
+
+#registration-signup {
+    text-decoration: none;
+}
+#registration-signup:hover {
+    color:#88E991;
 }
 
 #dish-photo-label {}

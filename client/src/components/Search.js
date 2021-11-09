@@ -6,7 +6,7 @@ export default function Search(props) {
         <>
             <div className="search-container">
                 <div className="search-bar">
-
+                    
                 </div>
             </div>
         </>

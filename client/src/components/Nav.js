@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState} from "react"
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
-import '../css/index.css'
 import '../css/styles.css'
 import logo from '../images/logo.png'
 

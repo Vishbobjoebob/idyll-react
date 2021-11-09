@@ -93,9 +93,8 @@ function App() {
   return (
     <>
     <Nav user={user} login={loginWithGoogle} auth={auth}/>
-    {/*<Login user={user} login={loginWithEmail}/>*/}
+    <Login user={user} login={loginWithEmail}/>
     {/*<Signup signup={signUpWithEmail}/>*/}
-    <Search />
     </>
   );
 }
