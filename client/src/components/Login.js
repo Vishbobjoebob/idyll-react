@@ -1,53 +1,34 @@
 import axios from 'axios'
-import React, { useEffect, useState, componentDidMount} from "react"
+import React, { useEffect, useState, componentDidMount, useRef} from "react"
+import {useNavigate} from "react-router-dom"
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import '../css/login.css'
 import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
+import { useAuth } from '../contexts/AuthContext'
+import {Alert} from 'react-bootstrap'
 
 export default function Login(props) {
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const rememberMeRef = useRef();
+
+    const navigate = useNavigate();
+
+    const {login } = useAuth();
+    const [error, setError] = useState("");
 
     async function submitInformation(e) {
         e.preventDefault();
-        const form = document.querySelector('form');
-        const error = document.querySelector('.error');
-    
-    
-        // reset errors
-        error.textContent = '';
-    
-        // get values
-        const email = form.email.value;
-        const password = form.password.value;
-    
+        
         try {
-            /*
-            const res = await fetch('/login', {
-                method: 'POST',
-                body: JSON.stringify({
-                    email,
-                    password
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await res.json();
-            console.log(data);
-            if (!data.success) {
-                error.textContent = data.message.split('')[0].toUpperCase() + data.message.slice(1);
-            }
-            if (data.success) {
-                window.location.href = '/';
-            }
-            */
-        const login = props.login;
-        login(email, password);
-
-    
-        } catch (err) {
-            console.log(err);
+            setError("")
+            await login(emailRef.current.value, passwordRef.current.value)
+            navigate("/");
+          } 
+        catch {
+            setError("Failed to login")
         }
     };
     return (
@@ -57,19 +38,20 @@ export default function Login(props) {
                     <div className="col-sm-12 col-md-12 col-lg-5 offset-3">
                         <div className="form-wrapper">
                             <h1 className="header1"> Log In to Use Idyll </h1>
+                            {error && <Alert variant = 'danger'>{error}</Alert>}
                             <div className="line"></div>
                             <div className="form">
                                 <form id="item-information" className="form-horizontal" onSubmit={submitInformation}>
                                     <div className="error"></div>
 
                                     <label className="control-label" htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
-                                    <input className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
+                                    <input ref = {emailRef} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
 
                                     <label htmlFor="dish-price" id="password-label"> Password </label>
-                                    <input className="form-control green-border" type="password" id="password" name="password" autoComplete="off" placeholder="Password" id="password-box" required/><br></br>
+                                    <input ref = {passwordRef} className="form-control green-border" type="password" id="password" name="password" autoComplete="off" placeholder="Password" id="password-box" required/><br></br>
 
                                     <input class="form-check-input" type="checkbox" value="" id="remember-me"/>
-                                    <label class="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
+                                    <label ref = {rememberMeRef} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
 
                                     <a href="#" class="" id="forgot-password">Forgot password?</a>
 
