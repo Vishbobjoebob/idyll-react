@@ -7,7 +7,7 @@ import 'firebase/compat/auth'
 import Nav from './components/Nav';
 import Login from './components/Login';
 import Sell from './components/Sell'
-import Signup from './components/Signup'
+//import Signup from './components/Signup'
 import Search from './components/Search'
 import NavDashboard from './components/NavDashboard';
 import { AuthProvider } from './contexts/AuthContext';
@@ -98,7 +98,7 @@ function App() {
       <AuthProvider>
           <Routes>
             <Route path="/" element ={<NavDashboard/>}/>
-            <Route path="/signup" element={<><Nav/><Signup/></>}/>
+            {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
             <Route path="/login" element={<><Nav/><Login/></>}/>
           </Routes>
       </AuthProvider>

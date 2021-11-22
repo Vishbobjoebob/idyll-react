@@ -3,6 +3,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Inter;
 }
 
 footer {
@@ -47,6 +48,7 @@ li {
     ======================================================*/
 
 #navbar {
+    position:fixed;
     font-weight: bold;
     background: white;
     color: rgb(13, 26, 38);
@@ -57,20 +59,10 @@ li {
     z-index: 10;
     box-shadow: 0 0px 10px 0px #999;
 }
-a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.logo {
-    font-size: 1.5em;
-}
-
-img.logo {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    margin: 0px 15px 15px 0px;
+#company-logo {
+    float:left;
+    margin-left:115px;
+    vertical-align: middle;
 }
 
 #company-name {
@@ -78,6 +70,77 @@ img.logo {
     margin-left: 15px;
 }
 
+.green-btn {
+    color: white;
+    background: #5AC865;
+    font-size:20px;
+}
+.green-btn:hover {
+    background:#88E991;
+}
+
+#login-btn {
+    float:right;
+    width:98px;
+    height:40px;
+    vertical-align: middle;
+    line-height: normal;
+    margin-right:200px;
+}
+
+.modal-content {
+  padding-left: 34px;
+  padding-right: 34px;
+}
+
+#login-modal {
+    width:516px;
+    
+}
+
+.modal-header {
+    display:flex
+}
+
+#or {
+    margin-top:10px;
+    font-weight: 600;
+    padding:10px;
+
+}
+
+.separator {
+    width: 100%;
+    display:flex;
+    align-items: center;
+}
+
+.alternative-auth {
+    width: 100%;
+    display:flex;
+    align-items:center;
+    
+}
+#google {
+    margin-left:110px;
+}
+
+#apple {
+    margin-left:30px;
+}
+
+#google:hover {
+    filter: drop-shadow(0px 4px 4px #000000);
+}
+
+#apple:hover {
+    filter: drop-shadow(0px 4px 4px #000000);
+}
+.line-bruh {
+    width:50%;
+    height: 0px;
+    border: 1px solid #000000;
+}
 #navbar ul {
     float: right;
     list-style: none;
