@@ -57,13 +57,8 @@ export default function NavDashboard(props) {
     async function submitInformation(e) {
         e.preventDefault();
 
-        console.log(passwordRef.current.value)
-        console.log(passwordConfirmRef.current.value)
-
-
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             setError("It looks like you typed in your email wrong somewhere - maybe check again?")
-            console.log("error set")
             return;
         }
 
@@ -72,14 +67,27 @@ export default function NavDashboard(props) {
             return;
         }
 
-        try {
-            setError("")
-            await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
-            handleCloseSignup();
-            navigate("/");
-          } catch {
-            setError("Failed to create an account")
-          }
+        setError("")
+        let res = await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
+        if (res) {
+            switch (res.code) {
+                case "auth/email-already-in-use":
+                    setError("It looks like you already have an account with this email. Please login.")
+                    break;
+                case "auth/invalid-email": 
+                    setError("Please use a valid email.")
+                    break;
+                case "auth/weak-password":
+                    setError("Your password is too weak. Please try again.")
+                    break;
+                default:
+                    setError("We failed to create an account for you. Please try again.")
+            }
+        }
+        // handleCloseSignup();
+        // navigate("/");
+
+
         // try {
         //     const signup = props.signup;
         //     signup(email, password, username, firstName, lastName, phoneNumber);

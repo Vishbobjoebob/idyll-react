@@ -15,19 +15,19 @@ export function AuthProvider ({ children }) {
     const [loading, setLoading] = useState(true)
 
     async function signup(email, password, username, firstName, lastName, phoneNumber) {
+        let res = undefined;
         await auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCred)=> {
            if (userCred) {
-            //loginWithEmail(email, password);
             setAuthState(true);
             window.localStorage.setItem('auth', 'true')
             setCurrentUser(userCred);
         } 
         }).catch(err => {
-            // console.log(err);
-            return err;
+            res = err;
         })
+        return res;
     }
 
     async function login(email, password) {
