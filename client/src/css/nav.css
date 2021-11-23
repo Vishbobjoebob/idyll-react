@@ -49,6 +49,9 @@ li {
 
 #navbar {
     position:fixed;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
     font-weight: bold;
     background: white;
     color: rgb(13, 26, 38);
@@ -60,9 +63,7 @@ li {
     box-shadow: 0 0px 10px 0px #999;
 }
 #company-logo {
-    float:left;
     margin-left:115px;
-    vertical-align: middle;
 }
 
 #company-name {
@@ -70,6 +71,10 @@ li {
     margin-left: 15px;
 }
 
+#nav-links {
+    font-size:20px;
+    height:100%;
+}
 .green-btn {
     color: white;
     background: #5AC865;
@@ -80,10 +85,10 @@ li {
 }
 
 #login-btn {
+    border-radius: 4px;
     float:right;
-    width:98px;
-    height:40px;
-    vertical-align: middle;
+    width:136px;
+    height:42px;
     line-height: normal;
     margin-right:200px;
 }
@@ -103,13 +108,13 @@ li {
 }
 
 #or {
-    margin-top:10px;
     font-weight: 600;
     padding:10px;
 
 }
 
 .separator {
+    margin-top:10px;
     width: 100%;
     display:flex;
     align-items: center;
@@ -213,15 +218,6 @@ li {
     cursor:pointer;
     color:#88E991;
 }
-#navbar ul {
-    float: right;
-    list-style: none;
-    /* margin-right: 14px; */
-    margin-top: -2px;
-    text-align: right;
-    transition: transform 0.5s ease-out;
-    -webkit-transition: transform 0.5s ease-out;
-}
 
 @media(max-width: 640px) {
     #navbar ul {
@@ -234,67 +230,6 @@ li {
         display: inline-block;
     }
 }
-
-#navbar li {
-    display: inline-block;
-}
-
-#navbar li a {
-    color: rgb(13, 26, 38);
-    display: block;
-    font-size: 0.8em;
-    height: 50px;
-    margin: 0 20px;
-    padding: 0 4px;
-    position: relative;
-    text-decoration: none;
-    transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-}
-
-#navbar li a:hover {
-    /* border-bottom: 1px solid rgb(28, 121, 184); */
-    color: rgb(28, 121, 184);
-    transition: all 1s ease;
-    -webkit-transition: all 1s ease;
-}
-
-
-/* Animated Bottom Line */
-
-#navbar li a:before,
-#navbar li a:after {
-    content: '';
-    position: absolute;
-    width: 0%;
-    height: 1px;
-    bottom: -1px;
-    background: rgb(13, 26, 38);
-}
-
-#navbar li a:before {
-    left: 0;
-    transition: 0.5s;
-}
-
-#navbar li a:after {
-    background: rgb(13, 26, 38);
-    right: 0;
-    /* transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1); */
-}
-
-#navbar li a:hover:before {
-    background: rgb(13, 26, 38);
-    width: 100%;
-    transition: width 0.5s cubic-bezier((0.22, 0.61, 0.36, 1));
-}
-
-#navbar li a:hover:after {
-    background: transparent;
-    width: 100%;
-    /* transition: 0s; */
-}
-
 
 /*======================================================
                       Mobile Menu Menu Icon

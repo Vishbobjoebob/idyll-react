@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Sell from './components/Sell'
 //import Signup from './components/Signup'
 import Search from './components/Search'
+import Browse from './components/Browse'
 import NavDashboard from './components/NavDashboard';
 import { AuthProvider } from './contexts/AuthContext';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
@@ -97,7 +98,7 @@ function App() {
     <Router>
       <AuthProvider>
           <Routes>
-            <Route path="/" element ={<NavDashboard/>}/>
+            <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
             {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
             <Route path="/login" element={<><Nav/><Login/></>}/>
           </Routes>

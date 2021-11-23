@@ -76,6 +76,7 @@ export default function NavDashboard(props) {
         try {
             setError("")
             await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
+            handleCloseSignup();
             navigate("/");
           } catch {
             setError("Failed to create an account")
@@ -121,6 +122,12 @@ export default function NavDashboard(props) {
                     {/* Logo Placeholder for Inlustration */}
                     <a id="company-logo" href="/home"><img id="logo" src={logo} width='124px'/></a>
                 </div>
+
+                <ul id="nav-links">
+                    <li><a href="">Map</a></li>
+                    <li><a href="">Browse</a></li>
+                    <li><a href="">Sell</a></li>
+                </ul>
 
                 {/* <div> Welcome {currentUser.email} </div> */}
 
