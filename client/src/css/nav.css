@@ -121,6 +121,7 @@ li {
     align-items:center;
     
 }
+
 #google {
     margin-left:110px;
 }
@@ -140,6 +141,77 @@ li {
     width:50%;
     height: 0px;
     border: 1px solid #000000;
+}
+
+.signup-options {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.option {
+    display:flex;
+    align-items : center;
+    width:100%;
+    height:66px;
+    border: 1px solid #837676;
+    box-sizing: border-box;
+    margin-top: 45px;
+    color:black;
+    font-weight:450;
+    line-height:22px;
+}
+
+.option-text {
+    margin-left:18%;
+    font-size:18px;
+}
+
+.option:hover {
+    background-color: #F5F5F5;
+    cursor:pointer;
+}
+
+.subpicture {
+    width: 66px;
+    height: 66px;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    float:left;
+    border-right: 1px solid #837676;
+    box-sizing: border-box;
+}
+
+#registration1 {
+    margin-top:150px;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    font-family: Inter;
+    padding:20px;
+}
+
+#registration-question1 {
+    margin-right:10px;
+}
+
+#registration-signup1 {
+    text-decoration: none;
+}
+#registration-signup1:hover {
+    color:#88E991;
+}
+
+#email-title {
+
+    margin-left:17%;
+}
+#back-btn {
+    margin-left:-15px;
+}
+#back-btn:hover {
+    cursor:pointer;
+    color:#88E991;
 }
 #navbar ul {
     float: right;

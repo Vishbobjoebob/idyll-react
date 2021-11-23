@@ -9,15 +9,19 @@ import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
 import {Modal, Button, Alert} from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
+import {PersonFill, ChevronCompactLeft} from "react-bootstrap-icons"
 
 export default function NavDashboard(props) {
     const [show, setShow] = useState(false);
     const [showSignup, setShowSignup] = useState(false)
+    const [showSignupChoose, setShowSignupChoose] = useState(false)
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleCloseSignup = () => setShowSignup(false);
     const handleShowSignup = () => setShowSignup(true);
+    const handleCloseSignupChoose = () => setShowSignupChoose(false)
+    const handleShowSignupChoose = () => setShowSignupChoose(true)
 
     const emailRefLogin = useRef();
     const passwordRefLogin = useRef();
@@ -85,11 +89,30 @@ export default function NavDashboard(props) {
         // }
     };
 
-    async function switchToSignup(e) {
+    async function switchToSignupChoose(e) {
         e.preventDefault();
         handleClose();
+        handleShowSignupChoose();
+    }
+
+    async function switchToLogin(e) {
+        e.preventDefault();
+        handleCloseSignupChoose();
+        handleShow();
+    }
+
+    async function switchToSignup(e) {
+        e.preventDefault();
+        handleCloseSignupChoose();
         handleShowSignup();
     }
+
+    async function switchToSignupChooseFromEmail(e) {
+        e.preventDefault();
+        handleCloseSignup();
+        handleShowSignupChoose();
+    }
+
     return (
         <>
             <nav id="navbar" className="">
@@ -149,14 +172,15 @@ export default function NavDashboard(props) {
                             </div>
                             <div id="registration"> 
                                 <div id="registration-question">Not registered?</div>
-                                <a id="registration-signup" href="" onClick={switchToSignup}> Sign Up for free! </a>
+                                <a id="registration-signup" href="" onClick={switchToSignupChoose}> Sign Up for free! </a>
                             </div>
                         </Modal.Body>
                     </Modal>
 
                     <Modal id="signup-modal" show={showSignup} onHide={handleCloseSignup} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
                         <Modal.Header closeButton>
-                            <Modal.Title>Sign Up for Idyll</Modal.Title>
+                            <ChevronCompactLeft onClick={switchToSignupChooseFromEmail} id="back-btn" color="black" size={32}></ChevronCompactLeft>
+                            <Modal.Title id="email-title">Sign Up With Email</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <form id="item-information" className="form-horizontal" onSubmit={(e) => {submitInformation(e)}}>
@@ -191,7 +215,32 @@ export default function NavDashboard(props) {
                         </Modal.Body>
                     </Modal>
 
-                    
+                    <Modal id="signup-choose-modal" show={showSignupChoose} onHide={handleCloseSignupChoose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Sign Up for Idyll</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div class="signup-options">
+                                <div class="option" id="email-and-password-option" onClick={switchToSignup}>
+                                    <div class="subpicture" id="email-pic"><PersonFill class="center-pic" color="black" size = {37}></PersonFill></div>
+                                    <div class="option-text">Use email/password</div>
+                                </div>
+                                <div class="option" id="google-option" >
+                                    <div class="subpicture" id="google-pic"> <img class="center-pic" src={google_logo} width='40px'></img></div>
+                                    <div class="option-text">Continue With Google</div>
+                                </div>
+                                <div class="option" id="apple-option" >
+                                    <div class="subpicture" id="apple-pic"> <img class="center-pic" src={apple_logo} width='73px'></img></div>
+                                    <div class="option-text">Continue With Apple</div>
+                                </div>
+                            </div>
+
+                            <div id="registration1"> 
+                                <div id="registration-question1">Already registered?</div>
+                                <a id="registration-signup1" href="" onClick={switchToLogin}> Log in! </a>
+                            </div>
+                        </Modal.Body>
+                    </Modal>
             </nav>
 
             {/* Menu Icon */}
