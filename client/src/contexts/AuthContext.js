@@ -31,6 +31,7 @@ export function AuthProvider ({ children }) {
     }
 
     async function login(email, password) {
+        let res = undefined;
         await auth
         .signInWithEmailAndPassword(email, password)
         .then((userCred)=> {
@@ -40,9 +41,9 @@ export function AuthProvider ({ children }) {
                 setCurrentUser(userCred);
             }
         }).catch(err => {
-            // console.log(err);
-            return err;
+            res = err;
         })
+        return res;
     }
 
     const fetchData = async (token) =>{

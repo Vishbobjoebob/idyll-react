@@ -44,22 +44,14 @@ export default function NavDashboard(props) {
     async function submitLoginInformation(e) {
         e.preventDefault();
         
-        try {
-            setErrorLogin("s")
-            let loginRes = await login(emailRef.current.value, passwordRef.current.value)
-            console.log(loginRes);
+            setErrorLogin("")
+            let loginRes = await login(emailRefLogin.current.value, passwordRefLogin.current.value)
             if(loginRes) { 
-                console.log(loginRes);
+                setErrorLogin('Invalid email or password')
             } else {
-                // navigate("/");
+                setShow(false);
+                navigate("/");
             }
-            // await login(emailRefLogin.current.value, passwordRefLogin.current.value)
-            // navigate("/")
-            setShow(false);
-          } 
-        catch {
-            setErrorLogin("Failed to login")
-        }
     }
 
     async function submitInformation(e) {
@@ -161,7 +153,7 @@ export default function NavDashboard(props) {
                         <Modal.Body>
                             <form id="item-information" className="form-horizontal" onSubmit={submitLoginInformation}>
                             {errorLogin && <Alert variant = 'danger'>{errorLogin}</Alert>}
-                                <label className="control-label" style={{margin:"0px;"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
+                                <label className="control-label" style={{margin:"0px"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
                                 <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
 
                                 <label htmlFor="dish-price" id="password-label"> Password </label>
