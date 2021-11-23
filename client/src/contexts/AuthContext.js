@@ -24,6 +24,9 @@ export function AuthProvider ({ children }) {
             window.localStorage.setItem('auth', 'true')
             setCurrentUser(userCred);
         } 
+        }).catch(err => {
+            // console.log(err);
+            return err;
         })
     }
 
@@ -31,12 +34,14 @@ export function AuthProvider ({ children }) {
         await auth
         .signInWithEmailAndPassword(email, password)
         .then((userCred)=> {
-        if (userCred) {
-            console.log(userCred)
-            setAuthState(true);
-            window.localStorage.setItem('auth', 'true')
-            setCurrentUser(userCred);
-        }
+            if (userCred) {
+                setAuthState(true);
+                window.localStorage.setItem('auth', 'true')
+                setCurrentUser(userCred);
+            }
+        }).catch(err => {
+            // console.log(err);
+            return err;
         })
     }
 

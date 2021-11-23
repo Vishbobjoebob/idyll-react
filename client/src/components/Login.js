@@ -24,8 +24,13 @@ export default function Login(props) {
         
         try {
             setError("")
-            await login(emailRef.current.value, passwordRef.current.value)
-            navigate("/");
+            let loginRes = await login(emailRef.current.value, passwordRef.current.value)
+            console.log(loginRes);
+            if(loginRes) { 
+                console.log(loginRes);
+            } else {
+                navigate("/");
+            }
           } 
         catch {
             setError("Failed to login")

@@ -38,16 +38,23 @@ export default function NavDashboard(props) {
     const navigate = useNavigate();
 
     const {currentUser, signup, login } = useAuth();
-    const [errorLogin, setErrorLogin] = useState("");
-    const [error, setError] = useState("");
+    const [errorLogin, setErrorLogin] = useState(undefined);
+    const [error, setError] = useState(undefined);
 
     async function submitLoginInformation(e) {
         e.preventDefault();
         
         try {
-            setErrorLogin("")
-            await login(emailRefLogin.current.value, passwordRefLogin.current.value)
-            navigate("/")
+            setErrorLogin("s")
+            let loginRes = await login(emailRef.current.value, passwordRef.current.value)
+            console.log(loginRes);
+            if(loginRes) { 
+                console.log(loginRes);
+            } else {
+                // navigate("/");
+            }
+            // await login(emailRefLogin.current.value, passwordRefLogin.current.value)
+            // navigate("/")
             setShow(false);
           } 
         catch {
@@ -153,8 +160,8 @@ export default function NavDashboard(props) {
                         </Modal.Header>
                         <Modal.Body>
                             <form id="item-information" className="form-horizontal" onSubmit={submitLoginInformation}>
-
-                                <label className="control-label" htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
+                            {errorLogin && <Alert variant = 'danger'>{errorLogin}</Alert>}
+                                <label className="control-label" style={{margin:"0px;"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
                                 <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
 
                                 <label htmlFor="dish-price" id="password-label"> Password </label>

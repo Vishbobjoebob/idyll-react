@@ -42,7 +42,7 @@ export default function Signup(props) {
         try {
             setError("")
             await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
-            navigate("/");
+            // navigate("/");
           } catch {
             setError("Failed to create an account")
           }
