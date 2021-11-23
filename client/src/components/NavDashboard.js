@@ -43,15 +43,15 @@ export default function NavDashboard(props) {
 
     async function submitLoginInformation(e) {
         e.preventDefault();
-        
-            setErrorLogin("")
-            let loginRes = await login(emailRefLogin.current.value, passwordRefLogin.current.value)
-            if(loginRes) { 
-                setErrorLogin('Invalid email or password')
-            } else {
-                setShow(false);
-                navigate("/");
-            }
+
+        setErrorLogin("")
+        let loginRes = await login(emailRefLogin.current.value, passwordRefLogin.current.value)
+        if(loginRes) { 
+            setErrorLogin('Invalid email or password')
+        } else {
+            setShow(false);
+            navigate("/");
+        }
     }
 
     async function submitInformation(e) {
@@ -62,13 +62,13 @@ export default function NavDashboard(props) {
 
 
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            setError("Bruh you suck. Get your passwords right idiot")
+            setError("It looks like you typed in your email wrong somewhere - maybe check again?")
             console.log("error set")
             return;
         }
 
         if (emailRef.current.value !== emailConfirmRef.current.value) {
-            setError("Bruh you suck. Get your emails right idiot")
+            setError("It looks like your passwords don't match. Please check again.")
             return;
         }
 
