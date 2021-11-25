@@ -3,7 +3,6 @@ import firebase from 'firebase/compat/app'
 import { useNavigate } from "react-router-dom"
 import 'firebase/compat/auth'
 import '../css/nav.css'
-//import '../css/signup.css'
 import logo from '../images/fullLogo.png'
 import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'

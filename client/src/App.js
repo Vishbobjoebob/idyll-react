@@ -1,13 +1,9 @@
-import logo from './logo.svg';
 import React, { useEffect, useState} from "react"
 import axios from 'axios'
 import './App.css';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
-import Nav from './components/Nav';
-import Login from './components/Login';
 import Sell from './components/Sell'
-//import Signup from './components/Signup'
 import Search from './components/Search'
 import Browse from './components/Browse'
 import NavDashboard from './components/NavDashboard';
@@ -100,7 +96,6 @@ function App() {
           <Routes>
             <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
             {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
-            <Route path="/login" element={<><Nav/><Login/></>}/>
           </Routes>
       </AuthProvider>
     </Router>
