@@ -67,7 +67,7 @@ export function AuthProvider ({ children }) {
     const signupUser = async (token, email, username, firstName, lastName, phoneNumber) =>{
         //https://us-central1-idyll-29e66.cloudfunctions.net/server/api/signup
         //http://localhost:5000/api/signup
-        const res = await axios.post("http://localhost:5000/api/signup", 
+        const res = await axios.post("https://us-central1-idyll-29e66.cloudfunctions.net/server/api/signup", 
         { 
             email: email,
             username: username,
@@ -84,7 +84,7 @@ export function AuthProvider ({ children }) {
     }
 
     const getUserData = async(token) =>{
-        const res = await axios.get("http://localhost:5000/api/getData",
+        const res = await axios.get("https://us-central1-idyll-29e66.cloudfunctions.net/server/api/getData",
         {
             headers : {
                 Authorization: 'Bearer ' + token,
