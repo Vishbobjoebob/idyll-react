@@ -27,6 +27,34 @@ app.get("/api/auth", (req, res) => {;
     })
 });
 
+// app.get('/api/getName', (req, res)=>{
+//     const auth = req.user;
+
+//     if (auth) {
+//         (async () => {
+//             try {
+//             await db.collection('users').doc(String(auth.email)).get().then((doc =>{
+//                 if (doc.exists) {
+//                     const firstName = doc.data()['firstName']
+//                     const lastName = doc.data()['lastName']
+                    
+//                 } else {
+//                     console.log("Doc does not exist")
+//                 }
+//             }))
+//             return res.status(200).send();
+//             } catch (error) {
+//             console.log(error);
+//             return res.status(500).send(error);
+//             }
+//         })();
+//     }
+//     else {
+//         return res.json({message: 'Unauthorized'});
+//     }
+//     }
+// })
+
 app.post('/api/signup', (req, res) => {
     const email = req.body.email;
     const firstName = req.body.firstName;

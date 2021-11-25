@@ -20,9 +20,12 @@ footer {
 /* Copy into new css file */
 @media only screen and (min-width: 1000px) {
     body {
-        /* background: url('') no-repeat center center fixed; */
+        background: url('') no-repeat center center fixed;
         background-size: cover;
         height: auto;
+    }
+    #navbar ul {
+        display: none;
     }
 }
 
@@ -259,6 +262,18 @@ li {
     margin-right: 80px;
 }
 
+.navbar-icons {
+    margin-right:260px;
+    display:flex;
+    align-items: center;
+}
+.navbar-icon {
+    margin-left:20px;
+    color:black;
+}
+.navbar-icon:hover {
+    color:#88E991;
+}
 /*======================================================
                       Mobile Menu Menu Icon
     ======================================================*/
