@@ -9,7 +9,7 @@ export function useAuth() {
 }
 
 export function AuthProvider ({ children }) {
-    const [currentUser, setCurrentUser] = useState()
+    const [currentUser, setCurrentUser] = useState(undefined);
     const [authState, setAuthState] = useState(false || window.localStorage.getItem("auth")===true);
     const [token, setToken] = useState('')
     const [loading, setLoading] = useState(true)
