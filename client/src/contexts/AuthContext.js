@@ -13,6 +13,7 @@ export function AuthProvider ({ children }) {
     const [authState, setAuthState] = useState(false || window.localStorage.getItem("auth")===true);
     const [token, setToken] = useState('')
     const [loading, setLoading] = useState(true)
+    const [userData, setUserData] = useState(undefined);
 
     async function signup(email, password, username, firstName, lastName, phoneNumber) {
         let res = undefined;
@@ -24,9 +25,9 @@ export function AuthProvider ({ children }) {
             window.localStorage.setItem('auth', 'true')
             userCred.user.getIdToken().then((token) => {
                 setToken(token)
-                setCurrentUser(userCred);
-                signupUser(token, email, username, firstName, lastName, phoneNumber)
             }).catch(()=> {console.log("bruh")})
+            setCurrentUser(userCred);
+            signupUser(token, email, username, firstName, lastName, phoneNumber)
         } 
         }).catch(err => {
             res = err;
@@ -50,6 +51,10 @@ export function AuthProvider ({ children }) {
         return res;
     }
 
+    async function signout() {
+        await auth.signOut()
+    }
+
     const fetchData = async (token) =>{
         const res = await axios.get("http://localhost:5000/api/auth", {
             headers : {
@@ -59,10 +64,10 @@ export function AuthProvider ({ children }) {
         console.log(res.data)
     }
 
-    const signupUser = async (token, email, username, firstName, lastName, phoneNumber) => {
+    const signupUser = async (token, email, username, firstName, lastName, phoneNumber) =>{
         //https://us-central1-idyll-29e66.cloudfunctions.net/server/api/signup
         //http://localhost:5000/api/signup
-        const res = await axios.post("https://us-central1-idyll-29e66.cloudfunctions.net/server/api/signup", 
+        const res = await axios.post("http://localhost:5000/api/signup", 
         { 
             email: email,
             username: username,
@@ -75,20 +80,31 @@ export function AuthProvider ({ children }) {
                 Authorization: 'Bearer ' + token,
             }
         })
-        console.log(res.data);
+        console.log(res.data)
     }
 
-    const value = {currentUser, signup, login}
+    const getUserData = async(token) =>{
+        const res = await axios.get("http://localhost:5000/api/getData",
+        {
+            headers : {
+                Authorization: 'Bearer ' + token,
+            }
+        })
+        return JSON.parse(JSON.stringify(res.data));
+    }
+
+    const value = {currentUser, signup, login, signout, userData}
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(userCred =>  {
+        const unsubscribe = auth.onAuthStateChanged(async userCred =>  {
             if (userCred) {
                 setAuthState(true)
                 window.localStorage.setItem('auth', 'true')
-                userCred.getIdToken().then((token) => {
-                    setToken(token)
-                })
+                let token = await userCred.getIdToken();
+                setToken(token);
                 setCurrentUser(userCred);
+                let data = await getUserData(token)
+                setUserData(data);
                 setLoading(false);
             }
         })
@@ -96,9 +112,10 @@ export function AuthProvider ({ children }) {
     }, 
     [currentUser])
 
-    // useEffect(() => {
+    // useEffect(async() => {
     //     if (token) {
-    //         signupUser(token);
+    //         const data = await getUserData(token);
+    //         console.log(data);
     //     }
     // },[token])
 

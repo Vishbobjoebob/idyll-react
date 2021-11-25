@@ -36,7 +36,7 @@ export default function NavDashboard(props) {
 
     const navigate = useNavigate();
 
-    const {currentUser, signup, login, signout} = useAuth();
+    const {currentUser, signup, login, signout, userData} = useAuth();
     const [errorLogin, setErrorLogin] = useState(undefined);
     const [error, setError] = useState(undefined);
 
@@ -143,10 +143,10 @@ export default function NavDashboard(props) {
                         <button onClick={props.login}> Login With Google </button>
                         </ul>
                     )} */} 
-                    {currentUser ? (
+                    {currentUser && userData ? (
                         <div class="navbar-icons">
                             <NavDropdown title={<PersonCircle size={32} color = "black"/>} className="navbar-icon" color="black">
-                                Welcome {currentUser.email}
+                                Welcome {userData.firstName}
                                 <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>

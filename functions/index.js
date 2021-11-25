@@ -37,6 +37,41 @@ app.get("/api/auth", (req, res) => {;
     })
 });
 
+app.get('/api/getData', (req, res)=>{
+    const auth = req.user;
+
+    if (auth) {
+        (async () => {
+            try {
+            await db.collection('users').doc(String(auth.email)).get().then((doc =>{
+                if (doc.exists) {
+                    const firstName = doc.data()['firstName']
+                    const lastName = doc.data()['lastName']
+                    const username = doc.data()['username']
+                    const phoneNumber = doc.data()['phoneNumber']
+                    console.log(firstName);
+                    return res.json({
+                        firstName: firstName,
+                        lastName: lastName,
+                        username: username,
+                        phoneNumber: phoneNumber
+                    })
+                    
+                } else {
+                    return res.json({message: 'Doc does not exist'})
+                }
+            }))
+            } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+            }
+        })();
+    }
+    else {
+        return res.json({message: 'Unauthorized'});
+    }
+})
+
 app.post('/api/signup', (req, res) => {
     const email = req.body.email;
     const firstName = req.body.firstName;
