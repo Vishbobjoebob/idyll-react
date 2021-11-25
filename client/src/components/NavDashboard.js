@@ -80,8 +80,8 @@ export default function NavDashboard(props) {
                 case "auth/weak-password":
                     setError("Your password is too weak. Please try again.")
                     break;
-                // default:
-                //     setError("We failed to create an account for you. Please try again.")
+                default:
+                    setError("We failed to create an account for you. Please try again.")
             }
         }
         handleCloseSignup();
@@ -144,7 +144,8 @@ export default function NavDashboard(props) {
                         <button onClick={props.login}> Login With Google </button>
                         </ul>
                     )} */} 
-                    <button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button>
+                    {currentUser ? (<div className="welcome"> Welcome {currentUser.email} </div>) : (<button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button>)}
+                    {/* <button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button> */}
 
                     <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
                         <Modal.Header closeButton>

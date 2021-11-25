@@ -45,9 +45,7 @@ export default function Nav(props) {
                     <li><a href="#contact">Contact Us</a></li>
                     <li><a href="/sell">Sell</a></li>
                 </ul>
-            </div>
-
-            
+            </div>       
         </>
     )
 }
