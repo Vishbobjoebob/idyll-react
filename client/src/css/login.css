@@ -236,23 +236,4 @@ body {
     background-color: #F5F5F5;
 }
 
-#registration {
-    margin-top:20px;
-    width:100%;
-    display:flex;
-    justify-content: center;
-    font-family: Inter;
-}
-
-#registration-question {
-    margin-right:10px;
-}
-
-#registration-signup {
-    text-decoration: none;
-}
-#registration-signup:hover {
-    color:#88E991;
-}
-
 #dish-photo-label {}

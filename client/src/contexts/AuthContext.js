@@ -22,7 +22,11 @@ export function AuthProvider ({ children }) {
            if (userCred) {
             setAuthState(true);
             window.localStorage.setItem('auth', 'true')
+            userCred.user.getIdToken().then((token) => {
+                setToken(token)
+            }).catch(()=> {console.log("bruh")})
             setCurrentUser(userCred);
+            signupUser(token, email, username, firstName, lastName, phoneNumber)
         } 
         }).catch(err => {
             res = err;
@@ -47,7 +51,24 @@ export function AuthProvider ({ children }) {
     }
 
     const fetchData = async (token) =>{
-        const res = await axios.get("http://localhost:5000/api/todos", {
+        const res = await axios.get("http://localhost:5000/api/auth", {
+            headers : {
+                Authorization: 'Bearer ' + token,
+            }
+        })
+        console.log(res.data)
+    }
+
+    const signupUser = async (token, email, username, firstName, lastName, phoneNumber) =>{
+        const res = await axios.post("http://localhost:5000/api/signup", 
+        { 
+            email: email,
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber
+        }, 
+        {
             headers : {
                 Authorization: 'Bearer ' + token,
             }
@@ -73,11 +94,11 @@ export function AuthProvider ({ children }) {
     }, 
     [currentUser])
 
-    useEffect(() => {
-        if (token) {
-            fetchData(token);
-        }
-    },[token])
+    // useEffect(() => {
+    //     if (token) {
+    //         signupUser(token);
+    //     }
+    // },[token])
 
     return (
         <AuthContext.Provider value = {value}>

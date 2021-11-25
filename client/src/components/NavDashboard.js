@@ -58,12 +58,12 @@ export default function NavDashboard(props) {
         e.preventDefault();
 
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            setError("It looks like you typed in your email wrong somewhere - maybe check again?")
+            setError("It looks like your passwords don't match. Please check again.")
             return;
         }
 
         if (emailRef.current.value !== emailConfirmRef.current.value) {
-            setError("It looks like your passwords don't match. Please check again.")
+            setError("It looks like your emails don't match. Please check again.")
             return;
         }
 
@@ -80,21 +80,13 @@ export default function NavDashboard(props) {
                 case "auth/weak-password":
                     setError("Your password is too weak. Please try again.")
                     break;
-                default:
-                    setError("We failed to create an account for you. Please try again.")
+                // default:
+                //     setError("We failed to create an account for you. Please try again.")
             }
         }
-        // handleCloseSignup();
-        // navigate("/");
+        handleCloseSignup();
+        navigate("/");
 
-
-        // try {
-        //     const signup = props.signup;
-        //     signup(email, password, username, firstName, lastName, phoneNumber);
-    
-        // } catch (err) {
-        //     console.log(err);
-        // }
     };
 
     async function switchToSignupChoose(e) {
@@ -240,7 +232,7 @@ export default function NavDashboard(props) {
                                     <div class="option-text">Use email/password</div>
                                 </div>
                                 <div class="option" id="google-option" >
-                                    <div class="subpicture" id="google-pic"> <img class="center-pic" src={google_logo} width='40px'></img></div>
+                                    <div class="subpicture" id="google-pic"> <img class="center-pic" src={google_logo} width='36px'></img></div>
                                     <div class="option-text">Continue With Google</div>
                                 </div>
                                 <div class="option" id="apple-option" >
@@ -266,10 +258,9 @@ export default function NavDashboard(props) {
 
             <div className="overlay-menu">
                 <ul id="menu">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#browse">Browse</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                    <li><a href="/sell">Sell</a></li>
+                    <li><a href="">Map</a></li>
+                    <li><a href="">Browse</a></li>
+                    <li><a href="">Sell</a></li>
                 </ul>
             </div>
 

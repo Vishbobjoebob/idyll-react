@@ -109,7 +109,7 @@ img.logo {
 
 #navbar li a:hover {
     /* border-bottom: 1px solid rgb(28, 121, 184); */
-    color: rgb(28, 121, 184);
+    color: #5AC865;
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
 }

@@ -1,5 +1,5 @@
 import '../css/index.css'
-import '../css/search.css'
+import '../css/browse.css'
 
 export default function Search(props) {
     return (
