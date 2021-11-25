@@ -116,72 +116,56 @@ export default function NavDashboard(props) {
         <>
             <nav id="navbar" className="">
                 {/* Navbar Logo */}
-                <div className="logo">
-                    {/* Logo Placeholder for Inlustration */}
-                    <a id="company-logo" href="/home"><img id="logo" src={logo} width='124px'/></a>
-                </div>
+            <div className="logo">
+                {/* Logo Placeholder for Inlustration */}
+                <a id="company-logo" href="/home"><img alt="logo" id="logo" src={logo} width='124px'/></a>
+            </div>
 
-                <ul id="nav-links">
-                    <li><a href="">Map</a></li>
-                    <li><a href="">Browse</a></li>
-                    <li><a href="">Sell</a></li>
-                </ul>
+            <ul id="nav-links">
+                <li><a href="/map">Map</a></li>
+                <li><a href="/browse">Browse</a></li>
+                <li><a href="/sell">Sell</a></li>
+            </ul>
 
-                {/* <div> Welcome {currentUser.email} </div> */}
+                
+            {currentUser ? (<div className="welcome"> Welcome {currentUser.email} </div>) : (<button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button>)}
 
-                {/* Navbar Links */}
-                    {/* {props.auth && props.user!==null ? (
-                        <ul id="menu">
-                        </ul>
-                    ) : (
-                        <ul id="menu">
-                        <li><a href="/home">Home</a></li>
-                        <li><a href="/browse">Browse</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="/login">Log in</a></li>
-                        <li><a href="/signup">Sign up</a></li>
-                        <button onClick={props.login}> Login With Google </button>
-                        </ul>
-                    )} */} 
-                    {currentUser ? (<div className="welcome"> Welcome {currentUser.email} </div>) : (<button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button>)}
-                    {/* <button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button> */}
+            <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Log In To Idyll</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form id="item-information" className="form-horizontal" onSubmit={submitLoginInformation}>
+                    {errorLogin && <Alert variant = 'danger'>{errorLogin}</Alert>}
+                        <label className="control-label" style={{margin:"0px"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
+                        <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
 
-                    <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Log In To Idyll</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <form id="item-information" className="form-horizontal" onSubmit={submitLoginInformation}>
-                            {errorLogin && <Alert variant = 'danger'>{errorLogin}</Alert>}
-                                <label className="control-label" style={{margin:"0px"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
-                                <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
+                        <label htmlFor="dish-price" id="password-label"> Password </label>
+                        <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password" name="password" autoComplete="off" placeholder="Password" id="password-box" required/><br></br>
 
-                                <label htmlFor="dish-price" id="password-label"> Password </label>
-                                <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password" name="password" autoComplete="off" placeholder="Password" id="password-box" required/><br></br>
+                        <input class="form-check-input" type="checkbox" value="" id="remember-me"/>
+                        <label ref = {rememberMeRefLogin} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
 
-                                <input class="form-check-input" type="checkbox" value="" id="remember-me"/>
-                                <label ref = {rememberMeRefLogin} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
+                        <a href="#" class="" id="forgot-password">Forgot password?</a>
 
-                                <a href="#" class="" id="forgot-password">Forgot password?</a>
+                        <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Login"/>
+                    </form>
 
-                                <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Login"/>
-                            </form>
-
-                            <div class="separator">
-                                <div id = "left-line" class="line-bruh"></div>
-                                <div id = "or"> OR </div>
-                                <div id = "left-line" class="line-bruh"></div>
-                            </div>
-                            <div class="alternative-auth">
-                                <a id="google" href=""><img id="logo" src={google_logo} width='54px'/></a>
-                                <a id="apple" href=""><img id="logo" src={apple_logo} width='122px'/></a>
-                            </div>
-                            <div id="registration"> 
-                                <div id="registration-question">Not registered?</div>
-                                <a id="registration-signup" href="" onClick={switchToSignupChoose}> Sign Up for free! </a>
-                            </div>
-                        </Modal.Body>
-                    </Modal>
+                    <div class="separator">
+                        <div id = "left-line" class="line-bruh"></div>
+                        <div id = "or"> OR </div>
+                        <div id = "left-line" class="line-bruh"></div>
+                    </div>
+                    <div class="alternative-auth">
+                        <a id="google" href=""><img id="logo" src={google_logo} width='54px'/></a>
+                        <a id="apple" href=""><img id="logo" src={apple_logo} width='122px'/></a>
+                    </div>
+                    <div id="registration"> 
+                        <div id="registration-question">Not registered?</div>
+                        <a id="registration-signup" href="" onClick={switchToSignupChoose}> Sign Up for free! </a>
+                    </div>
+                </Modal.Body>
+            </Modal>
 
                     <Modal id="signup-modal" show={showSignup} onHide={handleCloseSignup} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
                         <Modal.Header closeButton>
@@ -258,9 +242,9 @@ export default function NavDashboard(props) {
 
             <div className="overlay-menu">
                 <ul id="menu">
-                    <li><a href="">Map</a></li>
-                    <li><a href="">Browse</a></li>
-                    <li><a href="">Sell</a></li>
+                    <li><a href="/map">Map</a></li>
+                    <li><a href="/browse">Browse</a></li>
+                    <li><a href="/sell">Sell</a></li>
                 </ul>
             </div>
 
