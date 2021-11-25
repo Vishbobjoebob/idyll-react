@@ -82,10 +82,10 @@ export default function NavDashboard(props) {
                 default:
                     setError("We failed to create an account for you. Please try again.")
             }
+            return;
         }
         handleCloseSignup();
         navigate("/");
-
     };
 
     async function switchToSignupChoose(e) {
@@ -126,7 +126,7 @@ export default function NavDashboard(props) {
                 <li><a href="/browse">Browse</a></li>
                 <li><a href="/sell">Sell</a></li>
             </ul>
-
+            {console.log(currentUser)}
                 
             {currentUser ? (<div className="welcome"> Welcome {currentUser.email} </div>) : (<button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button>)}
 
