@@ -85,7 +85,6 @@ export default function NavDashboard(props) {
             return;
         }
         handleCloseSignup();
-        navigate("/");
     };
 
     async function switchToSignupChoose(e) {
@@ -115,10 +114,8 @@ export default function NavDashboard(props) {
     return (
         <>
             <nav id="navbar" className="">
-                {/* Navbar Logo */}
             <div className="logo">
-                {/* Logo Placeholder for Inlustration */}
-                <a id="company-logo" href="/home"><img alt="logo" id="logo" src={logo} width='124px'/></a>
+                <a id="company-logo" href="/"><img alt="logo" id="logo" src={logo} width='124px'/></a>
             </div>
 
             <ul id="nav-links">
@@ -126,7 +123,6 @@ export default function NavDashboard(props) {
                 <li><a href="/browse">Browse</a></li>
                 <li><a href="/sell">Sell</a></li>
             </ul>
-            {console.log(currentUser)}
                 
             {currentUser ? (<div className="welcome"> Welcome {currentUser.email} </div>) : (<button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button>)}
 

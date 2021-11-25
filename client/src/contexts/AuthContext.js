@@ -24,9 +24,9 @@ export function AuthProvider ({ children }) {
             window.localStorage.setItem('auth', 'true')
             userCred.user.getIdToken().then((token) => {
                 setToken(token)
+                setCurrentUser(userCred);
+                signupUser(token, email, username, firstName, lastName, phoneNumber)
             }).catch(()=> {console.log("bruh")})
-            setCurrentUser(userCred);
-            signupUser(token, email, username, firstName, lastName, phoneNumber)
         } 
         }).catch(err => {
             res = err;
@@ -59,8 +59,10 @@ export function AuthProvider ({ children }) {
         console.log(res.data)
     }
 
-    const signupUser = async (token, email, username, firstName, lastName, phoneNumber) =>{
-        const res = await axios.post("http://localhost:5000/api/signup", 
+    const signupUser = async (token, email, username, firstName, lastName, phoneNumber) => {
+        //https://us-central1-idyll-29e66.cloudfunctions.net/server/api/signup
+        //http://localhost:5000/api/signup
+        const res = await axios.post("https://us-central1-idyll-29e66.cloudfunctions.net/server/api/signup", 
         { 
             email: email,
             username: username,
@@ -73,7 +75,7 @@ export function AuthProvider ({ children }) {
                 Authorization: 'Bearer ' + token,
             }
         })
-        console.log(res.data)
+        console.log(res.data);
     }
 
     const value = {currentUser, signup, login}
