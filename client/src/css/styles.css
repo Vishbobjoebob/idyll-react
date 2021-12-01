@@ -16,25 +16,6 @@ footer {
     text-align: center;
 }
 
-/* Copy into new css file */
-@media only screen and (min-width: 1000px) {
-    body {
-        /* background: url('') no-repeat center center fixed; */
-        background-size: cover;
-        height: auto;
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    body {
-        background-color: white;
-    }
-    .form-wrapper {
-        height: 100vh;
-    }
-}
-/**/
-
 li {
     color: inherit;
     font-size: inherit;

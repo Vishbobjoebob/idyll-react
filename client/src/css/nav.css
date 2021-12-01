@@ -16,27 +16,11 @@ footer {
     color: white;
     text-align: center;
 }
+#company-logo {
+    margin-left:115px;
+}
 
 /* Copy into new css file */
-@media only screen and (min-width: 1000px) {
-    body {
-        background: url('') no-repeat center center fixed;
-        background-size: cover;
-        height: auto;
-    }
-    #navbar ul {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    body {
-        background-color: white;
-    }
-    .form-wrapper {
-        height: 100vh;
-    }
-}
 /**/
 
 li {
@@ -65,15 +49,6 @@ li {
     z-index: 10;
     box-shadow: 0 0px 10px 0px #999;
 }
-#company-logo {
-    margin-left:115px;
-}
-
-#company-name {
-    font-size: 24px;
-    margin-left: 15px;
-}
-
 #nav-links {
     font-size:20px;
     height:100%;
@@ -93,7 +68,6 @@ li {
     width:136px;
     height:42px;
     line-height: normal;
-    margin-right:200px;
 }
 
 .modal-content {
@@ -246,6 +220,13 @@ li {
     color:#88E991;
 }
 
+.black-thin-navbar-text {
+    display:flex;
+    align-items: center;
+    color:black;
+}
+
+
 @media(max-width: 640px) {
     #navbar ul {
         display: none;
@@ -263,12 +244,11 @@ li {
 }
 
 .navbar-icons {
-    margin-right:260px;
+    margin-right:10%;
     display:flex;
     align-items: center;
 }
 .navbar-icon {
-    margin-left:20px;
     color:black;
 }
 .navbar-icon:hover {
@@ -278,7 +258,7 @@ li {
                       Mobile Menu Menu Icon
     ======================================================*/
 
-@media(max-width: 640px) {
+@media(max-width: 750px) {
     .menuIcon {
         cursor: pointer;
         display: block;
@@ -439,6 +419,13 @@ li {
         -webkit-transition: all 0s ease 0s;
         transition: all 0s ease 0s;
     }
+    #navbar ul {
+        display: none;
+    }
+    .navbar-icons {
+        display:none;
+    }
+    
 }
 
 
@@ -486,4 +473,19 @@ li {
     color: rgb(28, 121, 184);
     -webkit-transition: color 0.3s ease;
     transition: color 0.3s ease;
+}
+
+@media screen and (min-width: 1000px) {
+    body {
+        
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        background-color: white;
+    }
+    #company-logo {
+        margin-left:0px;
+    }
 }

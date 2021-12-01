@@ -145,13 +145,20 @@ export default function NavDashboard(props) {
                     )} */} 
                     {currentUser && userData ? (
                         <div class="navbar-icons">
-                            <NavDropdown title={<PersonCircle size={32} color = "black"/>} className="navbar-icon" color="black">
+                            <NavDropdown title={<PersonCircle size={32} color = "black"/>} className="navbar-icon">
                                 Welcome {userData.firstName}
                                 <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
                         </div>
-                    ) : (<button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button>)}
+                    ) : (
+                        <div class="navbar-icons">
+                            <NavDropdown title={<div class="black-thin-navbar-text"> Welcome Sign In</div>} className="navbar-icon">
+                                <NavDropdown.Item onClick={handleShow}><button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button></NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
+                        </div>
+                    )}
                     {/* <button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button> */}
 
                     <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
