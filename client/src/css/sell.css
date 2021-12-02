@@ -1,0 +1,76 @@
+.container-fluid.scroll {
+    padding-bottom: 60px;
+}
+
+.form-wrapper {
+    background-color: white;
+    box-shadow: 0 0px 10px 0px #999;
+    margin-top: 110px;
+    padding: 40px;
+    border-radius: 10px;
+    width:100%;
+    border-top: #88E991 solid 15px;
+}
+.form {
+}
+
+.green-border:focus {
+    border-color: #88E991
+}
+#sell-form-header {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+
+    text-align: center;
+
+    color: #000000;
+}
+#location-text {
+    font-weight: normal;
+    font-size: 18px;
+    text-align: center;
+    margin-top:25px;
+}
+.multiple-groups {
+    display:flex;
+    justify-content:space-between
+}
+.half {
+    width:48%;
+}
+.file-input {
+    height:100px;
+}
+
+.loader {
+    margin-left: 50%;
+    visibility: hidden;
+    border: 8px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+#gray {
+    background-color: yellow;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#submit-btn {
+    margin-top:30px;
+    color: white;
+    width:100%;
+    background: #5AC865;
+}

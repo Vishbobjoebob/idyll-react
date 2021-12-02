@@ -95,6 +95,7 @@ function App() {
       <AuthProvider>
           <Routes>
             <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
+            <Route path="/sell" element ={<><NavDashboard/><Sell/></>}/>
             {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
           </Routes>
       </AuthProvider>

@@ -123,8 +123,8 @@ export default function NavDashboard(props) {
 
                 <ul id="nav-links">
                     <li><a href="">Map</a></li>
-                    <li><a href="">Browse</a></li>
-                    <li><a href="">Sell</a></li>
+                    <li><a href="/">Browse</a></li>
+                    <li><a href="/sell">Sell</a></li>
                 </ul>
 
                 {/* <div> Welcome {currentUser.email} </div> */}
