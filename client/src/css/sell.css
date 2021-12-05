@@ -4,12 +4,12 @@
 
 .form-wrapper {
     background-color: white;
-    box-shadow: 0 0px 10px 0px #999;
+    /* box-shadow: 0 0px 10px 0px #999; */
     margin-top: 110px;
     padding: 40px;
     border-radius: 10px;
     width:100%;
-    border-top: #88E991 solid 15px;
+    /* border-top: #88E991 solid 15px; */
 }
 .form {
 }
@@ -56,7 +56,47 @@
 }
 
 #gray {
-    background-color: yellow;
+    background-color: #FAFAFA;
+}
+
+#gray:hover {
+    background-color: white;
+}
+
+#gray:focus {
+    background-color: white;
+}
+
+#checkBox {
+    font-weight:600;
+}
+
+.sell-btns {
+    display:flex;
+    align-items: center;
+    justify-content: right;
+}
+
+#sell-submit-btn {
+    margin-left:30px;
+    color: white;
+    background: #5AC865;
+    border:none;
+}
+
+#sell-submit-btn:hover {
+    background: #90e990;
+}
+
+#add-btn {
+    margin-left:30px;
+    color: white;
+    background: #90e990;
+    border:none;
+}
+
+#add-btn:hover {
+    background: #5AC865;
 }
 
 @keyframes spin {
