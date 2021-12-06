@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef} from "react"
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { PinMapFill } from 'react-bootstrap-icons'
 import TimePicker from 'react-time-picker'
+import { useAuth } from "../contexts/AuthContext"
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import '../css/styles.css'
@@ -13,19 +14,11 @@ export default function Sell(props) {
     let currentTime = today.getHours() + ":" + today.getMinutes();
     const [cooked, setCooked] = useState(0);
     const [value, onChange] = useState(currentTime);
-    const [zipCode, setZipCode] = useState('getting zip code...');
-
-    const getZipCode = async () => {
-        // const res = await axios.get('https://geolocation-db.com/json/')
-        // setZipCode(res.data.postal)
-        
-        axios.get('https://ipapi.co/json/').then((res) => {
-            setZipCode(res.data.postal);
-        });
-    }
+    const {zipCode, getZipCode} = useAuth();
  
     useEffect(() => {
         getZipCode();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     function handleCooked(e) {

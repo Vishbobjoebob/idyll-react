@@ -9,11 +9,20 @@ export function useAuth() {
 }
 
 export function AuthProvider ({ children }) {
+    const [zipCode, setZipCode] = useState('getting zip code...');
     const [currentUser, setCurrentUser] = useState(undefined);
     const [authState, setAuthState] = useState(false || window.localStorage.getItem("auth")===true);
     const [token, setToken] = useState('')
     const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState(undefined);
+
+    const getZipCode = async () => {
+        axios.get('https://ipapi.co/json/').then((res) => {
+            setZipCode(res.data.postal);
+        }).catch((err) => {
+            setZipCode('Failed to retreive zip code');
+        });
+    }
 
     async function signup(email, password, username, firstName, lastName, phoneNumber) {
         let res = undefined;
@@ -93,7 +102,7 @@ export function AuthProvider ({ children }) {
         return JSON.parse(JSON.stringify(res.data));
     }
 
-    const value = {currentUser, signup, login, signout, userData}
+    const value = {currentUser, signup, login, signout, userData, zipCode, getZipCode}
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async userCred =>  {
