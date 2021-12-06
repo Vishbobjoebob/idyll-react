@@ -13,6 +13,20 @@ export default function Sell(props) {
     let currentTime = today.getHours() + ":" + today.getMinutes();
     const [cooked, setCooked] = useState(0);
     const [value, onChange] = useState(currentTime);
+    const [zipCode, setZipCode] = useState('getting zip code...');
+
+    const getZipCode = async () => {
+        // const res = await axios.get('https://geolocation-db.com/json/')
+        // setZipCode(res.data.postal)
+        
+        axios.get('https://ipapi.co/json/').then((res) => {
+            setZipCode(res.data.postal);
+        });
+    }
+ 
+    useEffect(() => {
+        getZipCode();
+    }, [])
 
     function handleCooked(e) {
         if (e.target.checked) {
@@ -27,6 +41,8 @@ export default function Sell(props) {
         e.preventDefault();
 
     }
+
+
     return (
 
         <>
@@ -92,7 +108,7 @@ export default function Sell(props) {
                         <div class="form-wrapper">
                             <Form onSubmit={submitSellInfo}>
                                 <h1 id="sell-form-header">Tell us a little about your dishes</h1>
-                                <h1 id="location-text"><PinMapFill color="black" size={22}/>Your zip code: 30097</h1>
+                                <h1 id="location-text"><PinMapFill color="black" size={22}/>Your zip code: {zipCode}</h1>
                                 
                                 <Form.Group className="mb-3" controlId="gray">
                                     <Form.Label>Name</Form.Label>
