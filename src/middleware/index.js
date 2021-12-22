@@ -4,14 +4,18 @@ class Middleware{
 
     async decodeToken(req,res,next){
         try {
-            const token = req.headers.authorization.split(' ')[1];
-            console.log(token)
-            const decodeValue = await admin.auth().verifyIdToken(token);
+            console.log(1)
+            if (req.headers.authorization) {
+                const token = req.headers.authorization.split(' ')[1];
+                console.log(req.headers.authorization);
+                const decodeValue = await admin.auth().verifyIdToken(token);
 
-            if(decodeValue){
-                req.user = decodeValue;
-                return next();
+                console.log(2)
+                if(decodeValue){
+                    req.user = decodeValue;
+                    return next();
 
+                }
             }
             return res.json({message: 'Unauthorized'});
         } catch (e) {

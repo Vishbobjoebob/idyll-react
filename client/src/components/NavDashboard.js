@@ -153,7 +153,7 @@ export default function NavDashboard(props) {
                         </div>
                     ) : (
                         <div class="navbar-icons">
-                            <NavDropdown title={<div class="black-thin-navbar-text"> Welcome Sign In</div>} className="navbar-icon">
+                            <NavDropdown title={<div class="black-thin-navbar-text"> Log In</div>} className="navbar-icon">
                                 <NavDropdown.Item onClick={handleShow}><button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button></NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
