@@ -10,12 +10,15 @@ import 'firebase/compat/auth'
 import '../css/styles.css'
 import '../css/sell.css'
 import { useNavigate } from 'react-router-dom';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 export default function Sell(props) {
     const navigate = useNavigate();
     let today = new Date();
     let currentTime = today.getHours() + ":" + today.getMinutes();
     const [cooked, setCooked] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(undefined)
     const [value, onChange] = useState(currentTime);
     const {zipCode, getZipCode, token} = useAuth();
@@ -47,11 +50,32 @@ export default function Sell(props) {
 
     async function submitSellInfo(e) {
         e.preventDefault();
+
+        let dishObject = {
+            dishName: dishNameRef.value,
+            dishDescription: dishDescriptionRef.value,
+            dishRestrictions: dishRestrictionsRef.value,
+            dishPrice: dishPriceRef.value,
+            type: typeRef.value,
+            cuisine: cuisineRef.value,
+            waitTime: waitTimeRef.value,
+            servings: servingsRef.value,
+            dropOff: dropOffRef.checked,
+            additionalComments: additionalCommentsRef.value,
+            cooked: cooked,
+            zipCode: zipCode,
+        }
+
+
         if (localStorage.getItem('auth') !== 'true') {
             alert('Please login to continue!')
             return;
         }
+
+        setLoading(true);
         getZipCode();   // get zip code
+
+        console.log(dishNameRef.value);
 
         const ref = firebase.storage().ref().child(image.name);
         const metadata = {
@@ -61,29 +85,19 @@ export default function Sell(props) {
         
         let pictureURL = await snapshot.ref.getDownloadURL();
 
+        dishObject.pictureURL = pictureURL;
+
         let res = await axios({
             method: 'post',
             url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadPost',
             // url:'http://localhost:5000/api/uploadPost',
-            data: {
-                dishName: dishNameRef.value,
-                dishDescription: dishDescriptionRef.value,
-                dishRestrictions: dishRestrictionsRef.value,
-                dishPrice: dishPriceRef.value,
-                type: typeRef.value,
-                cuisine: cuisineRef.value,
-                waitTime: waitTimeRef.value,
-                servings: servingsRef.value,
-                dropOff: dropOffRef.checked,
-                additionalComments: additionalCommentsRef.value,
-                cooked: cooked,
-                zipCode: zipCode,
-                pictureURL: pictureURL
-            }, 
+            data: dishObject, 
             headers: {
                 Authorization: 'Bearer ' + token,
             }
         })
+
+
 
         if (res.data.success) {
             alert('Listing posted!')
@@ -142,15 +156,10 @@ export default function Sell(props) {
                                             ref={ref => typeRef = ref}
                                             required
                                             className="gray">
-                                            <option value="American">American Food</option>
-                                            <option value="Chinese">Chinese Food</option>
-                                            <option value="French">French Food</option>
-                                            <option value="Indian">Indian Food</option>
-                                            <option value="Italian">Italian Food</option>
-                                            <option value="Japanese">Japanese Food</option>
-                                            <option value="Korean">Korean Food</option>
-                                            <option value="Mexican">Mexican Food</option>
-                                            <option value="Thai">Thai Food</option>
+                                            <option value="Breakfast">Breakfast</option>
+                                            <option value="Lunch">Lunch</option>
+                                            <option value="Dinner">Dinner</option>
+                                            <option value="Dessert">Dessert</option>
                                         </Form.Select>
                                     </Form.Group>
                                 </div>
@@ -172,17 +181,23 @@ export default function Sell(props) {
                                         />
                                     </Form.Group>
                                 </div>
-                                {/* <Form.Group className="mb-3" controlId="gray">
+                                <Form.Group className="mb-3" controlId="gray">
                                     <Form.Label>Cuisine</Form.Label>
                                     <Form.Select 
                                     ref={ref => cuisineRef = ref}
                                     className="gray"
                                     required >
-                                        <option value="DICTUM">Dictamen</option>
-                                        <option value="CONSTANCY">Constancia</option>
-                                        <option value="COMPLEMENT">Complemento</option>
+                                        <option value="American">American Food</option>
+                                        <option value="Chinese">Chinese Food</option>
+                                        <option value="French">French Food</option>
+                                        <option value="Indian">Indian Food</option>
+                                        <option value="Italian">Italian Food</option>
+                                        <option value="Japanese">Japanese Food</option>
+                                        <option value="Korean">Korean Food</option>
+                                        <option value="Mexican">Mexican Food</option>
+                                        <option value="Thai">Thai Food</option>
                                     </Form.Select>
-                                </Form.Group> */}
+                                </Form.Group>
                                 <Form.Group className="mb-3" controlId="gray">
                                     <Form.Label>Pictures</Form.Label>
                                     <Form.Control 
@@ -220,9 +235,12 @@ export default function Sell(props) {
                                     <Button type="submit" id="add-btn">
                                         Add another dish
                                     </Button>
-                                    <Button type="submit" id="sell-submit-btn">
-                                        Submit
-                                    </Button>
+                                    {loading ? 
+                                        <Loader className="loader" type="ThreeDots" color="#568850" height={80} width={80} /> :
+                                        <Button type="submit" id="sell-submit-btn">
+                                            Submit
+                                        </Button>
+                                    }
                                 </div>
                             </Form>
                         </div>
