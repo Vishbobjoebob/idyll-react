@@ -105,7 +105,7 @@ export default function Sell(props) {
                                 <h1 id="location-text"><PinMapFill color="black" size={22}/>Your zip code: {zipCode}</h1>
                                 
                                 <Form.Group className="mb-3" controlId="gray">
-                                    <Form.Label>Name</Form.Label>
+                                    <Form.Label>Name of Dish</Form.Label>
                                     <Form.Control 
                                         ref={ref => dishNameRef = ref}
                                         required
@@ -142,9 +142,15 @@ export default function Sell(props) {
                                             ref={ref => typeRef = ref}
                                             required
                                             className="gray">
-                                            <option value="DICTUM">Dictamen</option>
-                                            <option value="CONSTANCY">Constancia</option>
-                                            <option value="COMPLEMENT">Complemento</option>
+                                            <option value="American">American Food</option>
+                                            <option value="Chinese">Chinese Food</option>
+                                            <option value="French">French Food</option>
+                                            <option value="Indian">Indian Food</option>
+                                            <option value="Italian">Italian Food</option>
+                                            <option value="Japanese">Japanese Food</option>
+                                            <option value="Korean">Korean Food</option>
+                                            <option value="Mexican">Mexican Food</option>
+                                            <option value="Thai">Thai Food</option>
                                         </Form.Select>
                                     </Form.Group>
                                 </div>
@@ -166,7 +172,7 @@ export default function Sell(props) {
                                         />
                                     </Form.Group>
                                 </div>
-                                <Form.Group className="mb-3" controlId="gray">
+                                {/* <Form.Group className="mb-3" controlId="gray">
                                     <Form.Label>Cuisine</Form.Label>
                                     <Form.Select 
                                     ref={ref => cuisineRef = ref}
@@ -176,7 +182,7 @@ export default function Sell(props) {
                                         <option value="CONSTANCY">Constancia</option>
                                         <option value="COMPLEMENT">Complemento</option>
                                     </Form.Select>
-                                </Form.Group>
+                                </Form.Group> */}
                                 <Form.Group className="mb-3" controlId="gray">
                                     <Form.Label>Pictures</Form.Label>
                                     <Form.Control 
