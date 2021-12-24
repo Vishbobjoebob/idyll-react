@@ -20,6 +20,10 @@ footer {
     margin-left:115px;
 }
 
+.dropdown-menu {
+    padding: 10px !important;
+}
+
 /* Copy into new css file */
 /**/
 
