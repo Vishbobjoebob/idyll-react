@@ -123,7 +123,7 @@ export default function NavDashboard(props) {
                 {/* Navbar Logo */}
                 <div className="logo">
                     {/* Logo Placeholder for Inlustration */}
-                    <a id="company-logo" href="/home"><img id="logo" src={logo} width='124px'/></a>
+                    <a id="company-logo" href="/"><img id="logo" src={logo} width='124px'/></a>
                 </div>
 
                 <ul id="nav-links">
