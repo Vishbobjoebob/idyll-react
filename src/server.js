@@ -96,6 +96,19 @@ app.post('/api/signup', (req, res) => {
     }
   });
 
+  app.get('/api/getPost', (req, res)=>{
+    const auth = req.user;
+    if (auth) {
+        (async () => {
+            console.log('hi yes');
+            res.json({'message': 'hello'})
+        })();
+    }
+    else {
+        return res.json({message: 'Unauthorized'});
+    }
+  })
+
   app.post('/api/uploadPost', (req, res) => {
     const dishName = req.body.dishName;
     const dishDescription = req.body.dishDescription;
@@ -111,29 +124,35 @@ app.post('/api/signup', (req, res) => {
     const zipCode = req.body.zipCode;
     const pictureURL = req.body.pictureURL;
 
+    let dishObject = {
+        dishName: dishName,
+        dishDescription: dishDescription,
+        dishRestrictions: dishRestrictions,
+        dishPrice: dishPrice,
+        dishType: dishType,
+        cuisine: cuisine,
+        waitTime: waitTime,
+        servings: servings,
+        dropOff: dropOff,
+        additionalComments: additionalComments,
+        cooked: cooked,
+        pictureURL: pictureURL,
+        timeUploaded: isoTime
+    }
+
+    console.log(dishObject);
+
     console.log('before auth')
     const auth = req.user;
+
     if (auth) {
+        console.log('in auth');
         const d = new Date();
         let isoTime = d.toISOString();
         (async() => {
             try {
                 console.log(zipCode);
-                await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').doc().set({
-                    dishName: dishName,
-                    dishDescription: dishDescription,
-                    dishRestrictions: dishRestrictions,
-                    dishPrice: dishPrice,
-                    dishType: dishType,
-                    cuisine: cuisine,
-                    waitTime: waitTime,
-                    servings: servings,
-                    dropOff: dropOff,
-                    additionalComments: additionalComments,
-                    cooked: cooked,
-                    pictureURL: pictureURL,
-                    timeUploaded: isoTime
-                }).then(()=>{
+                await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').doc().set(dishObject).then(()=>{
                     console.log("Uploaded sell data!")
                 });
                 return res.status(200).send({"success": true});
@@ -142,6 +161,8 @@ app.post('/api/signup', (req, res) => {
                 return res.status(200).send({"success": false});
                 }
         })();
+    } else {
+        return res.json({message: 'Unauthorized'});
     }
 });
 

@@ -104,6 +104,124 @@ app.post('/api/signup', (req, res) => {
     }
   });
 
+  app.post('/api/uploadPost', (req, res) => {
+    const dishName = req.body.dishName;
+    const dishDescription = req.body.dishDescription;
+    const dishRestrictions = req.body.dishRestrictions;
+    const dishPrice = req.body.dishPrice;
+    const dishType = req.body.type;
+    const cuisine = req.body.cuisine;
+    const waitTime = req.body.waitTime;
+    const servings = req.body.servings;
+    const dropOff = req.body.dropOff;
+    const additionalComments = req.body.additionalComments;
+    const cooked = req.body.cooked;
+    const zipCode = req.body.zipCode;
+    const pictureURL = req.body.pictureURL;
+
+    const d = new Date();
+    let isoTime = d.toISOString();
+
+    let dishObject = {
+        dishName: dishName,
+        dishDescription: dishDescription,
+        dishRestrictions: dishRestrictions,
+        dishPrice: dishPrice,
+        dishType: dishType,
+        cuisine: cuisine,
+        waitTime: waitTime,
+        servings: servings,
+        dropOff: dropOff,
+        additionalComments: additionalComments,
+        cooked: cooked,
+        pictureURL: pictureURL,
+        timeUploaded: isoTime
+    }
+
+    console.log(dishObject);
+
+    console.log('before auth')
+    const auth = req.user;
+
+    if (auth) {
+        console.log('in auth');
+        (async() => {
+            try {
+                console.log(zipCode);
+                await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').doc().set(dishObject).then(()=>{
+                    console.log("Uploaded sell data!")
+                });
+                return res.status(200).send({"success": true});
+                } catch (error) {
+                console.log(error);
+                return res.status(200).send({"success": false});
+                }
+        })();
+    } else {
+        return res.json({message: 'Unauthorized'});
+    }
+});
+
+app.get('/getBrowseData/:zipcode', (req, res) => {
+    const zip = req.params.zipcode;
+    const area = zip.substring(0,3);
+
+    var categoryItems = {
+        items:[]
+    };
+    (async () => {
+        try {
+            await db.collection('posts').doc(`!${String(area)}!`).collection("items").get().then((querySnapshot)=>{
+                querySnapshot.forEach((doc)=> {
+                    if (doc.exists) {
+                        const additionalComments = doc.data()['additionalComments'];
+                        const cooked = doc.data()['cooked'];
+                        const cuisine = doc.data()['cuisine'];
+                        const dishDescription = doc.data()['dishDescription'];
+                        const dishName = doc.data()['dishName'];
+                        const dishPrice = doc.data()['dishPrice'];
+                        const dishRestrictions = doc.data()['dishRestrictions'];
+                        const dishType = doc.data()['dishType'];
+                        const dropOff = doc.data()['dropOff'];
+                        const servings = doc.data()['servings'];
+                        const waitTime = doc.data()['waitTime'];
+                        const pictureURL = doc.data()['pictureURL'];
+
+                        var itemJSON = {
+                            additionalComments : additionalComments,
+                            cooked : cooked,
+                            cuisine : cuisine,
+                            dishDescription : dishDescription,
+                            dishName : dishName,
+                            dishPrice : dishPrice,
+                            dishRestrictions : dishRestrictions,
+                            dishType : dishType,
+                            dropOff : dropOff,
+                            servings : servings,
+                            waitTime : waitTime,
+                            pictureURL : pictureURL
+                        }
+                        categoryItems.items.push(itemJSON);
+                    } else {
+                        console.log("doc does not exist");
+                    }
+                })
+                if (categoryItems.items.length > 0) { 
+                    return res.status(200).send(categoryItems);
+                } else {
+                    return res.status(200).send({message: "No items found"});
+                }
+                
+            })
+        } 
+        catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+    })();
+})
+
+
 exports.server = functions.https.onRequest(app);
 
 // // Create and Deploy Your First Cloud Functions

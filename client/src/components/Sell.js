@@ -63,7 +63,8 @@ export default function Sell(props) {
 
         let res = await axios({
             method: 'post',
-            url:'http://localhost:5000/api/uploadPost',
+            url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadPost',
+            // url:'http://localhost:5000/api/uploadPost',
             data: {
                 dishName: dishNameRef.value,
                 dishDescription: dishDescriptionRef.value,

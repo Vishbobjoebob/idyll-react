@@ -1,10 +1,8 @@
 const admin = require('../config/firebase-config')
 const db = admin.firestore();
 class Middleware{
-
     async decodeToken(req,res,next){
         try {
-            console.log(1)
             if (req.headers.authorization) {
                 const token = req.headers.authorization.split(' ')[1];
                 console.log(req.headers.authorization);
@@ -14,7 +12,6 @@ class Middleware{
                 if(decodeValue){
                     req.user = decodeValue;
                     return next();
-
                 }
             }
             return res.json({message: 'Unauthorized'});
