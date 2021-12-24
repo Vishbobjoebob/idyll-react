@@ -12,6 +12,8 @@ import '../css/sell.css'
 import { useNavigate } from 'react-router-dom';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Sell(props) {
     const navigate = useNavigate();
@@ -68,7 +70,15 @@ export default function Sell(props) {
 
 
         if (localStorage.getItem('auth') !== 'true') {
-            alert('Please login to continue!')
+            toast.error('You must be logged in to post a dish.', {
+                position: "top-right",
+                autoClose: 7000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+            });
             return;
         }
 
@@ -100,8 +110,16 @@ export default function Sell(props) {
 
 
         if (res.data.success) {
-            alert('Listing posted!')
             navigate('/')
+            toast.success('Your dish has been posted!', {
+                position: "top-right",
+                autoClose: 7000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+            });
         } else {
             alert('Something went wrong, please try again!')
         }

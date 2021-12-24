@@ -9,6 +9,8 @@ import apple_logo from '../images/apple_logo.png'
 import {Modal, Button, Alert, NavDropdown} from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
 import {PersonFill, ChevronCompactLeft, PersonCircle, CartFill} from "react-bootstrap-icons"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function NavDashboard(props) {
     const [show, setShow] = useState(false);
@@ -114,6 +116,9 @@ export default function NavDashboard(props) {
 
     return (
         <>
+            <div className="Toastify">
+                 <ToastContainer />
+            </div>
             <nav id="navbar" className="">
                 {/* Navbar Logo */}
                 <div className="logo">
