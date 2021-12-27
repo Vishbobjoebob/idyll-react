@@ -10,6 +10,7 @@ class Middleware{
 
                 console.log(2)
                 if(decodeValue){
+                    console.log(decodeValue);
                     req.user = decodeValue;
                     return next();
                 }

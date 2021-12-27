@@ -14,6 +14,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Image from 'react-bootstrap/Image'
 
 export default function Sell(props) {
     const navigate = useNavigate();
@@ -21,9 +22,9 @@ export default function Sell(props) {
     let currentTime = today.getHours() + ":" + today.getMinutes();
     const [cooked, setCooked] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [image, setImage] = useState(undefined)
+    const [images, setImages] = useState([])
     const [value, onChange] = useState(currentTime);
-    const {zipCode, getZipCode, token} = useAuth();
+    const {zipCode, getZipCode, token, userData} = useAuth();
 
     let dishNameRef = useRef();
     let dishDescriptionRef = useRef();
@@ -40,6 +41,10 @@ export default function Sell(props) {
         getZipCode();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const handleAddImage = (e) => {
+        setImages((images) => [...images, e.target.files]);
+    }
 
     function handleCooked(e) {
         if (e.target.checked) {
@@ -66,6 +71,7 @@ export default function Sell(props) {
             additionalComments: additionalCommentsRef.value,
             cooked: cooked,
             zipCode: zipCode,
+            userData: userData,
         }
 
 
@@ -85,17 +91,21 @@ export default function Sell(props) {
         setLoading(true);
         getZipCode();   // get zip code
 
-        console.log(dishNameRef.value);
+        let imageURLarray = [];
+        console.log(images);
 
-        const ref = firebase.storage().ref().child(image.name);
-        const metadata = {
-            contentType: image.type
+        for (let i = 0; i < images.length; i++) {
+            const ref = firebase.storage().ref().child(images[i][0].name);
+            const metadata = {
+                contentType: images[i].type
+            }
+            let snapshot = await ref.put(images[i][0], metadata);
+            
+            let pictureURL = await snapshot.ref.getDownloadURL();
+            imageURLarray.push(pictureURL);
         }
-        let snapshot = await ref.put(image, metadata);
-        
-        let pictureURL = await snapshot.ref.getDownloadURL();
 
-        dishObject.pictureURL = pictureURL;
+        dishObject.pictureURLs = imageURLarray;
 
         let res = await axios({
             method: 'post',
@@ -105,9 +115,18 @@ export default function Sell(props) {
             headers: {
                 Authorization: 'Bearer ' + token,
             }
+        }).catch(err => {
+            setLoading(false);
+            toast.error('There was an error posting your dish. Please try again.', {
+                position: "top-right",
+                autoClose: 7000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+            });
         })
-
-
 
         if (res.data.success) {
             navigate('/')
@@ -121,7 +140,16 @@ export default function Sell(props) {
                 progress: undefined,
             });
         } else {
-            alert('Something went wrong, please try again!')
+            toast.error('There was an error posting your dish. Please try again.', {
+                position: "top-right",
+                autoClose: 7000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+            });
+            setLoading(false);
         }
     }
 
@@ -220,9 +248,14 @@ export default function Sell(props) {
                                     <Form.Label>Pictures</Form.Label>
                                     <Form.Control 
                                     required
-                                    onChange={(e) => {setImage(e.target.files[0])}}
+                                    onChange={handleAddImage}
                                     className="file-input" type="file" multiple />
                                 </Form.Group>
+                                {images.length !== 0 ? 
+                                images.map((images, index) => {
+                                    return <Image className="images" src={URL.createObjectURL(images[0])} alt="" fluid/>
+                                })
+                                : null}
                                 <Form.Group className="mb-3" id="">
                                     <Form.Check onChange={handleCooked} type="checkbox" label="Is the food already cooked?" />
                                 </Form.Group>

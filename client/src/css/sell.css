@@ -48,6 +48,11 @@
     padding-left: 25px;
 }
 
+.images {
+    padding-bottom: 10px;
+    padding-right:50px;
+}
+
 #gray {
     background-color: #FAFAFA;
 }

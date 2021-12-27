@@ -118,6 +118,7 @@ app.post('/api/signup', (req, res) => {
     const cooked = req.body.cooked;
     const zipCode = req.body.zipCode;
     const pictureURL = req.body.pictureURL;
+    const userData = req.body.userData;
 
     const d = new Date();
     let isoTime = d.toISOString();
@@ -135,7 +136,7 @@ app.post('/api/signup', (req, res) => {
         additionalComments: additionalComments,
         cooked: cooked,
         pictureURL: pictureURL,
-        timeUploaded: isoTime
+        timeUploaded: isoTime,
     }
 
     console.log(dishObject);
@@ -145,6 +146,12 @@ app.post('/api/signup', (req, res) => {
 
     if (auth) {
         console.log('in auth');
+
+        userData.uid = auth.uid;
+        userData.email = auth.email;
+
+        dishObject.userData = userData;
+
         (async() => {
             try {
                 console.log(zipCode);
