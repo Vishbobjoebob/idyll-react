@@ -9,8 +9,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors())
 app.use(express.json());
-
-app.use(middleware.decodeToken)
+app.use("/api", middleware.decodeToken)
 
 app.get("/api/auth", (req, res) => {;
     return res.json({
@@ -177,6 +176,7 @@ app.post('/api/signup', (req, res) => {
 app.get('/getBrowseData/:zipcode', (req, res) => {
     const zip = req.params.zipcode;
     const area = zip.substring(0,3);
+    console.log(zip);
 
     var categoryItems = {
         items:[]
@@ -213,14 +213,17 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                             waitTime : waitTime,
                             pictureURLs : pictureURLs
                         }
+                        console.log(itemJSON);
                         categoryItems.items.push(itemJSON);
                     } else {
                         console.log("doc does not exist");
                     }
                 })
                 if (categoryItems.items.length > 0) { 
+                    console.log(categoryItems);
                     return res.status(200).send(categoryItems);
                 } else {
+                    console.log("No items found");
                     return res.status(200).send({message: "No items found"});
                 }
                 
@@ -233,6 +236,13 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
     })();
 })
 
+app.get('/searchParams', (req, res)=> {
+    const zip = req.query.zip.toString();
+    const search = req.query.search;
+
+    
+
+})
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)

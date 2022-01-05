@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {auth} from '../config/firebase-config'
 import axios from 'axios'
+import firebase from "firebase/compat/app";    
 
 const AuthContext = React.createContext()
+var provider = new firebase.auth.GoogleAuthProvider();
 
 export function useAuth() {
     return useContext(AuthContext)
@@ -42,6 +44,26 @@ export function AuthProvider ({ children }) {
         }).catch(err => {
             res = err;
         })
+        return res;
+    }
+
+    async function signupWithGoogle() {
+        let res = undefined;
+        await auth
+        .signInWithPopup(provider)
+        .then((userCred) => {
+            if (userCred) {
+                setAuthState(true);
+                window.localStorage.setItem('auth', 'true')
+                userCred.user.getIdToken().then((token) => {
+                    setToken(token)
+                }).catch(()=> {console.log("bruh")})
+                setCurrentUser(userCred);
+            }
+        }).catch(err => {
+            res = err;
+        })
+
         return res;
     }
 
@@ -112,13 +134,13 @@ export function AuthProvider ({ children }) {
                 let token = await userCred.getIdToken();
                 setToken(token);
                 setCurrentUser(userCred);
-                let data = await getUserData(token)
+                let data = await getUserData(token);
                 setUserData(data);
                 setLoading(false);
             }
         })
         return unsubscribe;
-    }, 
+    },
     [currentUser])
 
     const value = {currentUser, signup, login, signout, userData, zipCode, getZipCode, token}

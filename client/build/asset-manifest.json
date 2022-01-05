@@ -1,5 +1,6 @@
 {
   "files": {
+<<<<<<< Updated upstream
     "main.css": "/static/css/main.36b5e6da.chunk.css",
     "main.js": "/static/js/main.ea7d42d0.chunk.js",
     "main.js.map": "/static/js/main.ea7d42d0.chunk.js.map",
@@ -12,14 +13,35 @@
     "static/css/2.f14f9ba2.chunk.css.map": "/static/css/2.f14f9ba2.chunk.css.map",
     "static/css/main.36b5e6da.chunk.css.map": "/static/css/main.36b5e6da.chunk.css.map",
     "static/js/2.0ef7ba31.chunk.js.LICENSE.txt": "/static/js/2.0ef7ba31.chunk.js.LICENSE.txt",
+=======
+    "main.css": "/static/css/main.d56107c9.chunk.css",
+    "main.js": "/static/js/main.c2ce25ef.chunk.js",
+    "main.js.map": "/static/js/main.c2ce25ef.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.776c1e0d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.776c1e0d.js.map",
+    "static/css/2.1f8ed190.chunk.css": "/static/css/2.1f8ed190.chunk.css",
+    "static/js/2.343b2780.chunk.js": "/static/js/2.343b2780.chunk.js",
+    "static/js/2.343b2780.chunk.js.map": "/static/js/2.343b2780.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.1f8ed190.chunk.css.map": "/static/css/2.1f8ed190.chunk.css.map",
+    "static/css/main.d56107c9.chunk.css.map": "/static/css/main.d56107c9.chunk.css.map",
+    "static/js/2.343b2780.chunk.js.LICENSE.txt": "/static/js/2.343b2780.chunk.js.LICENSE.txt",
+>>>>>>> Stashed changes
     "static/media/apple_logo.98e79cd8.png": "/static/media/apple_logo.98e79cd8.png",
     "static/media/google_logo.78998f2b.png": "/static/media/google_logo.78998f2b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.776c1e0d.js",
+<<<<<<< Updated upstream
     "static/css/2.f14f9ba2.chunk.css",
     "static/js/2.0ef7ba31.chunk.js",
     "static/css/main.36b5e6da.chunk.css",
     "static/js/main.ea7d42d0.chunk.js"
+=======
+    "static/css/2.1f8ed190.chunk.css",
+    "static/js/2.343b2780.chunk.js",
+    "static/css/main.d56107c9.chunk.css",
+    "static/js/main.c2ce25ef.chunk.js"
+>>>>>>> Stashed changes
   ]
 }

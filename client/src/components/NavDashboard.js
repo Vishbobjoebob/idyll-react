@@ -1,21 +1,24 @@
 import React, { useEffect, useState, useRef} from "react"
 import { useNavigate } from "react-router-dom"
-import 'firebase/compat/auth'
+import {GoogleAuthProvider} from 'firebase/compat/auth'
 import '../css/nav.css'
 //import '../css/signup.css'
 import logo from '../images/fullLogo.png'
 import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
-import {Modal, Button, Alert, NavDropdown} from 'react-bootstrap'
+import {Modal, Container, Row, Col, Alert, NavDropdown} from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
-import {PersonFill, ChevronCompactLeft, PersonCircle, CartFill} from "react-bootstrap-icons"
+import {PersonFill, ChevronCompactLeft, PersonCircle, CartFill, Search} from "react-bootstrap-icons"
 import { ToastContainer, toast } from 'react-toastify';
+import SearchFilter from "./SearchFilter"
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function NavDashboard(props) {
     const [show, setShow] = useState(false);
     const [showSignup, setShowSignup] = useState(false)
     const [showSignupChoose, setShowSignupChoose] = useState(false)
+    const [showContact, setShowContact] = useState(false);
+    const [showSearch, setShowSearch] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -23,6 +26,10 @@ export default function NavDashboard(props) {
     const handleShowSignup = () => setShowSignup(true);
     const handleCloseSignupChoose = () => setShowSignupChoose(false)
     const handleShowSignupChoose = () => setShowSignupChoose(true)
+    const handleCloseContact = () => setShowContact(false)
+    const handleShowContact = () => setShowContact(true);
+    const handleCloseSearch = () => setShowSearch(false);
+    const handleShowSearch = () => setShowSearch(true);
 
     const emailRefLogin = useRef();
     const passwordRefLogin = useRef();
@@ -90,6 +97,13 @@ export default function NavDashboard(props) {
 
     };
 
+    async function signupGoogle(e) {
+        e.preventDefault();
+        
+        
+
+    }
+
     async function switchToSignupChoose(e) {
         e.preventDefault();
         handleClose();
@@ -120,153 +134,178 @@ export default function NavDashboard(props) {
                  <ToastContainer />
             </div>
             <nav id="navbar" className="">
-                {/* Navbar Logo */}
-                <div className="logo">
-                    {/* Logo Placeholder for Inlustration */}
-                    <a id="company-logo" href="/"><img id="logo" src={logo} width='124px'/></a>
-                </div>
+            <Container fluid>
+                <Row>
+                    <Col/>
+                    <Col xs={12} sm={12} md={12} lg={8} xl={8} >
+                        {/* Navbar Logo */}
+                        <div className="nav-flex">
+                            <div id="company-logo">
+                                    {/* Logo Placeholder for Inlustration */}
+                                    <a href="/"><img id="logo" src={logo} width='124px'/></a>
+                            </div>  
+                            <ul id="nav-links">
+                                <li><a href="">Map</a></li>
+                                <li><a href="/">Browse</a></li>
+                                <li><a href="/sell">Sell</a></li>
+                            </ul>
 
-                <ul id="nav-links">
-                    <li><a href="">Map</a></li>
-                    <li><a href="/">Browse</a></li>
-                    <li><a href="/sell">Sell</a></li>
-                </ul>
+                            {/* <div> Welcome {currentUser.email} </div> */}
 
-                {/* <div> Welcome {currentUser.email} </div> */}
+                            {/* Navbar Links */}
+                                {/* {props.auth && props.user!==null ? (
+                                    <ul id="menu">
+                                    </ul>
+                                ) : (
+                                    <ul id="menu">
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="/browse">Browse</a></li>
+                                    <li><a href="#contact">Contact Us</a></li>
+                                    <li><a href="/login">Log in</a></li>
+                                    <li><a href="/signup">Sign up</a></li>
+                                    <button onClick={props.login}> Login With Google </button>
+                                    </ul>
+                                )} */} 
+                                {currentUser && userData ? (
+                                    <div class="navbar-icons">
+                                        <div class="search-icon-div"> <Search id="search-icon" size={20} color="black" onClick={handleShowSearch}/> </div>
+                                        <NavDropdown title={<PersonCircle size={32} color = "black"/>} className="navbar-icon">
+                                            Welcome {userData.firstName}
+                                            <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
+                                        </NavDropdown>
+                                        <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
+                                    </div>
+                                ) : (
+                                    <div class="navbar-icons">
+                                        <div class="search-icon-div"> <Search id="search-icon" size={20} color="black" onClick={handleShowSearch}/> </div>
+                                        <NavDropdown title={<div class="black-thin-navbar-text"> Welcome Sign In</div>} className="navbar-icon">
+                                            <NavDropdown.Item onClick={handleShow}><button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button></NavDropdown.Item>
+                                        </NavDropdown>
+                                        <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
+                                    </div>
+                                )}
+                                {/* <button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button> */}
 
-                {/* Navbar Links */}
-                    {/* {props.auth && props.user!==null ? (
-                        <ul id="menu">
-                        </ul>
-                    ) : (
-                        <ul id="menu">
-                        <li><a href="/home">Home</a></li>
-                        <li><a href="/browse">Browse</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="/login">Log in</a></li>
-                        <li><a href="/signup">Sign up</a></li>
-                        <button onClick={props.login}> Login With Google </button>
-                        </ul>
-                    )} */} 
-                    {currentUser && userData ? (
-                        <div class="navbar-icons">
-                            <NavDropdown title={<PersonCircle size={32} color = "black"/>} className="navbar-icon">
-                                Welcome {userData.firstName}
-                                <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
+                                <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Log In To Idyll</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <form id="item-information" className="form-horizontal" onSubmit={submitLoginInformation}>
+                                        {errorLogin && <Alert variant = 'danger'>{errorLogin}</Alert>}
+                                            <label className="control-label" style={{margin:"0px"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
+                                            <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
+
+                                            <label htmlFor="dish-price" id="password-label"> Password </label>
+                                            <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password" name="password" autoComplete="off" placeholder="Password" id="password-box" required/><br></br>
+
+                                            <input class="form-check-input" type="checkbox" value="" id="remember-me"/>
+                                            <label ref = {rememberMeRefLogin} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
+
+                                            <a href="#" class="" id="forgot-password">Forgot password?</a>
+
+                                            <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Login"/>
+                                        </form>
+
+                                        <div class="separator">
+                                            <div id = "left-line" class="line-bruh"></div>
+                                            <div id = "or"> OR </div>
+                                            <div id = "left-line" class="line-bruh"></div>
+                                        </div>
+                                        <div class="alternative-auth">
+                                            <a id="google" href=""><img id="logo" src={google_logo} width='54px'/></a>
+                                            <a id="apple" href=""><img id="logo" src={apple_logo} width='122px'/></a>
+                                        </div>
+                                        <div id="registration"> 
+                                            <div id="registration-question">Not registered?</div>
+                                            <a id="registration-signup" href="" onClick={switchToSignupChoose}> Sign Up for free! </a>
+                                        </div>
+                                    </Modal.Body>
+                                </Modal>
+
+                                <Modal id="signup-modal" show={showSignup} onHide={handleCloseSignup} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                                    <Modal.Header closeButton>
+                                        <ChevronCompactLeft onClick={switchToSignupChooseFromEmail} id="back-btn" color="black" size={32}></ChevronCompactLeft>
+                                        <Modal.Title id="email-title">Sign Up With Email</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <form id="item-information" className="form-horizontal" onSubmit={(e) => {submitInformation(e)}}>
+                                            {error && <Alert variant = 'danger'>{error}</Alert>}
+                                            <div className="error"></div>
+                                            <label htmlFor="firstName" className="control-label" className="label-name"> First Name </label>
+                                            <input ref = {firstNameRef} className="form-control" type="text" id="firstName" name="firstName" placeholder="John" autoComplete="off" required/><br></br>
+
+                                            <label htmlFor="lastName" className="control-label" className="label-name"> Last Name </label>
+                                            <input ref = {lastNameRef} className="form-control" type="text" id="lastName" name="lastName" placeholder="Doe" autoComplete="off" required/><br></br>
+
+                                            <label htmlFor="email" className="control-label" className="label-name"> Email </label>
+                                            <input ref = {emailRef} className="form-control" type="text" id="email" name="email" placeholder="idyll@idyll.shop" autoComplete="off" required/><br></br>
+                                            
+                                            <label htmlFor="email-confirmation" className="control-label" className="label-name"> Email Confirmation </label>
+                                            <input ref = {emailConfirmRef} className="form-control" type="text" id="email-confirmation" name="emailConfirmation" placeholder="idyll@idyll.shop" autoComplete="off" required/><br></br>
+
+                                            <label htmlFor="username" className="control-label" className="label-name"> Username </label>
+                                            <input ref = {usernameRef} className="form-control" type="text" id="username" name="username" placeholder="Idyll" autoComplete="off" required/><br></br>
+
+                                            <label htmlFor="password" className="control-label" className="label-name"> Password </label>
+                                            <input ref = {passwordRef} className="form-control" type="password" id="password" name="password" placeholder="At least 6 letters and numbers" autoComplete="off" required/><br></br>
+
+                                            <label htmlFor="password-confirmation" className="control-label" className="label-name"> Password Confirmation </label>
+                                            <input ref = {passwordConfirmRef} className="form-control" type="password" id="password-confirmation" name="passwordConfirmation" placeholder="At least 6 letters and numbers" autoComplete="off" required/><br></br>
+
+                                            <label htmlFor="phoneNumber" className="control-label" className="label-name"> Phone Number </label>
+                                            <input ref = {phoneNumberRef} className="form-control" type="text" id="phoneNumber" name="phoneNumber" placeholder="xxxxxxxxxx" autoComplete="off" required/><br></br>
+
+                                            <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Sign Up"/>
+                                        </form>
+                                    </Modal.Body>
+                                </Modal>
+
+                                <Modal id="signup-choose-modal" show={showSignupChoose} onHide={handleCloseSignupChoose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Sign Up for Idyll</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div class="signup-options">
+                                            <div class="option" id="email-and-password-option" onClick={switchToSignup}>
+                                                <div class="subpicture" id="email-pic"><PersonFill class="center-pic" color="black" size = {37}></PersonFill></div>
+                                                <div class="option-text">Use email/password</div>
+                                            </div>
+                                            <div class="option" id="google-option" >
+                                                <div class="subpicture" id="google-pic"> <img class="center-pic" src={google_logo} width='36px'></img></div>
+                                                <div class="option-text">Continue With Google</div>
+                                            </div>
+                                            <div class="option" id="apple-option" >
+                                                <div class="subpicture" id="apple-pic"> <img class="center-pic" src={apple_logo} width='73px'></img></div>
+                                                <div class="option-text">Continue With Apple</div>
+                                            </div>
+                                        </div>
+
+                                        <div id="registration1"> 
+                                            <div id="registration-question1">Already registered?</div>
+                                            <a id="registration-signup1" href="" onClick={switchToLogin}> Log in! </a>
+                                        </div>
+                                    </Modal.Body>
+                                </Modal>
+
+                                <Modal id="contact-info-modal" show={showContact} onHide={handleCloseContact} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title> Contact Information </Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div class="signup-options">
+                                            <label htmlFor="phone-num" className="control-label" className="label-name"> Phone Number </label>
+                                            <input ref = {firstNameRef} className="form-control" type="text" id="phone-num" name="phone-num" autoComplete="off" required/><br></br>
+                                        </div>
+                                    </Modal.Body>
+                                </Modal>
+                                <SearchFilter show={showSearch} onHide={handleCloseSearch}/>
                         </div>
-                    ) : (
-                        <div class="navbar-icons">
-                            <NavDropdown title={<div class="black-thin-navbar-text"> Log In</div>} className="navbar-icon">
-                                <NavDropdown.Item onClick={handleShow}><button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button></NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
-                        </div>
-                    )}
-                    {/* <button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button> */}
-
-                    <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Log In To Idyll</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <form id="item-information" className="form-horizontal" onSubmit={submitLoginInformation}>
-                            {errorLogin && <Alert variant = 'danger'>{errorLogin}</Alert>}
-                                <label className="control-label" style={{margin:"0px"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
-                                <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
-
-                                <label htmlFor="dish-price" id="password-label"> Password </label>
-                                <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password" name="password" autoComplete="off" placeholder="Password" id="password-box" required/><br></br>
-
-                                <input class="form-check-input" type="checkbox" value="" id="remember-me"/>
-                                <label ref = {rememberMeRefLogin} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
-
-                                <a href="#" class="" id="forgot-password">Forgot password?</a>
-
-                                <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Login"/>
-                            </form>
-
-                            <div class="separator">
-                                <div id = "left-line" class="line-bruh"></div>
-                                <div id = "or"> OR </div>
-                                <div id = "left-line" class="line-bruh"></div>
-                            </div>
-                            <div class="alternative-auth">
-                                <a id="google" href=""><img id="logo" src={google_logo} width='54px'/></a>
-                                <a id="apple" href=""><img id="logo" src={apple_logo} width='122px'/></a>
-                            </div>
-                            <div id="registration"> 
-                                <div id="registration-question">Not registered?</div>
-                                <a id="registration-signup" href="" onClick={switchToSignupChoose}> Sign Up for free! </a>
-                            </div>
-                        </Modal.Body>
-                    </Modal>
-
-                    <Modal id="signup-modal" show={showSignup} onHide={handleCloseSignup} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
-                        <Modal.Header closeButton>
-                            <ChevronCompactLeft onClick={switchToSignupChooseFromEmail} id="back-btn" color="black" size={32}></ChevronCompactLeft>
-                            <Modal.Title id="email-title">Sign Up With Email</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <form id="item-information" className="form-horizontal" onSubmit={(e) => {submitInformation(e)}}>
-                                {error && <Alert variant = 'danger'>{error}</Alert>}
-                                <div className="error"></div>
-                                <label htmlFor="firstName" className="control-label" className="label-name"> First Name </label>
-                                <input ref = {firstNameRef} className="form-control" type="text" id="firstName" name="firstName" placeholder="John" autoComplete="off" required/><br></br>
-
-                                <label htmlFor="lastName" className="control-label" className="label-name"> Last Name </label>
-                                <input ref = {lastNameRef} className="form-control" type="text" id="lastName" name="lastName" placeholder="Doe" autoComplete="off" required/><br></br>
-
-                                <label htmlFor="email" className="control-label" className="label-name"> Email </label>
-                                <input ref = {emailRef} className="form-control" type="text" id="email" name="email" placeholder="idyll@idyll.shop" autoComplete="off" required/><br></br>
-                                
-                                <label htmlFor="email-confirmation" className="control-label" className="label-name"> Email Confirmation </label>
-                                <input ref = {emailConfirmRef} className="form-control" type="text" id="email-confirmation" name="emailConfirmation" placeholder="idyll@idyll.shop" autoComplete="off" required/><br></br>
-
-                                <label htmlFor="username" className="control-label" className="label-name"> Username </label>
-                                <input ref = {usernameRef} className="form-control" type="text" id="username" name="username" placeholder="Idyll" autoComplete="off" required/><br></br>
-
-                                <label htmlFor="password" className="control-label" className="label-name"> Password </label>
-                                <input ref = {passwordRef} className="form-control" type="password" id="password" name="password" placeholder="At least 6 letters and numbers" autoComplete="off" required/><br></br>
-
-                                <label htmlFor="password-confirmation" className="control-label" className="label-name"> Password Confirmation </label>
-                                <input ref = {passwordConfirmRef} className="form-control" type="password" id="password-confirmation" name="passwordConfirmation" placeholder="At least 6 letters and numbers" autoComplete="off" required/><br></br>
-
-                                <label htmlFor="phoneNumber" className="control-label" className="label-name"> Phone Number </label>
-                                <input ref = {phoneNumberRef} className="form-control" type="text" id="phoneNumber" name="phoneNumber" placeholder="xxxxxxxxxx" autoComplete="off" required/><br></br>
-
-                                <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Sign Up"/>
-                            </form>
-                        </Modal.Body>
-                    </Modal>
-
-                    <Modal id="signup-choose-modal" show={showSignupChoose} onHide={handleCloseSignupChoose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Sign Up for Idyll</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <div class="signup-options">
-                                <div class="option" id="email-and-password-option" onClick={switchToSignup}>
-                                    <div class="subpicture" id="email-pic"><PersonFill class="center-pic" color="black" size = {37}></PersonFill></div>
-                                    <div class="option-text">Use email/password</div>
-                                </div>
-                                <div class="option" id="google-option" >
-                                    <div class="subpicture" id="google-pic"> <img class="center-pic" src={google_logo} width='36px'></img></div>
-                                    <div class="option-text">Continue With Google</div>
-                                </div>
-                                <div class="option" id="apple-option" >
-                                    <div class="subpicture" id="apple-pic"> <img class="center-pic" src={apple_logo} width='73px'></img></div>
-                                    <div class="option-text">Continue With Apple</div>
-                                </div>
-                            </div>
-
-                            <div id="registration1"> 
-                                <div id="registration-question1">Already registered?</div>
-                                <a id="registration-signup1" href="" onClick={switchToLogin}> Log in! </a>
-                            </div>
-                        </Modal.Body>
-                    </Modal>
+                    </Col>
+                            
+                    <Col/>
+                </Row>
+            </Container>
             </nav>
 
             {/* Menu Icon */}

@@ -4,11 +4,11 @@ import './App.css';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import Sell from './components/Sell'
-import Search from './components/Search'
 import Browse from './components/Browse'
 import NavDashboard from './components/NavDashboard';
 import { AuthProvider } from './contexts/AuthContext';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Slider from "react-slick";
 
 function App() {  
     // const [auth, setAuth] = useState(false || window.localStorage.getItem("auth")===true);
@@ -95,6 +95,7 @@ function App() {
       <AuthProvider>
           <Routes>
             <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
+            {/* <Route path="/" element ={<><SliderTest/></>}/> */}
             <Route path="/sell" element ={<><NavDashboard/><Sell/></>}/>
             {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
           </Routes>

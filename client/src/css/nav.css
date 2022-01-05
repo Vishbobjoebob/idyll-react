@@ -16,14 +16,6 @@ footer {
     color: white;
     text-align: center;
 }
-#company-logo {
-    margin-left:115px;
-}
-
-.dropdown-menu {
-    padding: 10px !important;
-}
-
 /* Copy into new css file */
 /**/
 
@@ -40,9 +32,6 @@ li {
 
 #navbar {
     position:fixed;
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
     font-weight: bold;
     background: white;
     color: rgb(13, 26, 38);
@@ -53,10 +42,13 @@ li {
     z-index: 10;
     box-shadow: 0 0px 10px 0px #999;
 }
-#nav-links {
-    font-size:20px;
-    height:100%;
-    margin-left:100px;
+
+.nav-flex {
+    width:100%;
+    height:64px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .green-btn {
     color: white;
@@ -231,25 +223,11 @@ li {
     color:black;
 }
 
-
-@media(max-width: 640px) {
-    #navbar ul {
-        display: none;
-    }
-}
-
-@media(orientation: landscape) {
-    #navbar ul {
-        display: inline-block;
-    }
-}
-
 .welcome {
     margin-right: 80px;
 }
 
 .navbar-icons {
-    margin-right:10%;
     display:flex;
     align-items: center;
 }
@@ -259,11 +237,33 @@ li {
 .navbar-icon:hover {
     color:#88E991;
 }
+
+.search-icon-div { 
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    width:36px;
+    height:36px;
+    flex-shrink:0;
+    border-radius:20px;
+    transition:0.5s;
+}
+
+.search-icon-div:hover{
+    background-color:#e5e5e5;
+    cursor:pointer;
+    transition:0.5s;
+}
+
+#search-icon {
+    margin-left:10px;
+    flex-shrink:0;
+}
 /*======================================================
                       Mobile Menu Menu Icon
     ======================================================*/
 
-@media(max-width: 750px) {
+@media(max-width: 1300px) {
     .menuIcon {
         cursor: pointer;
         display: block;
@@ -489,8 +489,5 @@ li {
 @media screen and (max-width: 1000px) {
     body {
         background-color: white;
-    }
-    #company-logo {
-        margin-left:0px;
     }
 }
