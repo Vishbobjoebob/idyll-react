@@ -117,7 +117,7 @@ app.post('/api/signup', (req, res) => {
     const additionalComments = req.body.additionalComments;
     const cooked = req.body.cooked;
     const zipCode = req.body.zipCode;
-    const pictureURL = req.body.pictureURL;
+    const pictureURLs = req.body.pictureURLs;
     const userData = req.body.userData;
 
     const d = new Date();
@@ -135,7 +135,7 @@ app.post('/api/signup', (req, res) => {
         dropOff: dropOff,
         additionalComments: additionalComments,
         cooked: cooked,
-        pictureURL: pictureURL,
+        pictureURLs: pictureURLs,
         timeUploaded: isoTime,
     }
 
@@ -192,7 +192,7 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                         const dropOff = doc.data()['dropOff'];
                         const servings = doc.data()['servings'];
                         const waitTime = doc.data()['waitTime'];
-                        const pictureURL = doc.data()['pictureURL'];
+                        const pictureURLs = doc.data()['pictureURLs'];
 
                         var itemJSON = {
                             additionalComments : additionalComments,
@@ -206,7 +206,7 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                             dropOff : dropOff,
                             servings : servings,
                             waitTime : waitTime,
-                            pictureURL : pictureURL
+                            pictureURLs : pictureURLs
                         }
                         categoryItems.items.push(itemJSON);
                     } else {
