@@ -1,12 +1,17 @@
 const functions = require("firebase-functions");
-const express = require("express")
-const cors = require("cors")
-const admin = require('./config/firebase-config')
-const middleware = require('./middleware')
+const express = require("express");
+const cors = require("cors");
+const admin = require('./config/firebase-config');
+const middleware = require('./middleware');
+const algoliasearch = require('algoliasearch');
 
 const app = express();
 const db = admin.firestore();
 const port = process.env.PORT || 5000;
+const env = functions.config();
+
+const algoliaClient = algoliasearch(env.algolia.app_id, env.algolia.admin_api_key);
+const index = algoliaClient.initIndex('searchPosts')
 
 app.use(cors())
 app.use(express.json());
@@ -137,6 +142,7 @@ app.post('/api/signup', (req, res) => {
         cooked: cooked,
         pictureURLs: pictureURLs,
         timeUploaded: isoTime,
+        zipCode: zipCode
     }
 
     console.log(dishObject);
@@ -151,7 +157,21 @@ app.post('/api/signup', (req, res) => {
         userData.email = auth.email;
 
         dishObject.userData = userData;
+        dishObject.fullName = userData.lastName + ", " + userData.firstName;
 
+        (async() => {
+            try {
+                console.log(zipCode);
+                await db.collection('searchPosts').doc().set(dishObject).then(()=>{
+                    console.log("Uploaded sell data!")
+                });
+                return res.status(200).send({"success": true});
+                } catch (error) {
+                console.log(error);
+                return res.status(200).send({"success": false});
+                }
+        })();
+        /*
         (async() => {
             try {
                 console.log(zipCode);
@@ -164,6 +184,7 @@ app.post('/api/signup', (req, res) => {
                 return res.status(200).send({"success": false});
                 }
         })();
+        */
     } else {
         return res.json({message: 'Unauthorized'});
     }
@@ -172,6 +193,7 @@ app.post('/api/signup', (req, res) => {
 app.get('/getBrowseData/:zipcode', (req, res) => {
     const zip = req.params.zipcode;
     const area = zip.substring(0,3);
+    console.log("brah");
 
     var categoryItems = {
         items:[]
@@ -208,14 +230,17 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                             waitTime : waitTime,
                             pictureURLs : pictureURLs
                         }
+                        console.log(itemJSON);
                         categoryItems.items.push(itemJSON);
                     } else {
                         console.log("doc does not exist");
                     }
                 })
                 if (categoryItems.items.length > 0) { 
+                    console.log(categoryItems);
                     return res.status(200).send(categoryItems);
                 } else {
+                    console.log("No items found");
                     return res.status(200).send({message: "No items found"});
                 }
                 
@@ -228,6 +253,16 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
     })();
 })
 
+exports.onPostCreated = functions.firestore.document('searchPosts/{postId}').onCreate(((snap, ctx) => {
+    return index.save0bject({
+        objectID: snap.id,
+        ...snap.data()
+    });
+}))
+
+exports.onPostDeleted = functions.firestore.document('searchPosts/{postId}').onDelete(((snap, ctx) => {
+    return index.deleteObject(snap.id);
+}))
 
 exports.server = functions.https.onRequest(app);
 

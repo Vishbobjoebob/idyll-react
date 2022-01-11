@@ -117,6 +117,7 @@ export default function Sell(props) {
             }
         }).catch(err => {
             setLoading(false);
+            console.log("my boi")
             toast.error('There was an error posting your dish. Please try again.', {
                 position: "top-right",
                 autoClose: 7000,
