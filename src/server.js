@@ -176,7 +176,7 @@ app.post('/api/signup', (req, res) => {
 app.get('/getBrowseData/:zipcode', (req, res) => {
     const zip = req.params.zipcode;
     const area = zip.substring(0,3);
-    console.log(zip);
+    console.log("brah");
 
     var categoryItems = {
         items:[]

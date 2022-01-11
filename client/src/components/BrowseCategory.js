@@ -24,7 +24,8 @@ export default function BrowseCategory(props) {
 
 
     const getBrowseData = async() =>{
-        const res = await axios.get(`http://localhost:5000/getBrowseData/30024`)
+        const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024`)
+        console.log(JSON.parse(JSON.stringify(res.data)));
         return JSON.parse(JSON.stringify(res.data));
     }
 
