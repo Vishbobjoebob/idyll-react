@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef} from "react"
 import {Modal} from 'react-bootstrap'
-import {InstantSearch, Hits, SearchBox} from 'react-instantsearch-dom';
+import {InstantSearch, Hits, SearchBox, connectSearchBox, connectHits} from 'react-instantsearch-dom';
 import algoliasearch from "algoliasearch";
 import '../css/index.css'
 import '../css/search.css'
 
 export default function SearchFilter(props) {
-    const searchRef=useRef();
+    const searchRef=useRef(null);
+    const [showContent, setShowContent] = useState(false);
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
         '12af5740b6d988432c9b23af2f5a9480'
@@ -18,32 +19,59 @@ export default function SearchFilter(props) {
         }
       }
     
-    const Hit = ({hit}) =>
-      <div className="hit">
-          <div className="hit-content">
-              <div className="hit-name">
-                  {hit.dishName}
-              </div>
-              <div className="hit-seller">
-                  {hit.fullName}
-              </div>
-          </div>
-      </div>
-    const Content = () =>
-      <div className="content">
-          <Hits hitComponent={Hit}/>
-      </div>
+    const onFocus = () => {
+
+    }
+    const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
+        <input
+        id="searchBox"
+        type="search"
+        ref={searchRef}
+        className="form-control"
+        value={currentRefinement}
+        onChange={event => refine(event.currentTarget.value)}
+        onFocus={onFocus}
+        placeholder="Search..."
+        />
+    );
+    const CustomSearchBox = connectSearchBox(SearchBox);
+
+    const Hits = ({ hits }) => (
+        <div className="hit-wrapper">
+          {hits.map(hit => (
+            <div className="hit-content">
+                <div className="hit-img-wrapper">
+                    <img className="hit-img" src={hit.pictureURLs}/>
+                </div>
+                <div className="hit-name">
+                    {hit.dishName}
+                </div>
+                <div className="hit-price">
+                    {hit.dishPrice}
+                </div>
+                <div className="hit-seller">
+                    {hit.fullName}
+                </div>
+            </div>
+          ))}
+        </div>
+      );
+    const CustomHits = connectHits(Hits);
 
     return (
-        <Modal id="search-modal" show={props.show} onHide={props.onHide} aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal contentClassName="search-modal" show={props.show} onHide={props.onHide} centered closeButton>
             <Modal.Header closeButton>
                 <Modal.Title>What are you craving?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div>
                     <InstantSearch searchClient={searchClient} indexName="searchPosts" >
-                        <SearchBox id="search-box"/>
-                        <Content/>
+                        <CustomSearchBox/>
+                        <div className="content">
+                            <h1 className="search-item-header">Items</h1>
+                            <CustomHits/>
+                        </div>
+    
                     </InstantSearch>
                 </div>
                 <h1 id="popular-searches-header"> Popular Searches </h1>
