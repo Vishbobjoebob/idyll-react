@@ -44,9 +44,13 @@ export default function NavDashboard(props) {
 
     const navigate = useNavigate();
 
-    const {currentUser, signup, login, signout, userData, zipCode} = useAuth();
+    const {currentUser, signup, login, signout, userData, zipCode, getZipCode} = useAuth();
     const [errorLogin, setErrorLogin] = useState(undefined);
     const [error, setError] = useState(undefined);
+
+    useState(() => {
+        getZipCode();
+    }, [])
 
     async function submitLoginInformation(e) {
         e.preventDefault();
@@ -95,7 +99,7 @@ export default function NavDashboard(props) {
         }
         handleCloseSignup();
         navigate("/");
-
+        
     };
 
     // async function signupGoogle(e) {
@@ -143,18 +147,18 @@ export default function NavDashboard(props) {
                             <Search id="search-icon" size={20} color="black" /> 
                         </div>
                         {currentUser && userData ? (
-                            <NavDropdown title={userData.firstName} id="basic-nav-dropdown">
-                                <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
-                            </NavDropdown>
+                            <><NavDropdown title={userData.firstName} id="basic-nav-dropdown">
+                                    <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
+                                </NavDropdown><Nav.Link href="/sell">Sell</Nav.Link></>
                         ) : (
                             <Nav.Link onClick={handleShow}> Log In </Nav.Link>
                         )}
                         
-                        <Nav.Link href="/sell">Sell</Nav.Link>
                         <Nav.Link href="/map">Map</Nav.Link>
-                        <Nav.Link href="/browse">Browse</Nav.Link>
+                        <Nav.Link href="/browse" style={{paddingRight:'10px'}}>Browse</Nav.Link>
+                        <Nav.Item style={{lineHeight:'2.6', fontWeight: "bold"}}>{zipCode}</Nav.Item>
                     </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -8,6 +8,7 @@ import BrowseCard from "./BrowseCard"
 import axios from 'axios'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useAuth } from "../contexts/AuthContext"
 
 export default function BrowseCategory(props) {
     // const [width, setWidth] = useState(0);
@@ -17,14 +18,16 @@ export default function BrowseCategory(props) {
     const [sliderStyle, setSliderStyle] = useState("slider");
     const [seeAll, setSeeAll] = useState("See All")
     const [showArrow, setShowArrow] = useState("")
+    // eslint-disable-next-line no-unused-vars
+    const {zipCode, getZipCode} = useAuth();
 
     const [categoryItems, setCategoryItems] = useState();
 
-
     const getBrowseData = async() =>{
+        // await getZipCode();
         //http://localhost:5000/getBrowseData/30024
         //https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024
-        const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024`)
+        const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024`);
         console.log(JSON.parse(JSON.stringify(res.data)));
         return JSON.parse(JSON.stringify(res.data));
     }
@@ -34,6 +37,7 @@ export default function BrowseCategory(props) {
         let categoryItems = await getBrowseData();
         console.log(categoryItems);
         setCategoryItems(categoryItems.items)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const changeSliderStyle = () => {

@@ -20,6 +20,10 @@ export function AuthProvider ({ children }) {
     const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState(undefined);
 
+    useEffect(() => {
+        getZipCode()
+    }, [])
+
     const getZipCode = async () => {
         axios.get('https://ipapi.co/json/').then((res) => {
             setZipCode(res.data.postal);

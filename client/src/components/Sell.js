@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState, useRef} from "react"
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Form, Button } from 'react-bootstrap'
 import { PinMapFill } from 'react-bootstrap-icons'
 import TimePicker from 'react-time-picker'
 import { useAuth } from "../contexts/AuthContext"
@@ -108,9 +108,9 @@ export default function Sell(props) {
         dishObject.pictureURLs = imageURLarray;
         let res = await axios({
             method: 'post',
-            url:'http://localhost:5000/api/uploadPost',
             // url:'http://localhost:5000/api/uploadPost',
-            // url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadPost',
+            // url:'http://localhost:5000/api/uploadPost',
+            url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadPost',
             data: dishObject, 
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -156,10 +156,8 @@ export default function Sell(props) {
 
 
     return (
-            <Container fluid>
+            <Container fluid className="px-4" style={{maxWidth: '55rem'}}>
                 <Row>
-                    <Col>1 of 3</Col>
-                    <Col xs={12} sm={12} md={12} lg={5} xl={5}>
                         <div class="form-wrapper">
                             <Form onSubmit={submitSellInfo}>
                                 <h1 id="sell-form-header">Tell us a little about your dishes</h1>
@@ -296,8 +294,6 @@ export default function Sell(props) {
                                 </div>
                             </Form>
                         </div>
-                    </Col>
-                    <Col></Col>
                 </Row>
             </Container>
             )   
