@@ -75,7 +75,7 @@ export default function BrowseCategory(props) {
       };
     return (
         <div class="category-container" ref={containerRef}>
-            <div id="category-header d-none d-lg-block">
+            <div id="category-header ">
                 <h1 id="category-title">{props.name || <Skeleton/>}</h1>
                 <div className="arrows">
                     <div id="see-all" onClick={changeSliderStyle}>{seeAll}</div>

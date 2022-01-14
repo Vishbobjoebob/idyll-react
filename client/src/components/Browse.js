@@ -26,10 +26,8 @@ export default function Browse(props) {
             </div>
             <div id="green-line"></div>
 
-            <Container fluid>
+            <Container className="px-4" style={{maxWidth: '61rem'}} fluid>
                 <Row>
-                    <Col></Col>
-                    <Col xs={8} sm={8} md={8} lg={8} xl={8} >
                         <div id="dropdown-container">
                             <Dropdown id="filter-box">
                                 <Dropdown.Toggle variant="light" id="dropdown">
@@ -59,7 +57,7 @@ export default function Browse(props) {
                             <BrowseCategory name="Local Favorites"/>
                             <BrowseCategory name="Fresh"/>
                         </div>
-                    </Col>
+
                     <Col></Col>
                 </Row>
             </Container>
