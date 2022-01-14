@@ -15,6 +15,7 @@ const index = algoliaClient.initIndex('searchPosts')
 
 app.use(cors())
 app.use(express.json());
+app.use("/api", middleware.decodeToken)
 
 app.get('/', (req, res) => {
     res.json({message: 'hey'})
@@ -23,8 +24,6 @@ app.get('/', (req, res) => {
 app.get('/api/hello', (req, res) => {
     res.json({message: 'Hello!'})
 })
-
-app.use(middleware.decodeToken)
 
 app.get("/api/auth", (req, res) => {;
     return res.json({
