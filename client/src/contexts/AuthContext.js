@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react'
 import {auth} from '../config/firebase-config'
 import axios from 'axios'

@@ -1,23 +1,23 @@
-import React, { useEffect, useState, useRef} from "react"
+import React, {useRef} from "react"
 import {Modal} from 'react-bootstrap'
-import {InstantSearch, Hits, SearchBox, connectSearchBox, connectHits} from 'react-instantsearch-dom';
+import {InstantSearch, connectSearchBox, connectHits} from 'react-instantsearch-dom';
 import algoliasearch from "algoliasearch";
 import '../css/index.css'
 import '../css/search.css'
 
 export default function SearchFilter(props) {
     const searchRef=useRef(null);
-    const [showContent, setShowContent] = useState(false);
+    // const [showContent, setShowContent] = useState(false);
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
         '12af5740b6d988432c9b23af2f5a9480'
       );
     
-    const onSearch = (e) => {
-        if (e.key === 'Enter') {
+    // const onSearch = (e) => {
+    //     if (e.key === 'Enter') {
             
-        }
-      }
+    //     }
+    //   }
     
     const onFocus = () => {
 

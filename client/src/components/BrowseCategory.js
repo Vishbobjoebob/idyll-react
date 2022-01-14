@@ -1,12 +1,10 @@
 import React, {useRef, useState, useEffect} from "react"
 import '../css/index.css'
 import '../css/browse.css'
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronRight, ChevronLeft } from "react-bootstrap-icons";
 import BrowseCard from "./BrowseCard"
-import Scroll from 'react-scroll'
 import axios from 'axios'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'

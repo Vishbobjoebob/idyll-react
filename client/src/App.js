@@ -1,14 +1,11 @@
-import React, { useEffect, useState} from "react"
-import axios from 'axios'
+import React from "react"
 import './App.css';
-import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import Sell from './components/Sell'
 import Browse from './components/Browse'
 import NavDashboard from './components/NavDashboard';
 import { AuthProvider } from './contexts/AuthContext';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import Slider from "react-slick";
 
 function App() {  
     // const [auth, setAuth] = useState(false || window.localStorage.getItem("auth")===true);

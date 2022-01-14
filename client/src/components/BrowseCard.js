@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef} from "react"
+import React from "react"
 import {Card, Image } from "react-bootstrap"
 import '../css/browse.css'
-import sixnine from "../images/69.jpg"
 import { ChevronRight, ChevronLeft } from "react-bootstrap-icons";
 import Slider from "react-slick";
 export default function BrowseCard(props) {

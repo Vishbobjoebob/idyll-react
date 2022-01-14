@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useRef} from "react"
+import React, { useState, useRef} from "react"
 import { useNavigate } from "react-router-dom"
-import {GoogleAuthProvider} from 'firebase/compat/auth'
 import '../css/nav.css'
 //import '../css/signup.css'
 import logo from '../images/fullLogo.png'
 import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
-import {Modal, Container, Row, Col, Alert, NavDropdown, Navbar, Nav} from 'react-bootstrap'
+import {Modal, Container, Alert, NavDropdown, Navbar, Nav, } from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
-import {PersonFill, ChevronCompactLeft, PersonCircle, CartFill, Search} from "react-bootstrap-icons"
-import { ToastContainer, toast } from 'react-toastify';
+import {PersonFill, ChevronCompactLeft, Search} from "react-bootstrap-icons"
+import { ToastContainer } from 'react-toastify';
 import SearchFilter from "./SearchFilter"
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,7 +26,7 @@ export default function NavDashboard(props) {
     const handleCloseSignupChoose = () => setShowSignupChoose(false)
     const handleShowSignupChoose = () => setShowSignupChoose(true)
     const handleCloseContact = () => setShowContact(false)
-    const handleShowContact = () => setShowContact(true);
+    // const handleShowContact = () => setShowContact(true);
     const handleCloseSearch = () => setShowSearch(false);
     const handleShowSearch = () => setShowSearch(true);
 
@@ -76,7 +75,7 @@ export default function NavDashboard(props) {
         }
 
         setError("")
-        let {res, err} = await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
+        let { err } = await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
         if (err) {
             switch (err.code) {
                 case "auth/email-already-in-use":
@@ -99,10 +98,9 @@ export default function NavDashboard(props) {
 
     };
 
-    async function signupGoogle(e) {
-        e.preventDefault();
-
-    }
+    // async function signupGoogle(e) {
+    //     e.preventDefault();
+    // }
 
     async function switchToSignupChoose(e) {
         e.preventDefault();
@@ -135,13 +133,15 @@ export default function NavDashboard(props) {
             </div>
             <Navbar expand="lg" className="px-4 py-0">
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                      <img src={logo} className="img" alt=""></img>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <div class="search-icon-div" style={{paddingTop: '6px'}} onClick={handleShowSearch}> <Search id="search-icon" size={20} color="black" /> </div>
+                        <div class="search-icon-div" style={{paddingTop: '6px'}} onClick={handleShowSearch}> 
+                            <Search id="search-icon" size={20} color="black" /> 
+                        </div>
                         {currentUser && userData ? (
                             <NavDropdown title={userData.firstName} id="basic-nav-dropdown">
                                 <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
@@ -151,6 +151,7 @@ export default function NavDashboard(props) {
                         ) : (
                             <Nav.Link onClick={handleShow}> Log In </Nav.Link>
                         )}
+                        
                         <Nav.Link href="/sell">Sell</Nav.Link>
                         <Nav.Link href="/map">Map</Nav.Link>
                         <Nav.Link href="/browse">Browse</Nav.Link>
@@ -166,16 +167,16 @@ export default function NavDashboard(props) {
                                     <Modal.Body>
                                         <form id="item-information" className="form-horizontal" onSubmit={submitLoginInformation}>
                                         {errorLogin && <Alert variant = 'danger'>{errorLogin}</Alert>}
-                                            <label className="control-label" style={{margin:"0px"}} htmlFor="dish-name" className="label-name" id="email-label"> Email </label>
-                                            <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email" name="email" autoComplete="off" placeholder="Email" id="email-box" required/><br></br>
+                                            <label className="control-label label-name" style={{margin:"0px"}} htmlFor="dish-name" id="email-label"> Email </label>
+                                            <input ref = {emailRefLogin} className="form-control green-border" type="text" id="email email-box" name="email" autoComplete="off" placeholder="Email" required/><br></br>
 
                                             <label htmlFor="dish-price" id="password-label"> Password </label>
-                                            <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password" name="password" autoComplete="off" placeholder="Password" id="password-box" required/><br></br>
+                                            <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password password-box" name="password" autoComplete="off" placeholder="Password"  required/><br></br>
 
                                             <input class="form-check-input" type="checkbox" value="" id="remember-me"/>
                                             <label ref = {rememberMeRefLogin} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
 
-                                            <a href="#" class="" id="forgot-password">Forgot password?</a>
+                                            <a href="/" class="" id="forgot-password">Forgot password?</a>
 
                                             <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Login"/>
                                         </form>
@@ -186,12 +187,12 @@ export default function NavDashboard(props) {
                                             <div id = "left-line" class="line-bruh"></div>
                                         </div>
                                         <div class="alternative-auth">
-                                            <a id="google" href=""><img id="logo" src={google_logo} width='54px'/></a>
-                                            <a id="apple" href=""><img id="logo" src={apple_logo} width='122px'/></a>
+                                            <a id="google" href="/"><img id="logo" alt='' src={google_logo} width='54px'/></a>
+                                            <a id="apple" href="/"><img id="logo" alt='' src={apple_logo} width='122px'/></a>
                                         </div>
                                         <div id="registration"> 
                                             <div id="registration-question">Not registered?</div>
-                                            <a id="registration-signup" href="" onClick={switchToSignupChoose}> Sign Up for free! </a>
+                                            <a id="registration-signup" href="/#" onClick={switchToSignupChoose}> Sign up for free! </a>
                                         </div>
                                     </Modal.Body>
                                 </Modal>
@@ -205,28 +206,28 @@ export default function NavDashboard(props) {
                                         <form id="item-information" className="form-horizontal" onSubmit={(e) => {submitInformation(e)}}>
                                             {error && <Alert variant = 'danger'>{error}</Alert>}
                                             <div className="error"></div>
-                                            <label htmlFor="firstName" className="control-label" className="label-name"> First Name </label>
+                                            <label htmlFor="firstName" className="control-label label-name"> First Name </label>
                                             <input ref = {firstNameRef} className="form-control" type="text" id="firstName" name="firstName" placeholder="John" autoComplete="off" required/><br></br>
 
-                                            <label htmlFor="lastName" className="control-label" className="label-name"> Last Name </label>
+                                            <label htmlFor="lastName" className="control-label label-name"> Last Name </label>
                                             <input ref = {lastNameRef} className="form-control" type="text" id="lastName" name="lastName" placeholder="Doe" autoComplete="off" required/><br></br>
 
-                                            <label htmlFor="email" className="control-label" className="label-name"> Email </label>
+                                            <label htmlFor="email" className="control-label label-name"> Email </label>
                                             <input ref = {emailRef} className="form-control" type="text" id="email" name="email" placeholder="idyll@idyll.shop" autoComplete="off" required/><br></br>
                                             
-                                            <label htmlFor="email-confirmation" className="control-label" className="label-name"> Email Confirmation </label>
+                                            <label htmlFor="email-confirmation" className="control-label label-name"> Email Confirmation </label>
                                             <input ref = {emailConfirmRef} className="form-control" type="text" id="email-confirmation" name="emailConfirmation" placeholder="idyll@idyll.shop" autoComplete="off" required/><br></br>
 
-                                            <label htmlFor="username" className="control-label" className="label-name"> Username </label>
+                                            <label htmlFor="username" className="control-label label-name"> Username </label>
                                             <input ref = {usernameRef} className="form-control" type="text" id="username" name="username" placeholder="Idyll" autoComplete="off" required/><br></br>
 
-                                            <label htmlFor="password" className="control-label" className="label-name"> Password </label>
+                                            <label htmlFor="password" className="control-label label-name"> Password </label>
                                             <input ref = {passwordRef} className="form-control" type="password" id="password" name="password" placeholder="At least 6 letters and numbers" autoComplete="off" required/><br></br>
 
-                                            <label htmlFor="password-confirmation" className="control-label" className="label-name"> Password Confirmation </label>
+                                            <label htmlFor="password-confirmation" className="control-label label-name"> Password Confirmation </label>
                                             <input ref = {passwordConfirmRef} className="form-control" type="password" id="password-confirmation" name="passwordConfirmation" placeholder="At least 6 letters and numbers" autoComplete="off" required/><br></br>
 
-                                            <label htmlFor="phoneNumber" className="control-label" className="label-name"> Phone Number </label>
+                                            <label htmlFor="phoneNumber" className="control-label label-name"> Phone Number </label>
                                             <input ref = {phoneNumberRef} className="form-control" type="text" id="phoneNumber" name="phoneNumber" placeholder="xxxxxxxxxx" autoComplete="off" required/><br></br>
 
                                             <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Sign Up"/>
@@ -242,21 +243,21 @@ export default function NavDashboard(props) {
                                         <div class="signup-options">
                                             <div class="option" id="email-and-password-option" onClick={switchToSignup}>
                                                 <div class="subpicture" id="email-pic"><PersonFill class="center-pic" color="black" size = {37}></PersonFill></div>
-                                                <div class="option-text">Use email/password</div>
+                                                <a class="option-text" href="/#">Use email/password</a>
                                             </div>
                                             <div class="option" id="google-option" >
-                                                <div class="subpicture" id="google-pic"> <img class="center-pic" src={google_logo} width='36px'></img></div>
-                                                <div class="option-text">Continue With Google</div>
+                                                <div class="subpicture" id="google-pic"> <img class="center-pic" alt='' src={google_logo} width='36px'></img></div>
+                                                <a class="option-text" href="/#">Continue with Google</a>
                                             </div>
                                             <div class="option" id="apple-option" >
-                                                <div class="subpicture" id="apple-pic"> <img class="center-pic" src={apple_logo} width='73px'></img></div>
-                                                <div class="option-text">Continue With Apple</div>
+                                                <div class="subpicture" id="apple-pic"> <img class="center-pic"  alt='' src={apple_logo} width='73px'></img></div>
+                                                <a class="option-text" href="/#">Continue With Apple</a>
                                             </div>
                                         </div>
 
                                         <div id="registration1"> 
                                             <div id="registration-question1">Already registered?</div>
-                                            <a id="registration-signup1" href="" onClick={switchToLogin}> Log in! </a>
+                                            <a id="registration-signup1" href="/#" onClick={switchToLogin}> Log in! </a>
                                         </div>
                                     </Modal.Body>
                                 </Modal>
@@ -267,7 +268,7 @@ export default function NavDashboard(props) {
                                     </Modal.Header>
                                     <Modal.Body>
                                         <div class="signup-options">
-                                            <label htmlFor="phone-num" className="control-label" className="label-name"> Phone Number </label>
+                                            <label htmlFor="phone-num" className="control-label label-name"> Phone Number </label>
                                             <input ref = {firstNameRef} className="form-control" type="text" id="phone-num" name="phone-num" autoComplete="off" required/><br></br>
                                         </div>
                                     </Modal.Body>

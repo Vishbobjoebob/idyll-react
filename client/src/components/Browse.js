@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef} from "react"
+import React, { useRef} from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import { Container, Dropdown, Row, Col} from "react-bootstrap"
-import {Search} from 'react-bootstrap-icons'
 import BrowseCategory from "./BrowseCategory"
 
 export default function Browse(props) {
