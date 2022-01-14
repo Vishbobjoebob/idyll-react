@@ -194,6 +194,7 @@ overflow-x: hidden;
     height:150px;
 }
 #card-img {
+    object-fit: cover;
     height:150px;
 }
 #card-container:hover #card-img{

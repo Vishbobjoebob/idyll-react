@@ -31,6 +31,7 @@ export default function BrowseCategory(props) {
         return JSON.parse(JSON.stringify(res.data));
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async()=>{
         let categoryItems = await getBrowseData();
         console.log(categoryItems);

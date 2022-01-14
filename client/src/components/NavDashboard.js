@@ -80,7 +80,7 @@ export default function NavDashboard(props) {
         if (res) {
             switch (res.code) {
                 case "auth/email-already-in-use":
-                    setError("It looks like you already have an account with this email. Please login.")
+                    setError("It looks like you already have an account with this email. Please try logging in.")
                     break;
                 case "auth/invalid-email": 
                     setError("Please use a valid email.")
