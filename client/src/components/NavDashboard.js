@@ -6,7 +6,7 @@ import '../css/nav.css'
 import logo from '../images/fullLogo.png'
 import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
-import {Modal, Container, Row, Col, Alert, NavDropdown} from 'react-bootstrap'
+import {Modal, Container, Row, Col, Alert, NavDropdown, Navbar, Nav} from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
 import {PersonFill, ChevronCompactLeft, PersonCircle, CartFill, Search} from "react-bootstrap-icons"
 import { ToastContainer, toast } from 'react-toastify';
@@ -99,8 +99,6 @@ export default function NavDashboard(props) {
 
     async function signupGoogle(e) {
         e.preventDefault();
-        
-        
 
     }
 
@@ -133,60 +131,31 @@ export default function NavDashboard(props) {
             <div className="Toastify">
                  <ToastContainer />
             </div>
-            <nav id="navbar" className="">
-            <Container fluid>
-                <Row>
-                    <Col/>
-                    <Col xs={12} sm={12} md={12} lg={8} xl={8} >
-                        {/* Navbar Logo */}
-                        <div className="nav-flex">
-                            <div id="company-logo">
-                                    {/* Logo Placeholder for Inlustration */}
-                                    <a href="/"><img id="logo" src={logo} width='124px'/></a>
-                            </div>  
-                            <ul id="nav-links">
-                                <li><a href="">Map</a></li>
-                                <li><a href="/">Browse</a></li>
-                                <li><a href="/sell">Sell</a></li>
-                            </ul>
+            <Navbar expand="lg" className="px-4 py-0">
+                <Container>
+                    <Navbar.Brand href="#home">
+                     <img src={logo} className="img" alt=""></img>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ms-auto">
+                        {currentUser && userData ? (
+                            <NavDropdown title={userData.firstName} id="basic-nav-dropdown">
+                                <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
+                                <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
+                            </NavDropdown>
+                        ) : (
+                            <Nav.Link onClick={handleShow}> Log In </Nav.Link>
+                        )}
+                        <Nav.Link href="/sell">Sell</Nav.Link>
+                        <Nav.Link href="/map">Map</Nav.Link>
+                        <Nav.Link href="/browse">Browse</Nav.Link>
+                    </Nav>
+                    </Navbar.Collapse>
+                </Container>
 
-                            {/* <div> Welcome {currentUser.email} </div> */}
-
-                            {/* Navbar Links */}
-                                {/* {props.auth && props.user!==null ? (
-                                    <ul id="menu">
-                                    </ul>
-                                ) : (
-                                    <ul id="menu">
-                                    <li><a href="/home">Home</a></li>
-                                    <li><a href="/browse">Browse</a></li>
-                                    <li><a href="#contact">Contact Us</a></li>
-                                    <li><a href="/login">Log in</a></li>
-                                    <li><a href="/signup">Sign up</a></li>
-                                    <button onClick={props.login}> Login With Google </button>
-                                    </ul>
-                                )} */} 
-                                {currentUser && userData ? (
-                                    <div class="navbar-icons">
-                                        <div class="search-icon-div"> <Search id="search-icon" size={20} color="black" onClick={handleShowSearch}/> </div>
-                                        <NavDropdown title={<PersonCircle size={32} color = "black"/>} className="navbar-icon">
-                                            Welcome {userData.firstName}
-                                            <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
-                                        </NavDropdown>
-                                        <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
-                                    </div>
-                                ) : (
-                                    <div class="navbar-icons">
-                                        <div class="search-icon-div"> <Search id="search-icon" size={20} color="black" onClick={handleShowSearch}/> </div>
-                                        <NavDropdown title={<div class="black-thin-navbar-text"> Welcome Sign In</div>} className="navbar-icon">
-                                            <NavDropdown.Item onClick={handleShow}><button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button></NavDropdown.Item>
-                                        </NavDropdown>
-                                        <NavDropdown title={<CartFill size={32} color = "black"/>} className="navbar-icon" color="black"></NavDropdown>
-                                    </div>
-                                )}
-                                {/* <button type="button" class="green-btn" id="login-btn" onClick={handleShow}> Log In </button> */}
-
-                                <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                
+                <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
                                     <Modal.Header closeButton>
                                         <Modal.Title>Log In To Idyll</Modal.Title>
                                     </Modal.Header>
@@ -300,30 +269,10 @@ export default function NavDashboard(props) {
                                     </Modal.Body>
                                 </Modal>
                                 <SearchFilter show={showSearch} onHide={handleCloseSearch}/>
-                        </div>
-                    </Col>
-                            
-                    <Col/>
-                </Row>
-            </Container>
-            </nav>
+                </Navbar>
 
             {/* Menu Icon */}
-            <div className="menuIcon">
-                <span className="icon icon-bars"></span>
-                <span className="icon icon-bars overlay"></span>
-            </div>
 
-
-            <div className="overlay-menu">
-                <ul id="menu">
-                    <li><a href="">Map</a></li>
-                    <li><a href="">Browse</a></li>
-                    <li><a href="">Sell</a></li>
-                </ul>
-            </div>
-
-            
         </>
     )
 }

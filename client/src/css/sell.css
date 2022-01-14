@@ -112,3 +112,7 @@
     width:100%;
     background: #5AC865;
 }
+
+.img {
+    max-width: 70%;
+}
