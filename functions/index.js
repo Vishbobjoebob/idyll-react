@@ -55,7 +55,6 @@ app.get('/api/getData', (req, res)=>{
                     const phoneNumber = doc.data()['phoneNumber']
                     console.log(firstName);
                     return res.json({
-                        email: auth.email,
                         firstName: firstName,
                         lastName: lastName,
                         username: username,
@@ -121,7 +120,7 @@ app.post('/api/signup', (req, res) => {
     const dropOff = req.body.dropOff;
     const additionalComments = req.body.additionalComments;
     const cooked = req.body.cooked;
-    const zipCode = req.body.zipCode;
+    const zipCode = req.body.zipCode.substring(0,3);
     const pictureURLs = req.body.pictureURLs;
     const userData = req.body.userData;
 
@@ -161,10 +160,8 @@ app.post('/api/signup', (req, res) => {
 
         (async() => {
             try {
-                console.log(zipCode);
-                await db.collection('searchPosts').doc().set(dishObject).then(()=>{
-                    console.log("Uploaded sell data!")
-                });
+                const mainPostDocRef = await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').add(dishObject);
+                const searchPostDocRef = await db.collection('searchPosts').doc(mainPostDocRef.id).set(dishObject);
                 return res.status(200).send({"success": true});
                 } catch (error) {
                 console.log(error);
@@ -175,7 +172,7 @@ app.post('/api/signup', (req, res) => {
         (async() => {
             try {
                 console.log(zipCode);
-                await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').doc().set(dishObject).then(()=>{
+                await db.collection('posts').doc(`!${zipCode}!`).collection('items').doc().set(dishObject).then(()=>{
                     console.log("Uploaded sell data!")
                 });
                 return res.status(200).send({"success": true});

@@ -38,7 +38,7 @@ export default function SearchFilter(props) {
 
     const Hits = ({ hits }) => (
         <div className="hit-wrapper">
-          {hits.map(hit => (
+          {hits.slice(0,2).map(hit => (
             <div className="hit-content">
                 <div className="hit-img-wrapper">
                     <img className="hit-img" alt='' src={hit.pictureURLs}/>

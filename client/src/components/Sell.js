@@ -106,11 +106,11 @@ export default function Sell(props) {
         }
 
         dishObject.pictureURLs = imageURLarray;
-
         let res = await axios({
             method: 'post',
-            url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadPost',
+            url:'http://localhost:5000/api/uploadPost',
             // url:'http://localhost:5000/api/uploadPost',
+            // url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadPost',
             data: dishObject, 
             headers: {
                 Authorization: 'Bearer ' + token,

@@ -44,7 +44,7 @@ export default function NavDashboard(props) {
 
     const navigate = useNavigate();
 
-    const {currentUser, signup, login, signout, userData} = useAuth();
+    const {currentUser, signup, login, signout, userData, zipCode} = useAuth();
     const [errorLogin, setErrorLogin] = useState(undefined);
     const [error, setError] = useState(undefined);
 
@@ -273,7 +273,7 @@ export default function NavDashboard(props) {
                                         </div>
                                     </Modal.Body>
                                 </Modal>
-                                <SearchFilter show={showSearch} onHide={handleCloseSearch}/>
+                                <SearchFilter show={showSearch} onHide={handleCloseSearch} zipCode={zipCode}/>
                 </Navbar>
 
             {/* Menu Icon */}

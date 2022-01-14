@@ -141,6 +141,7 @@ app.post('/api/signup', (req, res) => {
         cooked: cooked,
         pictureURLs: pictureURLs,
         timeUploaded: isoTime,
+        zipCode: zipCode.substring(0,3),
     }
 
     console.log(dishObject);
@@ -158,8 +159,19 @@ app.post('/api/signup', (req, res) => {
 
         (async() => {
             try {
+                const mainPostDocRef = await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').add(dishObject);
+                const searchPostDocRef = await db.collection('searchPosts').doc(mainPostDocRef.id).set(dishObject);
+                return res.status(200).send({"success": true});
+                } catch (error) {
+                console.log(error);
+                return res.status(200).send({"success": false});
+                }
+        })();
+        /*
+        (async() => {
+            try {
                 console.log(zipCode);
-                await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').doc().set(dishObject).then(()=>{
+                await db.collection('posts').doc(`!${zipCode}!`).collection('items').doc().set(dishObject).then(()=>{
                     console.log("Uploaded sell data!")
                 });
                 return res.status(200).send({"success": true});
@@ -168,6 +180,7 @@ app.post('/api/signup', (req, res) => {
                 return res.status(200).send({"success": false});
                 }
         })();
+        */
     } else {
         return res.json({message: 'Unauthorized'});
     }
