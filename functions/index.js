@@ -55,6 +55,7 @@ app.get('/api/getData', (req, res)=>{
                     const phoneNumber = doc.data()['phoneNumber']
                     console.log(firstName);
                     return res.json({
+                        email: auth.email,
                         firstName: firstName,
                         lastName: lastName,
                         username: username,

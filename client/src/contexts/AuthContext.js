@@ -3,6 +3,7 @@ import {auth} from '../config/firebase-config'
 import axios from 'axios'
 import firebase from "firebase/compat/app";    
 
+
 const AuthContext = React.createContext()
 var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -28,23 +29,20 @@ export function AuthProvider ({ children }) {
     }
 
     async function signup(email, password, username, firstName, lastName, phoneNumber) {
-        let res = undefined;
-        await auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((userCred)=> {
-           if (userCred) {
+        try {
+            let userCred = await auth.createUserWithEmailAndPassword(email, password);
+            let idToken = await userCred.user.getIdToken()
+
             setAuthState(true);
             window.localStorage.setItem('auth', 'true')
-            userCred.user.getIdToken().then(async (idToken) => {
-                await setToken(idToken)
-                await setCurrentUser(userCred)
-                await signupUser(idToken, email, username, firstName, lastName, phoneNumber)
-            }).catch(()=> {console.log("bruh")})
-        } 
-        }).catch(err => {
-            res = err;
-        })
-        return res;
+            await setToken(idToken)
+            await setCurrentUser(userCred)
+            await signupUser(idToken, email, username, firstName, lastName, phoneNumber)
+        } catch (err) {
+            console.log(err);
+            setAuthState(false);
+            window.localStorage.setItem('auth', 'false')
+        }
     }
 
     async function signupWithGoogle() {
@@ -113,7 +111,7 @@ export function AuthProvider ({ children }) {
                 Authorization: 'Bearer ' + token,
             }
         })
-        console.log(res.data)
+        return res.data;
     }
 
     const getUserData = async(token) =>{

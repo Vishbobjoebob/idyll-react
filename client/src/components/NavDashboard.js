@@ -92,8 +92,8 @@ export default function NavDashboard(props) {
                     setError("We failed to create an account for you. Please try again.")
             }
         }
-        handleCloseSignup();
-        navigate("/");
+        // handleCloseSignup();
+        // navigate("/");
 
     };
 
