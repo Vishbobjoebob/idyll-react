@@ -10,10 +10,6 @@ export default function Browse(props) {
 
     return (
         <>
-            <div className="search-container">
-                
-            </div>
-            
             <div id="green-line"></div>
 
             <Container className="px-4" style={{maxWidth: '83rem'}} fluid>

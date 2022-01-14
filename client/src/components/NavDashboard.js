@@ -143,6 +143,7 @@ export default function NavDashboard(props) {
                         {currentUser && userData ? (
                             <NavDropdown title={userData.firstName} id="basic-nav-dropdown">
                                 <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
+                                <NavDropdown.Divider />
                                 <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
                             </NavDropdown>
                         ) : (
