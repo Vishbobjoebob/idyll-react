@@ -35,11 +35,11 @@ export function AuthProvider ({ children }) {
            if (userCred) {
             setAuthState(true);
             window.localStorage.setItem('auth', 'true')
-            userCred.user.getIdToken().then((token) => {
-                setToken(token)
+            userCred.user.getIdToken().then(async (token) => {
+                await setToken(token)
+                await setCurrentUser(userCred)
+                await signupUser(token, email, username, firstName, lastName, phoneNumber)
             }).catch(()=> {console.log("bruh")})
-            setCurrentUser(userCred);
-            signupUser(token, email, username, firstName, lastName, phoneNumber)
         } 
         }).catch(err => {
             res = err;
