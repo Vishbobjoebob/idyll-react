@@ -5,6 +5,7 @@ import { Container, Dropdown, Row, Col} from "react-bootstrap"
 import BrowseCategory from "./BrowseCategory"
 
 export default function Browse(props) {
+    // eslint-disable-next-line no-unused-vars
     const searchRef = useRef();
 
     return (
