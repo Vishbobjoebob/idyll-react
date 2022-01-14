@@ -7,6 +7,7 @@ import Slider from "react-slick";
 export default function BrowseCard(props) {
     const slider = React.useRef(null);
     const settings = {
+        arrows: false,
         dots: false,
         infinite: true,
         speed: 500,

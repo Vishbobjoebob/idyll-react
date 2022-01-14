@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.0eb38d8d.chunk.css",
-    "main.js": "/static/js/main.95a0b4e0.chunk.js",
-    "main.js.map": "/static/js/main.95a0b4e0.chunk.js.map",
+    "main.css": "/static/css/main.7f354852.chunk.css",
+    "main.js": "/static/js/main.d62d506e.chunk.js",
+    "main.js.map": "/static/js/main.d62d506e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.776c1e0d.js",
     "runtime-main.js.map": "/static/js/runtime-main.776c1e0d.js.map",
     "static/css/2.6b746296.chunk.css": "/static/css/2.6b746296.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.265c6c69.chunk.js.map": "/static/js/2.265c6c69.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.6b746296.chunk.css.map": "/static/css/2.6b746296.chunk.css.map",
-    "static/css/main.0eb38d8d.chunk.css.map": "/static/css/main.0eb38d8d.chunk.css.map",
+    "static/css/main.7f354852.chunk.css.map": "/static/css/main.7f354852.chunk.css.map",
     "static/js/2.265c6c69.chunk.js.LICENSE.txt": "/static/js/2.265c6c69.chunk.js.LICENSE.txt",
     "static/media/apple_logo.98e79cd8.png": "/static/media/apple_logo.98e79cd8.png",
     "static/media/google_logo.78998f2b.png": "/static/media/google_logo.78998f2b.png",
@@ -20,7 +20,7 @@
     "static/js/runtime-main.776c1e0d.js",
     "static/css/2.6b746296.chunk.css",
     "static/js/2.265c6c69.chunk.js",
-    "static/css/main.0eb38d8d.chunk.css",
-    "static/js/main.95a0b4e0.chunk.js"
+    "static/css/main.7f354852.chunk.css",
+    "static/js/main.d62d506e.chunk.js"
   ]
 }

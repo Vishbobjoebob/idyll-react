@@ -38,11 +38,14 @@ export function AuthProvider ({ children }) {
             await setToken(idToken)
             await setCurrentUser(userCred)
             await signupUser(idToken, email, username, firstName, lastName, phoneNumber)
+            return {res: userCred};
         } catch (err) {
             console.log(err);
             setAuthState(false);
             window.localStorage.setItem('auth', 'false')
+            return {err: err};
         }
+
     }
 
     async function signupWithGoogle() {

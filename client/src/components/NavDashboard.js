@@ -76,9 +76,9 @@ export default function NavDashboard(props) {
         }
 
         setError("")
-        let res = await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
-        if (res) {
-            switch (res.code) {
+        let {res, err} = await signup(emailRef.current.value, passwordRef.current.value, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
+        if (err) {
+            switch (err.code) {
                 case "auth/email-already-in-use":
                     setError("It looks like you already have an account with this email. Please try logging in.")
                     break;
@@ -89,8 +89,10 @@ export default function NavDashboard(props) {
                     setError("Your password is too weak. Please try again.")
                     break;
                 default:
-                    setError("We failed to create an account for you. Please try again.")
+                    setError("We failed to create an account for you. Please try again.");
+                    break;
             }
+            return;
         }
         handleCloseSignup();
         navigate("/");
