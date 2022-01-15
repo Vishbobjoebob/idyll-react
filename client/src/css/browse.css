@@ -166,7 +166,6 @@ overflow-x: hidden;
     display: flex;
     flex-wrap:wrap;
     /* overflow-x:scroll; */
-    height:300px;
     scroll-behavior: smooth;
     transition:0.5s;
 }
@@ -176,6 +175,7 @@ overflow-x: hidden;
 
 #card-container {
     /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);  */
+    margin-bottom: 15px;
     border-radius: 4px;
     transition:1s;
     height:250px;
@@ -234,6 +234,7 @@ text-overflow: ellipsis;
     display:flex;
     align-items:center;
     border-radius: 20px;
+    padding-bottom:6px;
 }
 
 .arrow-left {
@@ -286,9 +287,10 @@ text-overflow: ellipsis;
 
 
 #see-all {
-    width:70px;
+    color:rgb(114, 114, 114);
+    width:64px;
     font-weight:600;
-    padding-right:10px;
+    /* padding-right:6px; */
 }
 
 #see-all:hover {
