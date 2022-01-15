@@ -1,4 +1,4 @@
-import React, { useState, useRef} from "react"
+import React, { useState, useRef, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
 import '../css/nav.css'
 //import '../css/signup.css'
@@ -48,8 +48,9 @@ export default function NavDashboard(props) {
     const [errorLogin, setErrorLogin] = useState(undefined);
     const [error, setError] = useState(undefined);
 
-    useState(() => {
+    useEffect(() => {
         getZipCode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     async function submitLoginInformation(e) {
@@ -279,7 +280,7 @@ export default function NavDashboard(props) {
                                 </Modal>
                                 <SearchFilter show={showSearch} onHide={handleCloseSearch} zipCode={zipCode}/>
                 </Navbar>
-
+                <div id="green-line"></div>
             {/* Menu Icon */}
 
         </>

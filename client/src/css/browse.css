@@ -158,7 +158,6 @@ overflow-x: hidden;
 #slider {
     display: flex;
     overflow-x:scroll;
-    height:300px;
     scroll-behavior: smooth;
     transition:0.5s;
 }
@@ -183,7 +182,6 @@ overflow-x: hidden;
     width:270px;
     flex-shrink: 0;
     margin-right:25px;
-    margin-bottom:50px;
 }
 
 #card-container:hover {

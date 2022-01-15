@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import './App.css';
 import 'firebase/compat/auth'
 import Sell from './components/Sell'
@@ -6,8 +6,22 @@ import Browse from './components/Browse'
 import NavDashboard from './components/NavDashboard';
 import { AuthProvider } from './contexts/AuthContext';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { useAuth } from "./contexts/AuthContext.js"
 
 function App() {  
+
+  return (
+    <Router>
+      <AuthProvider>
+          <Routes>
+            <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
+            {/* <Route path="/" element ={<><SliderTest/></>}/> */}
+            <Route path="/sell" element ={<><NavDashboard/><Sell/></>}/>
+            {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
+          </Routes>
+      </AuthProvider>
+    </Router>
+  );
     // const [auth, setAuth] = useState(false || window.localStorage.getItem("auth")===true);
     // const [token, setToken] = useState('')
     // const [user, setUser] = useState(firebase.auth().currentUser)
@@ -73,12 +87,6 @@ function App() {
     //     })
     // }
 
-    // useEffect(() => {
-    //     if (token) {
-    //         fetchData(token);
-    //     }
-    // },[token])
-
     // const fetchData = async (token) =>{
     //     const res = await axios.get("http://localhost:5000/api/todos", {
     //         headers : {
@@ -87,18 +95,7 @@ function App() {
     //     })
     //     console.log(res.data)
     // }
-  return (
-    <Router>
-      <AuthProvider>
-          <Routes>
-            <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
-            {/* <Route path="/" element ={<><SliderTest/></>}/> */}
-            <Route path="/sell" element ={<><NavDashboard/><Sell/></>}/>
-            {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
-          </Routes>
-      </AuthProvider>
-    </Router>
-  );
+  
 }
 
 export default App;

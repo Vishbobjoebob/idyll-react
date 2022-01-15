@@ -20,17 +20,10 @@ export function AuthProvider ({ children }) {
     const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState(undefined);
 
-    useEffect(() => {
-        getZipCode()
-    }, [])
-
     const getZipCode = async () => {
-        axios.get('https://ipapi.co/json/').then((res) => {
-            setZipCode(res.data.postal);
-        }).catch((err) => {
-            console.log(err);
-            setZipCode('Failed to retreive zip code');
-        });
+        let res = await axios.get('https://ipapi.co/json/');
+        setZipCode(res.data.postal);
+        return res.data.postal;
     }
 
     async function signup(email, password, username, firstName, lastName, phoneNumber) {

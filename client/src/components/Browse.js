@@ -1,4 +1,4 @@
-import React, { useRef} from "react"
+import React, { useEffect, useRef} from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import { Container, Dropdown, Row, Col} from "react-bootstrap"
@@ -7,11 +7,9 @@ import BrowseCategory from "./BrowseCategory"
 export default function Browse(props) {
     // eslint-disable-next-line no-unused-vars
     const searchRef = useRef();
-
+        
     return (
         <>
-            <div id="green-line"></div>
-
             <Container className="px-4" style={{maxWidth: '83rem'}} fluid>
                 <Row>
                         <div id="dropdown-container">
