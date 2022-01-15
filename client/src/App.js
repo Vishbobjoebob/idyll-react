@@ -1,5 +1,4 @@
 import React from "react"
-import './App.css';
 import 'firebase/compat/auth'
 import Sell from './components/Sell'
 import Browse from './components/Browse'

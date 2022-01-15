@@ -27,7 +27,6 @@ export default function BrowseCategory(props) {
         //http://localhost:5000/getBrowseData/30024
         //https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024
         const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/${zip}`);
-        console.log(JSON.parse(JSON.stringify(res.data)));
         return JSON.parse(JSON.stringify(res.data));
     }
 
@@ -55,7 +54,6 @@ export default function BrowseCategory(props) {
 
     const scroll = (scrollOffset) => {
         slider.current.scrollLeft += scrollOffset;
-        console.log(slider);
       };
     return (
         <div class="category-container" ref={containerRef}>
