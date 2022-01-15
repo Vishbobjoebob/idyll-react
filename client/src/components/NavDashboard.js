@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
 import '../css/nav.css'
-import logo from '../images/fullLogo.png'
+import logo from '../images/fullLogoT.png'
 import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
 import {Modal, Container, Alert, NavDropdown, Navbar, Nav, } from 'react-bootstrap'
@@ -222,7 +222,7 @@ export default function NavDashboard(props) {
                                             <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password password-box" name="password" autoComplete="off" placeholder="Password"  required/><br></br>
 
                                             <input class="form-check-input" type="checkbox" value="" id="remember-me"/> 
-                                            <label ref = {rememberMeRefLogin} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
+                                            <label ref = {rememberMeRefLogin} className="form-check-label pl-2" for="remember-me" id="remember-me-label"> Remember Me </label>
                                             <br></br>
                                             <a href="/#" class="" onClick={() => {handleClose(); toggleResetPasswordMenu();}} id="forgot-password">Forgot password?</a>
 

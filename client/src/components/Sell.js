@@ -161,7 +161,7 @@ export default function Sell(props) {
                         <div class="form-wrapper">
                             <Form onSubmit={submitSellInfo}>
                                 <h1 id="sell-form-header">Tell us a little about your dishes</h1>
-                                <h1 id="location-text"><PinMapFill color="black" size={22}/>Your zip code: {zipCode}</h1>
+                                <h1 className="pb-4"id="location-text"><PinMapFill color="black" size={22}/>Your zip code: {zipCode}</h1>
                                 
                                 <Form.Group className="mb-3" controlId="gray">
                                     <Form.Label>Name of Dish</Form.Label>
