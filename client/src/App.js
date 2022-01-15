@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React from "react"
 import './App.css';
 import 'firebase/compat/auth'
 import Sell from './components/Sell'
@@ -6,7 +6,7 @@ import Browse from './components/Browse'
 import NavDashboard from './components/NavDashboard';
 import { AuthProvider } from './contexts/AuthContext';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import { useAuth } from "./contexts/AuthContext.js"
+
 
 function App() {  
 
