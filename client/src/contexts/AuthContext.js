@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {auth} from '../config/firebase-config'
 import axios from 'axios'
-import firebase from "firebase/compat/app";    
+import firebase from "firebase/compat/app"; 
 
 
 const AuthContext = React.createContext()
@@ -44,6 +44,17 @@ export function AuthProvider ({ children }) {
             return {err: err};
         }
 
+    }
+
+    async function resetPassword(email) {
+        let success = true;
+        let res = await auth.sendPasswordResetEmail(email).catch(err => {
+            success = undefined;
+        });
+        
+        return {
+            success: success
+        };
     }
 
     async function signupWithGoogle() {
@@ -142,7 +153,7 @@ export function AuthProvider ({ children }) {
     },
     [currentUser])
 
-    const value = {currentUser, signup, login, signout, userData, zipCode, getZipCode, token}
+    const value = {currentUser, signup, login, signout, userData, zipCode, getZipCode, token, resetPassword}
 
     // useEffect(async() => {
     //     if (token) {

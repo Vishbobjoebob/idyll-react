@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
 import '../css/nav.css'
-//import '../css/signup.css'
 import logo from '../images/fullLogo.png'
 import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
 import {Modal, Container, Alert, NavDropdown, Navbar, Nav, } from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
 import {PersonFill, ChevronCompactLeft, Search} from "react-bootstrap-icons"
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import SearchFilter from "./SearchFilter"
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,6 +17,7 @@ export default function NavDashboard(props) {
     const [showSignupChoose, setShowSignupChoose] = useState(false)
     const [showContact, setShowContact] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
+    const [showResetPassword, setShowResetPassword] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -29,6 +29,7 @@ export default function NavDashboard(props) {
     // const handleShowContact = () => setShowContact(true);
     const handleCloseSearch = () => setShowSearch(false);
     const handleShowSearch = () => setShowSearch(true);
+    const toggleResetPasswordMenu = () => setShowResetPassword(!showResetPassword);
 
     const emailRefLogin = useRef();
     const passwordRefLogin = useRef();
@@ -41,10 +42,11 @@ export default function NavDashboard(props) {
     const lastNameRef = useRef();
     const usernameRef = useRef();
     const phoneNumberRef = useRef();
+    const resetPasswordEmail = useRef();
 
     const navigate = useNavigate();
 
-    const {currentUser, signup, login, signout, userData, zipCode, getZipCode} = useAuth();
+    const {currentUser, signup, login, signout, userData, zipCode, getZipCode, resetPassword} = useAuth();
     const [errorLogin, setErrorLogin] = useState(undefined);
     const [error, setError] = useState(undefined);
 
@@ -52,6 +54,34 @@ export default function NavDashboard(props) {
         getZipCode();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    async function sendResetPasswordEmail(e) {
+        e.preventDefault();
+        let {success} = await resetPassword(resetPasswordEmail.current.value);
+        if (success) {
+            toggleResetPasswordMenu()
+            toast.success('Your password reset has been sent!', {
+                position: "top-right",
+                autoClose: 7000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+            toast.error('Something went wrong, please try again later', {
+                position: "top-right",
+                autoClose: 7000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+            });
+            
+        }
+    }
 
     async function submitLoginInformation(e) {
         e.preventDefault();
@@ -164,6 +194,19 @@ export default function NavDashboard(props) {
                     </Navbar.Collapse>
                 </Container>
 
+                <Modal id="reset-modal" show={showResetPassword} onHide={toggleResetPasswordMenu} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Reset your password</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <form id="item-information" className="form-horizontal" onSubmit={sendResetPasswordEmail}>
+                            <label className="control-label label-name" style={{margin:"0px"}} htmlFor="dish-name" id="email-label"> Email </label>
+                            <input ref = {resetPasswordEmail} className="form-control green-border" type="text" id="email email-box" name="email" autoComplete="off" placeholder="Email" required/><br></br>
+
+                            <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Reset Password"/>
+                        </form>
+                    </Modal.Body>
+                </Modal>
                 
                 <Modal id="login-modal" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
                                     <Modal.Header closeButton>
@@ -178,10 +221,10 @@ export default function NavDashboard(props) {
                                             <label htmlFor="dish-price" id="password-label"> Password </label>
                                             <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password password-box" name="password" autoComplete="off" placeholder="Password"  required/><br></br>
 
-                                            <input class="form-check-input" type="checkbox" value="" id="remember-me"/>
+                                            <input class="form-check-input" type="checkbox" value="" id="remember-me"/> 
                                             <label ref = {rememberMeRefLogin} className="form-check-label" for="remember-me" id="remember-me-label"> Remember Me </label>
-
-                                            <a href="/" class="" id="forgot-password">Forgot password?</a>
+                                            <br></br>
+                                            <a href="/#" class="" onClick={() => {handleClose(); toggleResetPasswordMenu();}} id="forgot-password">Forgot password?</a>
 
                                             <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Login"/>
                                         </form>
