@@ -13,7 +13,7 @@ export function useAuth() {
 }
 
 export function AuthProvider ({ children }) {
-    const [zipCode, setZipCode] = useState('getting zip code...');
+    const [zipCode, setZipCode] = useState('Getting zip code...');
     const [currentUser, setCurrentUser] = useState(undefined);
     const [authState, setAuthState] = useState(false || window.localStorage.getItem("auth")===true);
     const [token, setToken] = useState('')
