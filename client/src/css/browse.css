@@ -199,6 +199,9 @@ overflow-x: hidden;
     opacity:0.5;
 }
 #card-title {
+    white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
     font-weight:700;
 }
 
