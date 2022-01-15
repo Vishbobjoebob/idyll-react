@@ -38,6 +38,8 @@ function ResetPasswordModal() {
                     progress: undefined,
                 });
             });
+        } else {
+            navigate('/')
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
