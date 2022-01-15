@@ -3,6 +3,7 @@ import 'firebase/compat/auth'
 import Sell from './components/Sell'
 import Browse from './components/Browse'
 import NavDashboard from './components/NavDashboard';
+import ResetPasswordModal from "./components/ResetPasswordModal";
 import { AuthProvider } from './contexts/AuthContext';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
             {/* <Route path="/" element ={<><SliderTest/></>}/> */}
             <Route path="/sell" element ={<><NavDashboard/><Sell/></>}/>
+            <Route path="/resetpassword" element ={<><NavDashboard/><ResetPasswordModal/></>}/>
             {/* <Route path="/signup" element={<><Nav/><Signup/></>}/> */}
           </Routes>
       </AuthProvider>
