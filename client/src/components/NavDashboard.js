@@ -176,7 +176,8 @@ export default function NavDashboard(props) {
                     <Nav className="ms-auto">
                         <div className="searchwrapper">
                             <Search id="search-icon" size={20} style={{marginTop: '11px', pointerEvents: 'none'}} color="black" /> 
-                            <input type="text" class="search-click" name="" placeholder="" />
+                            {/* <input type="text" class="search-click" name="" placeholder="" /> */}
+                            <SearchFilter/>
                         </div>
                         {/* <div class="search-icon-div" style={{paddingTop: '6px'}} onClick={handleShowSearch}> 
                             <Search id="search-icon" size={20} color="black" /> 
