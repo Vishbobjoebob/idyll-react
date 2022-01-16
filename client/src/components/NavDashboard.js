@@ -326,7 +326,6 @@ export default function NavDashboard(props) {
                                         </div>
                                     </Modal.Body>
                                 </Modal>
-                                <SearchFilter show={showSearch} onHide={handleCloseSearch} zipCode={zipCode}/>
             </Navbar>
             <div id="green-line"></div>
         </>
