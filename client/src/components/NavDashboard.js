@@ -174,9 +174,13 @@ export default function NavDashboard(props) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <div class="search-icon-div" style={{paddingTop: '6px'}} onClick={handleShowSearch}> 
-                            <Search id="search-icon" size={20} color="black" /> 
+                        <div className="searchwrapper">
+                            <Search id="search-icon" size={20} style={{marginTop: '11px', pointerEvents: 'none'}} color="black" /> 
+                            <input type="text" class="search-click" name="" placeholder="" />
                         </div>
+                        {/* <div class="search-icon-div" style={{paddingTop: '6px'}} onClick={handleShowSearch}> 
+                            <Search id="search-icon" size={20} color="black" /> 
+                        </div> */}
                         {currentUser && userData ? (
                             <><NavDropdown title={userData.firstName} id="basic-nav-dropdown">
                                     <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
