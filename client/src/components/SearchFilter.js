@@ -1,6 +1,6 @@
 import React, {useRef} from "react"
 import {Modal} from 'react-bootstrap'
-import {InstantSearch, connectSearchBox, connectHits} from 'react-instantsearch-dom';
+import {InstantSearch, connectSearchBox, connectHits, Index} from 'react-instantsearch-dom';
 import algoliasearch from "algoliasearch";
 import '../css/index.css'
 import '../css/search.css'
@@ -38,22 +38,30 @@ export default function SearchFilter(props) {
 
     const Hits = ({ hits }) => (
         <div className="hit-wrapper">
-          {hits.slice(0,2).map(hit => (
-            <div className="hit-content">
-                <div className="hit-img-wrapper">
-                    <img className="hit-img" alt='' src={hit.pictureURLs}/>
-                </div>
-                <div className="hit-name">
-                    {hit.dishName}
-                </div>
-                <div className="hit-price">
-                    {hit.dishPrice}
-                </div>
-                <div className="hit-seller">
-                    {hit.fullName}
-                </div>
-            </div>
-          ))}
+          {hits.slice(0,2).map(function(hit) {
+                // if (hit.zipCode == props.zipCode) {
+                    return(
+                    <div className="hit-content">
+                        <div className="hit-img-wrapper">
+                            <img className="hit-img" alt='' src={hit.pictureURLs}/>
+                        </div>
+                        <div className="hit-name">
+                            {hit.dishName}
+                        </div>
+                        <div className="hit-price">
+                            {hit.dishPrice}
+                        </div>
+                        <div className="hit-seller">
+                            {hit.fullName}
+                        </div>
+                    </div>
+                    )
+                // }
+                // else  {
+                //     return (null);
+                // }
+            }
+        )}
         </div>
       );
     const CustomHits = connectHits(Hits);
@@ -68,10 +76,16 @@ export default function SearchFilter(props) {
                     <InstantSearch searchClient={searchClient} indexName="searchPosts" >
                         <CustomSearchBox/>
                         <div className="content">
-                            <h1 className="search-item-header">Items</h1>
-                            <CustomHits/>
+                            <Index indexName="searchPosts">
+                                <h1 className="search-item-header">Items</h1>
+                                <CustomHits />
+                            </Index>
+                            <Index indexName="searchSellers">
+                                <h1 className="search-item-header">Chefs</h1>
+                                <CustomHits />
+                            </Index>
                         </div>
-    
+                        {/* <h1 className="search-item-header">Items</h1> */}
                     </InstantSearch>
                 </div>
                 <h1 id="popular-searches-header"> Popular Searches </h1>
