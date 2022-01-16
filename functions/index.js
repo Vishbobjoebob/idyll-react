@@ -11,7 +11,8 @@ const port = process.env.PORT || 5000;
 const env = functions.config();
 
 const algoliaClient = algoliasearch(env.algolia.app_id, env.algolia.admin_api_key);
-const index = algoliaClient.initIndex('searchPosts')
+const searchIndex = algoliaClient.initIndex('searchPosts');
+const sellerIndex = algoliaClient.initIndex('searchSellers');
 
 app.use(cors())
 app.use(express.json());
@@ -251,16 +252,26 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
 })
 
 exports.onPostCreated = functions.firestore.document('searchPosts/{postId}').onCreate(((snap, ctx) => {
-    return index.save0bject({
+    return searchIndex.save0bject({
         objectID: snap.id,
         ...snap.data()
     });
 }))
 
 exports.onPostDeleted = functions.firestore.document('searchPosts/{postId}').onDelete(((snap, ctx) => {
-    return index.deleteObject(snap.id);
+    return searchIndex.deleteObject(snap.id);
 }))
 
+exports.onSellerCreated = functions.firestore.document('searchSellers/{sellerId}').onCreate(((snap, ctx) => {
+    return sellerIndex.save0bject({
+        objectID: snap.id,
+        ...snap.data()
+    });
+}))
+
+exports.onSellerDeleted = functions.firestore.document('searchSellers/{sellerId}').onDelete(((snap, ctx) => {
+    return sellerIndex.deleteObject(snap.id);
+}))
 exports.server = functions.https.onRequest(app);
 
 // // Create and Deploy Your First Cloud Functions
