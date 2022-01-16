@@ -4,6 +4,7 @@ import {InstantSearch, connectSearchBox, connectHits, Index} from 'react-instant
 import algoliasearch from "algoliasearch";
 import '../css/index.css'
 import '../css/search.css'
+import '../css/nav.css'
 
 export default function SearchFilter(props) {
     const searchRef=useRef(null);
@@ -18,19 +19,14 @@ export default function SearchFilter(props) {
             
     //     }
     //   }
-    
-    const onFocus = () => {
-
-    }
     const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
         <input
         id="searchBox"
-        type="search"
+        type="text"
         ref={searchRef}
-        className="form-control"
+        className="search-click"
         value={currentRefinement}
         onChange={event => refine(event.currentTarget.value)}
-        onFocus={onFocus}
         placeholder="Search..."
         />
     );
@@ -67,35 +63,19 @@ export default function SearchFilter(props) {
     const CustomHits = connectHits(Hits);
 
     return (
-        <Modal contentClassName="search-modal" show={props.show} onHide={props.onHide} centered closeButton>
-            <Modal.Header closeButton>
-                <Modal.Title>What are you craving?</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <InstantSearch searchClient={searchClient} indexName="searchPosts" >
-                        <CustomSearchBox/>
-                        <div className="content">
-                            <Index indexName="searchPosts">
-                                <h1 className="search-item-header">Items</h1>
-                                <CustomHits />
-                            </Index>
-                            <Index indexName="searchSellers">
-                                <h1 className="search-item-header">Chefs</h1>
-                                <CustomHits />
-                            </Index>
-                        </div>
-                        {/* <h1 className="search-item-header">Items</h1> */}
-                    </InstantSearch>
-                </div>
-                <h1 id="popular-searches-header"> Popular Searches </h1>
-                <ul id="popular-searches">
-                    <li>Noodles</li>
-                    <li>Chinese</li>
-                    <li>Indian</li>
-                    <li>Fresh</li>
-                </ul>
-            </Modal.Body>
-        </Modal>
+        <InstantSearch searchClient={searchClient} indexName="searchPosts" >
+            <CustomSearchBox/>
+            <div className="content">
+                <Index indexName="searchPosts">
+                    <h1 className="search-item-header">Items</h1>
+                    <CustomHits />
+                </Index>
+                <Index indexName="searchSellers">
+                    <h1 className="search-item-header">Chefs</h1>
+                    <CustomHits />
+                </Index>
+            </div>
+            {/* <h1 className="search-item-header">Items</h1> */}
+        </InstantSearch>
     )
 }

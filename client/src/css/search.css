@@ -53,9 +53,9 @@
     z-index:-1;
 }
 .content {
-    position:relative;
+    position:absolute;
     border: 1px solid black;
-
+    width: 300px;
     display:none;
     z-index:299;
     background-color:#ffffff;
