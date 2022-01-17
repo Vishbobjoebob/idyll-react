@@ -18,7 +18,7 @@ export function AuthProvider ({ children }) {
     const [authState, setAuthState] = useState(false || window.localStorage.getItem("auth")===true);
     const [token, setToken] = useState('')
     const [loading, setLoading] = useState(true)
-    const [userData, setUserData] = useState(undefined);
+    let [userData, setUserData] = useState('');
 
     const getZipCode = async () => {
         let res = await axios.get('https://ipapi.co/json/');
@@ -58,23 +58,25 @@ export function AuthProvider ({ children }) {
     }
 
     async function signupWithGoogle() {
-        let res = undefined;
-        await auth
-        .signInWithPopup(provider)
-        .then((userCred) => {
-            if (userCred) {
-                setAuthState(true);
-                window.localStorage.setItem('auth', 'true')
-                userCred.user.getIdToken().then((token) => {
-                    setToken(token)
-                }).catch(()=> {console.log("bruh")})
-                setCurrentUser(userCred);
-            }
-        }).catch(err => {
-            res = err;
+        let userCred = await auth.signInWithPopup(provider).catch(err => {
+            return {err: err};
         })
-
-        return res;
+        if (userCred.user) {
+            // setAuthState(true);
+            // window.localStorage.setItem('auth', 'true')
+            let idToken = await userCred.user.getIdToken().catch((err) => {
+                return {err: err};
+            });
+            await setToken(idToken)
+            await setCurrentUser(userCred);
+            let res = await getUserData(idToken);
+            if (res.firstName) {
+                return {res: userCred, userExists: true};
+            } else {
+                return {res: userCred, userExists: false};
+            }
+        }
+        return {err: 'uhoh'};
     }
 
     async function login(email, password) {
@@ -123,7 +125,7 @@ export function AuthProvider ({ children }) {
                 Authorization: 'Bearer ' + token,
             }
         })
-        return res.data;
+        return res;
     }
 
     const getUserData = async(token) =>{
@@ -153,7 +155,7 @@ export function AuthProvider ({ children }) {
     },
     [currentUser])
 
-    const value = {currentUser, signup, login, signout, userData, zipCode, getZipCode, token, resetPassword}
+    const value = {currentUser, signup, login, signout, userData, zipCode, getZipCode, token, resetPassword, signupWithGoogle, signupUser, getUserData}
 
     // useEffect(async() => {
     //     if (token) {

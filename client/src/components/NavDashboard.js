@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
 import '../css/nav.css'
@@ -18,6 +19,7 @@ export default function NavDashboard(props) {
     const [showContact, setShowContact] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
+    const [showGoogleAuthModal, setShowGoogleAuthModal] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -46,7 +48,7 @@ export default function NavDashboard(props) {
 
     const navigate = useNavigate();
 
-    const {currentUser, signup, login, signout, userData, zipCode, getZipCode, resetPassword} = useAuth();
+    let {currentUser, signup, login, signout, userData, zipCode, getZipCode, token, resetPassword, signupWithGoogle, signupUser, getUserData} = useAuth();
     const [errorLogin, setErrorLogin] = useState(undefined);
     const [error, setError] = useState(undefined);
 
@@ -54,6 +56,10 @@ export default function NavDashboard(props) {
         getZipCode();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
 
     async function sendResetPasswordEmail(e) {
         e.preventDefault();
@@ -133,9 +139,35 @@ export default function NavDashboard(props) {
         
     };
 
-    // async function signupGoogle(e) {
-    //     e.preventDefault();
-    // }
+    async function signupGoogle(e) {
+        e.preventDefault();
+
+        let r = await signupWithGoogle();
+        if (r.err) {
+            setError('Something went wrong. Please try again later.')
+        } else {
+            if (r.err) {
+                setError(`We couldn't sign you in with Google right now. Please try again later.`)
+            } else {
+                setShow(false);
+                if (r.userExists){
+                    return;
+                } else {
+                    setShowGoogleAuthModal(true)
+                }
+            }
+        }
+    }
+
+    async function completeGoogleSignUp(e) {
+        e.preventDefault();
+
+        let res = await signupUser(token, currentUser.email, usernameRef.current.value, firstNameRef.current.value, lastNameRef.current.value, phoneNumberRef.current.value)
+
+        if (res.status === 200) {
+            window.location.reload();
+        }
+    }
 
     async function switchToSignupChoose(e) {
         e.preventDefault();
@@ -182,8 +214,8 @@ export default function NavDashboard(props) {
                         {/* <div class="search-icon-div" style={{paddingTop: '6px'}} onClick={handleShowSearch}> 
                             <Search id="search-icon" size={20} color="black" /> 
                         </div> */}
-                        {currentUser && userData ? (
-                            <><NavDropdown title={userData.firstName} id="basic-nav-dropdown">
+                        {(currentUser && userData.firstName) ? (
+                            <><NavDropdown title={userData.username} id="basic-nav-dropdown">
                                     <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
@@ -198,6 +230,29 @@ export default function NavDashboard(props) {
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
+
+                <Modal id="google-auth-modal" show={showGoogleAuthModal} onHide={() => {setShowGoogleAuthModal(false); setError('')}} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Fill out additional info to complete sign up</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5> {currentUser ? (currentUser.email) : ''} </h5>
+                        <form id="item-information" className="form-horizontal" onSubmit={completeGoogleSignUp}>
+                            {error && <Alert variant = 'danger'>{error}</Alert>}
+                            <label htmlFor="firstName" className="control-label label-name"> First Name </label>
+                            <input ref = {firstNameRef} className="form-control" type="text" id="firstName" name="firstName" placeholder="John" autoComplete="off" required/><br></br>
+                            <label htmlFor="lastName" className="control-label label-name"> Last Name </label>
+                            <input ref = {lastNameRef} className="form-control" type="text" id="lastName" name="lastName" placeholder="Doe" autoComplete="off" required/><br></br>
+                            <label className="control-label label-name" style={{margin:"0px"}} htmlFor="dish-name" id="email-label"> Username </label>
+                            <input ref = {usernameRef} className="form-control green-border" type="text" id="email email-box" name="username" autoComplete="off" placeholder="Username" required/><br></br>
+                            <label className="control-label label-name" style={{margin:"0px"}} htmlFor="dish-name" id="email-label"> Phone Number </label>
+                            <input ref = {phoneNumberRef} className="form-control green-border" type="text" id="email email-box" name="number" autoComplete="off" placeholder="No dashes" required/><br></br>
+
+                            <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Complete Signup"/>
+                        </form>
+                    </Modal.Body>
+                </Modal>
+                
 
                 <Modal id="reset-modal" show={showResetPassword} onHide={toggleResetPasswordMenu} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
                     <Modal.Header closeButton>
@@ -240,7 +295,7 @@ export default function NavDashboard(props) {
                                             <div id = "left-line" class="line-bruh"></div>
                                         </div>
                                         <div class="alternative-auth">
-                                            <a id="google" href="/"><img id="logo" alt='' src={google_logo} width='54px'/></a>
+                                            <a id="google" href="/"><img id="logo" alt='' src={google_logo} width='54px' onClick={signupGoogle}/></a>
                                             <a id="apple" href="/"><img id="logo" alt='' src={apple_logo} width='122px'/></a>
                                         </div>
                                         <div id="registration"> 
