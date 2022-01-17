@@ -232,7 +232,7 @@ export default function NavDashboard(props) {
                 </Container>
 
                 <Modal id="google-auth-modal" show={showGoogleAuthModal} onHide={() => {setShowGoogleAuthModal(false); setError('')}} aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                         <Modal.Title>Fill out additional info to complete sign up</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
