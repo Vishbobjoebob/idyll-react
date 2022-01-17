@@ -353,10 +353,6 @@ export default function NavDashboard(props) {
                                                 <div class="subpicture" id="email-pic"><PersonFill class="center-pic" color="black" size = {37}></PersonFill></div>
                                                 <a class="option-text" href="/#">Use email/password</a>
                                             </div>
-                                            <div class="option" id="google-option" >
-                                                <div class="subpicture" id="google-pic"> <img class="center-pic" alt='' src={google_logo} width='36px'></img></div>
-                                                <a class="option-text" href="/#">Continue with Google</a>
-                                            </div>
                                             <div class="option" id="apple-option" >
                                                 <div class="subpicture" id="apple-pic"> <img class="center-pic"  alt='' src={apple_logo} width='73px'></img></div>
                                                 <a class="option-text" href="/#">Continue With Apple</a>
