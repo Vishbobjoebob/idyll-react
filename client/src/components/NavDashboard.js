@@ -57,16 +57,13 @@ export default function NavDashboard(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-
     async function sendResetPasswordEmail(e) {
         e.preventDefault();
-        let {success} = await resetPassword(resetPasswordEmail.current.value);
+        let { success } = await resetPassword(resetPasswordEmail.current.value);
+        console.log(success);
         if (success) {
             toggleResetPasswordMenu()
-            toast.success('Your password reset has been sent!', {
+            toast.success('If an account exists with this email, a password reset has been sent.', {
                 position: "top-right",
                 autoClose: 7000,
                 hideProgressBar: false,
@@ -85,7 +82,6 @@ export default function NavDashboard(props) {
                 draggable: true,
                 progress: undefined,
             });
-            
         }
     }
 
@@ -198,7 +194,7 @@ export default function NavDashboard(props) {
             <div className="Toastify">
                  <ToastContainer />
             </div>
-            <Navbar expand="lg" className="px-4 py-0">
+            <Navbar sticky="top" style={{borderBottom: "5px solid #15BF3A", background: 'white'}} expand="lg" className="px-4 py-0">
                 <Container>
                     <Navbar.Brand href="/">
                      <img src={logo} className="img" alt=""></img>
@@ -353,6 +349,10 @@ export default function NavDashboard(props) {
                                                 <div class="subpicture" id="email-pic"><PersonFill class="center-pic" color="black" size = {37}></PersonFill></div>
                                                 <a class="option-text" href="/#">Use email/password</a>
                                             </div>
+                                            <div class="option" id="google-option" >
+                                                <div class="subpicture" id="google-pic"> <img class="center-pic" alt='' src={google_logo} width='36px'></img></div>
+                                                <a class="option-text" href="/#">Continue with Google</a>
+                                            </div>
                                             <div class="option" id="apple-option" >
                                                 <div class="subpicture" id="apple-pic"> <img class="center-pic"  alt='' src={apple_logo} width='73px'></img></div>
                                                 <a class="option-text" href="/#">Continue With Apple</a>
@@ -378,7 +378,6 @@ export default function NavDashboard(props) {
                                     </Modal.Body>
                                 </Modal>
             </Navbar>
-            <div id="green-line"></div>
         </>
     )
 }
