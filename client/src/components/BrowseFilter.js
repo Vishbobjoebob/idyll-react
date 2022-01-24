@@ -7,24 +7,19 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Rating from '@mui/material/Rating';
 import { useNavigate } from "react-router-dom";
+import {useSearch} from "../contexts/SearchContext";
 
 export default function BrowseFilter(props) {
     // eslint-disable-next-line no-unused-vars
-    let navigate = useNavigate();
-
-    const [type, setType] = useState(props.type);
-    const [price, setPrice] = useState(props.price);
-    const [rating, setRating] = useState(props.rating);
 
     // setType(props.type);
     // setPrice(props.price);
     // setRating(props.rating);
+    const {browseRoute, type, price, rating, setType, setPrice, setRating} = useSearch();
 
+    let navigate = useNavigate();
 
-    async function browseRoute() {
-        navigate(`/search?type=${type}&price=${price}&rating=${rating}`);
-    }
-
+    
     const handleChangeType = (e) => {
         setType(e.target.value);
     }
@@ -46,14 +41,14 @@ export default function BrowseFilter(props) {
                     {/* <MenuSelect attribute="dishType"/> */}
                     <FormControl>
                         <InputLabel id="demo-simple-select-label">Type of Meal</InputLabel>
-                        <Select defaultValue= {type} onChange={handleChangeType} label="Type of Meal" sx={{width:200,height:50, marginRight:"10px"}}>
+                        <Select defaultValue= {props.type} onChange={handleChangeType} label="Type of Meal" sx={{width:200,height:50, marginRight:"10px"}}>
                             <MenuItem value={"Breakfast"}>Breakfast</MenuItem>
                             <MenuItem value={"Lunch"}>Lunch</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl>
                         <InputLabel id="demo-simple-select-label">Price</InputLabel>
-                        <Select defaultValue= {price} onChange={handleChangePrice} label="Price" sx={{width:200,height:50, marginRight:"10px"}}>
+                        <Select defaultValue= {props.price} onChange={handleChangePrice} label="Price" sx={{width:200,height:50, marginRight:"10px"}}>
                             <MenuItem value={"5"}>$5</MenuItem>
                             <MenuItem value={"10"}>$10</MenuItem>
                         </Select>
@@ -65,8 +60,8 @@ export default function BrowseFilter(props) {
                         </Select>
                     </FormControl>
                 </div>
-                <input onClick={() =>navigate("/")} id="reset-btn" className="btn btn-primary mb-3" type="submit" value="Reset"/>
-                <input onClick={() =>browseRoute()} id="reset-btn" className="btn btn-primary mb-3" type="submit" value="Filter"/>
+                <input onClick={() => {navigate("/"); setType(''); setPrice(''); setRating('');}} id="reset-btn" className="btn btn-primary mb-3" type="submit" value="Reset"/>
+                <input onClick={() => browseRoute()} id="reset-btn" className="btn btn-primary mb-3" type="submit" value="Filter"/>
             </div>
         </>
     ) 

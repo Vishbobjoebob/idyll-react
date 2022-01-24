@@ -1,26 +1,36 @@
-// import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-// const SearchContext = React.createContext()
+const SearchContext = React.createContext()
 
-// export function useSearch() {
-//     return useContext(SearchContext)
-// }
+export function useSearch() {
+    return useContext(SearchContext)
+}
 
-// export function SearchProvider ({ children }) {
+export function SearchProvider ({ children }) {
+    let navigate = useNavigate();
 
-//     const [type, setType] = useState();
-//     const [price, setPrice] = useState();
-//     const [rating, setRating] = useState();
+    const [type, setType] = useState();
+    const [price, setPrice] = useState();
+    const [rating, setRating] = useState();
+    const [search, setSearch] = useState();
+    const searchRef=useRef();
 
-//     async function browseRoute() {
-//         navigate(`/search?type=${type}&price=${price}&rating=${rating}`);
-//     }
+    // useEffect(() => {
+    //     setSearch(search.current.value);
+    //     console.log(search);
+    // },
+    // [searchRef.current.value])
+    
+    async function browseRoute() {
+        navigate(`/search?search=${searchRef.current.value}&type=${type}&price=${price}&rating=${rating}`);
+    }
 
-//     const value = {browseRoute}
+    const value = {browseRoute, type, price, rating, setType, setPrice, setRating, searchRef}
 
-//     return (
-//         <SearchContext.Provider value = {value}>
-//             {children}
-//         </SearchContext.Provider>   
-//     ) 
-// }
+    return (
+        <SearchContext.Provider value = {value}>
+            {children}
+        </SearchContext.Provider>   
+    ) 
+}

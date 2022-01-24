@@ -3,15 +3,14 @@ import { useNavigate } from "react-router-dom";
 import {InstantSearch, connectSearchBox, connectHits, Index} from 'react-instantsearch-dom';
 import algoliasearch from "algoliasearch";
 import {Search} from 'react-bootstrap-icons';
+import { useSearch } from "../contexts/SearchContext";
 import '../css/index.css'
 import '../css/search.css'
 import '../css/nav.css'
 import { Navigate } from "react-router-dom";
 
 export default function SearchFilter(props) {
-    const searchRef=useRef(null);
-    let navigate = useNavigate();
-    const [currentSearch, setCurrentSearch] = useState(props.search)
+    
     // const [showContent, setShowContent] = useState(false);
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
@@ -23,9 +22,12 @@ export default function SearchFilter(props) {
             
     //     }
     //   }
+
+    const {browseRoute, searchRef} = useSearch();
+
     const handleChange = (e) => {
         if (e.key=="Enter") {
-            navigate(`/search?search=${searchRef.current.value}`)
+            browseRoute();
         }
     }
 
@@ -77,7 +79,7 @@ export default function SearchFilter(props) {
     const CustomHits = connectHits(Hits);
     return (
         <InstantSearch searchClient={searchClient} indexName="searchPosts" >
-            <CustomSearchBox defaultRefinement={props.search}/>
+            <CustomSearchBox/>
             <div className="content">
                 <Index indexName="searchPosts">
                     <h1 className="search-item-header">Items</h1>
@@ -87,7 +89,7 @@ export default function SearchFilter(props) {
                     <h1 className="search-item-header">Chefs</h1>
                     <CustomHits />
                 </Index>
-                <div className="other-results-wrapper" onClick={()=> {navigate(`/search?search=${searchRef.current.value}`)}}><div className="other-results">< Search size={20} color="black"/> See more results</div></div>
+                <div className="other-results-wrapper" onClick={()=> browseRoute()}><div className="other-results">< Search size={20} color="black"/> See more results</div></div>
             </div>
             {/* <h1 className="search-item-header">Items</h1> */}
 

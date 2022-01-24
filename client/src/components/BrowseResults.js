@@ -7,8 +7,11 @@ import BrowseFilter from "./BrowseFilter"
 import SearchFilter from "./SearchFilter"
 import {InstantSearch, MenuSelect, RangeInput, RatingMenu, Hits, SearchBox, connectSearchBox, connectHits} from 'react-instantsearch-dom'
 import algoliasearch from "algoliasearch";
+import { useSearch } from "../contexts/SearchContext"
 export default function BrowseResults(props) {
     const [searchParams, setSearchParams] = useSearchParams();
+
+    const {} = useSearch();
 
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
@@ -19,6 +22,7 @@ export default function BrowseResults(props) {
     const type = searchParams.get('type');
     const price = searchParams.get('price');
     const rating = searchParams.get('rating');
+    
 
     const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
         return (
@@ -66,9 +70,9 @@ export default function BrowseResults(props) {
                 <Row>
                     <InstantSearch searchClient={searchClient} indexName="searchPosts">
                         <BrowseFilter type={type} price={price} rating={rating}/>
-
-                        <InvisibleCustomSearchBox defaultRefinement={search}/>
-                        <MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"></MenuSelect>
+                        
+                        {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
+                        {search ? (<InvisibleCustomSearchBox defaultRefinement={search}/>):(null)}
                         <CustomHits/>
                     </InstantSearch>
 
