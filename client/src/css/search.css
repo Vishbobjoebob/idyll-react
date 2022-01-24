@@ -46,7 +46,7 @@
     color:green;
 }
 #searchBox:focus ~ .content{
-    display:block;
+    opacity:1;
     
 }
 #searchBox:focus ~ #popular-searches-header{
@@ -56,7 +56,7 @@
     position:absolute;
     border: 1px solid black;
     width: 300px;
-    display:none;
+    opacity:0;
     z-index:299;
     background-color:#ffffff;
 }
@@ -71,8 +71,8 @@
 .hit-wrapper {
     list-style-type:none;
 }
-.hit-wrapper:hover {
-    background-color:gray;
+.hit-content:hover {
+    background-color:#e5e5e5;
 }
 .hit-content {
     padding:15px;
@@ -90,4 +90,15 @@
 }
 .hit-price{
     margin-bottom:0px;
+}
+.other-results-wrapper {
+    height:50px;
+}
+.other-results-wrapper:hover {
+    background:#e5e5e5;
+}
+.other-results {
+    position:relative;
+    top:12%;
+    left:5%;
 }
