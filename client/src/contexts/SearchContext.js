@@ -10,10 +10,10 @@ export function useSearch() {
 export function SearchProvider ({ children }) {
     let navigate = useNavigate();
 
-    const [type, setType] = useState();
-    const [price, setPrice] = useState();
-    const [rating, setRating] = useState();
-    const [search, setSearch] = useState();
+    const [type, setType] = useState('');
+    const [price, setPrice] = useState('');
+    const [rating, setRating] = useState('');
+    const [search, setSearch] = useState('');
     const searchRef=useRef();
 
     // useEffect(() => {
@@ -22,8 +22,8 @@ export function SearchProvider ({ children }) {
     // },
     // [searchRef.current.value])
     
-    async function browseRoute() {
-        navigate(`/search?search=${searchRef.current.value}&type=${type}&price=${price}&rating=${rating}`);
+    async function browseRoute(currentType, currentPrice, currentRating) {
+        navigate(`/search?search=${searchRef.current.value}&type=${currentType}&price=${currentPrice}&rating=${currentRating}`);
     }
 
     const value = {browseRoute, type, price, rating, setType, setPrice, setRating, searchRef}

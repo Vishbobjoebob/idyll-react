@@ -22,14 +22,17 @@ export default function BrowseFilter(props) {
     
     const handleChangeType = (e) => {
         setType(e.target.value);
+        browseRoute(e.target.value, price, rating);
     }
 
     const handleChangePrice = (e) => {
         setPrice(e.target.value)
+        browseRoute(type, e.target.value, rating);
     }
 
     const handleChangeRating = (event, newRating) => {
         setRating(newRating)
+        browseRoute(type, price, newRating);
     }
 
 
@@ -61,7 +64,6 @@ export default function BrowseFilter(props) {
                     </FormControl>
                 </div>
                 <input onClick={() => {navigate("/"); setType(''); setPrice(''); setRating('');}} id="reset-btn" className="btn btn-primary mb-3" type="submit" value="Reset"/>
-                <input onClick={() => browseRoute()} id="reset-btn" className="btn btn-primary mb-3" type="submit" value="Filter"/>
             </div>
         </>
     ) 

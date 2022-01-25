@@ -32,7 +32,7 @@ export default function BrowseResults(props) {
                 value={currentRefinement}
             />
         )
-};
+    };
     const InvisibleCustomSearchBox = connectSearchBox(SearchBox);
 
     const Hits = ({ hits }) => (
