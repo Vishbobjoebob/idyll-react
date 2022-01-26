@@ -317,3 +317,13 @@ text-overflow: ellipsis;
 #off {
     display:none;
 }
+#nb-results {
+    position:relative;
+    font-size:20px;
+    margin-top:40px;
+}
+#hit-browse-wrapper {
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+}

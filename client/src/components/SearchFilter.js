@@ -23,11 +23,11 @@ export default function SearchFilter(props) {
     //     }
     //   }
 
-    const {browseRoute, searchRef} = useSearch();
+    const {browseRoute, searchRef, type, price, rating} = useSearch();
 
     const handleChange = (e) => {
         if (e.key=="Enter") {
-            browseRoute();
+            browseRoute(type, price, rating);
         }
     }
 
@@ -89,7 +89,7 @@ export default function SearchFilter(props) {
                     <h1 className="search-item-header">Chefs</h1>
                     <CustomHits />
                 </Index>
-                <div className="other-results-wrapper" onClick={()=> browseRoute()}><div className="other-results">< Search size={20} color="black"/> See more results</div></div>
+                <div className="other-results-wrapper" onClick={()=> browseRoute(type, price, rating)}><div className="other-results">< Search size={20} color="black"/> See more results</div></div>
             </div>
             {/* <h1 className="search-item-header">Items</h1> */}
 

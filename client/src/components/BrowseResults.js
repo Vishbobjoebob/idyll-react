@@ -4,8 +4,8 @@ import '../css/browse.css'
 import { Container, Row, Col} from "react-bootstrap"
 import { useSearchParams } from 'react-router-dom'
 import BrowseFilter from "./BrowseFilter"
-import SearchFilter from "./SearchFilter"
-import {InstantSearch, MenuSelect, RangeInput, RatingMenu, Hits, SearchBox, connectSearchBox, connectHits} from 'react-instantsearch-dom'
+import BrowseCard from "./BrowseCard"
+import {InstantSearch, MenuSelect, RangeInput, RatingMenu, Hits, SearchBox, connectSearchBox, connectHits, Stats, connectStats} from 'react-instantsearch-dom'
 import algoliasearch from "algoliasearch";
 import { useSearch } from "../contexts/SearchContext"
 export default function BrowseResults(props) {
@@ -22,7 +22,6 @@ export default function BrowseResults(props) {
     const type = searchParams.get('type');
     const price = searchParams.get('price');
     const rating = searchParams.get('rating');
-    
 
     const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
         return (
@@ -36,24 +35,11 @@ export default function BrowseResults(props) {
     const InvisibleCustomSearchBox = connectSearchBox(SearchBox);
 
     const Hits = ({ hits }) => (
-        <div className="hit-browse-wrapper">
+        <div id="hit-browse-wrapper">
           {hits.map(function(hit) {
                 // if (hit.zipCode == props.zipCode) {
                     return(
-                    <div className="hit-browse-content">
-                        <div className="hit-browse-img-wrapper">
-                            <img className="hit-browse-img" alt='' src={hit.pictureURLs}/>
-                        </div>
-                        <div className="hit-browse-name">
-                            {hit.dishName}
-                        </div>
-                        <div className="hit-browse-price">
-                            {hit.dishPrice}
-                        </div>
-                        <div className="hit-browse-seller">
-                            {hit.fullName}
-                        </div>
-                    </div>
+                        <BrowseCard name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs}/>
                     )
                 // }
                 // else  {
@@ -64,12 +50,19 @@ export default function BrowseResults(props) {
         </div>
       );
     const CustomHits = connectHits(Hits);
+
+    const Stats = ({ nbHits }) => (
+        <h1 id="nb-results"> {nbHits} Results </h1>
+      );
+    const CustomStats = connectStats(Stats)
+    
     return (
         <> 
             <Container className="px-4" style={{maxWidth: '83rem'}} fluid>
                 <Row>
                     <InstantSearch searchClient={searchClient} indexName="searchPosts">
                         <BrowseFilter type={type} price={price} rating={rating}/>
+                        <CustomStats/>
                         
                         {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
                         {search ? (<InvisibleCustomSearchBox defaultRefinement={search}/>):(null)}
