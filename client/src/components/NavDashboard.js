@@ -221,7 +221,7 @@ export default function NavDashboard(props) {
                         )}
                         
                         <Nav.Link href="/map">Map</Nav.Link>
-                        <Nav.Link href="/browse" style={{paddingRight:'10px'}}>Browse</Nav.Link>
+                        <Nav.Link href="/" style={{paddingRight:'10px'}}>Browse</Nav.Link>
                         <Nav.Item style={{lineHeight:'2.6', fontWeight: "bold"}}>{zipCode}</Nav.Item>
                     </Nav>
                     </Navbar.Collapse>

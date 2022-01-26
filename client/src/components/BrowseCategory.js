@@ -61,8 +61,8 @@ export default function BrowseCategory(props) {
                 <h1 id="category-title">{props.name || <Skeleton/>}</h1>
                 <div className="arrows">
                     <div id="see-all" onClick={changeSliderStyle}>{seeAll}</div>
-                    <div className="arrow-left" id={showArrow}><ChevronLeft color={"black"} size={18} onClick={() => scroll(-350)} /></div>
-                    <div className="arrow-right" id={showArrow}><ChevronRight color={"black"} size={18} onClick={() => scroll(350)} /></div>
+                    <div className="arrow-left" id={showArrow} onClick={() => scroll(-350)}><ChevronLeft color={"black"} size={18} /></div>
+                    <div className="arrow-right" id={showArrow} onClick={() => scroll(350)}><ChevronRight color={"black"} size={18} /></div>
                 </div>
             </div>
             {loading ? (

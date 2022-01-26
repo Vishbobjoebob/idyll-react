@@ -1,13 +1,16 @@
-import React, {useRef} from "react"
-import {Modal} from 'react-bootstrap'
+import React, {useRef, useState} from "react"
+import { useNavigate } from "react-router-dom";
 import {InstantSearch, connectSearchBox, connectHits, Index} from 'react-instantsearch-dom';
 import algoliasearch from "algoliasearch";
+import {Search} from 'react-bootstrap-icons';
+import { useSearch } from "../contexts/SearchContext";
 import '../css/index.css'
 import '../css/search.css'
 import '../css/nav.css'
+import { Navigate } from "react-router-dom";
 
 export default function SearchFilter(props) {
-    const searchRef=useRef(null);
+    
     // const [showContent, setShowContent] = useState(false);
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
@@ -19,17 +22,30 @@ export default function SearchFilter(props) {
             
     //     }
     //   }
-    const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
-        <input
-        id="searchBox"
-        type="text"
-        ref={searchRef}
-        className="search-click"
-        value={currentRefinement}
-        onChange={event => refine(event.currentTarget.value)}
-        placeholder="Search..."
-        />
-    );
+
+    const {browseRoute, searchRef, type, price, rating} = useSearch();
+
+    const handleChange = (e) => {
+        if (e.key=="Enter") {
+            browseRoute(type, price, rating);
+        }
+    }
+
+    const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
+        return (
+            <input
+                id="searchBox"
+                type="text"
+                ref={searchRef}
+                className="search-click"
+                value={currentRefinement}
+                onChange={event=> {
+                    refine(event.currentTarget.value);}}
+                onKeyDown={handleChange}
+                placeholder="Search..."
+            />
+        )
+};
     const CustomSearchBox = connectSearchBox(SearchBox);
 
     const Hits = ({ hits }) => (
@@ -61,7 +77,6 @@ export default function SearchFilter(props) {
         </div>
       );
     const CustomHits = connectHits(Hits);
-
     return (
         <InstantSearch searchClient={searchClient} indexName="searchPosts" >
             <CustomSearchBox/>
@@ -74,8 +89,11 @@ export default function SearchFilter(props) {
                     <h1 className="search-item-header">Chefs</h1>
                     <CustomHits />
                 </Index>
+                <div className="other-results-wrapper" onClick={()=> browseRoute(type, price, rating)}><div className="other-results">< Search size={20} color="black"/> See more results</div></div>
             </div>
             {/* <h1 className="search-item-header">Items</h1> */}
+
+            {/*onClick={()=> {navigate(`/search?search=${search}}*/}
         </InstantSearch>
     )
 }
