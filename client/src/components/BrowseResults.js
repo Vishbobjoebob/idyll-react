@@ -4,6 +4,7 @@ import '../css/browse.css'
 import { Container, Row, Col} from "react-bootstrap"
 import { useSearchParams } from 'react-router-dom'
 import BrowseFilter from "./BrowseFilter"
+import CuisineFilter from "./CuisineFilter"
 import BrowseCard from "./BrowseCard"
 import {InstantSearch, MenuSelect, RangeInput, RatingMenu, Hits, SearchBox, connectSearchBox, connectHits, Stats, connectStats} from 'react-instantsearch-dom'
 import algoliasearch from "algoliasearch";
@@ -22,6 +23,7 @@ export default function BrowseResults(props) {
     const type = searchParams.get('type');
     const price = searchParams.get('price');
     const rating = searchParams.get('rating');
+    const cuisine = searchParams.get('cuisine');
 
     const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
         return (
@@ -58,6 +60,7 @@ export default function BrowseResults(props) {
     
     return (
         <> 
+            <CuisineFilter/>
             <Container className="px-4" style={{maxWidth: '83rem'}} fluid>
                 <Row>
                     <InstantSearch searchClient={searchClient} indexName="searchPosts">
@@ -65,6 +68,7 @@ export default function BrowseResults(props) {
                         <CustomStats/>
                         
                         {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
+                        {cuisine ? (<MenuSelect id="menu-select" defaultRefinement={cuisine} attribute="cuisine"/>):(null)}
                         {search ? (<InvisibleCustomSearchBox defaultRefinement={search}/>):(null)}
                         <CustomHits/>
                     </InstantSearch>

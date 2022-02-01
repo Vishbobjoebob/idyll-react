@@ -327,7 +327,6 @@ export default function NavDashboard(props) {
                                     </Modal.Body>
                                 </Modal>
             </Navbar>
-            <div id="green-line"></div>
         </>
     )
 }
