@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect} from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import '../css/nav.css'
 import logo from '../images/fullLogoT.png'
 import google_logo from '../images/google_logo.png'
@@ -196,7 +196,7 @@ export default function NavDashboard(props) {
             </div>
             <Navbar sticky="top" style={{borderBottom: "5px solid #15BF3A", background: 'white'}} expand="lg" className="px-4 py-0">
                 <Container>
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand as={Link} to="/">
                      <img src={logo} className="img" alt=""></img>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -215,13 +215,13 @@ export default function NavDashboard(props) {
                                     <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
-                                </NavDropdown><Nav.Link href="/sell">Sell</Nav.Link></>
+                                </NavDropdown><Nav.Link as={Link} to="/sell">Sell</Nav.Link></>
                         ) : (
                             <Nav.Link onClick={handleShow}> Log In </Nav.Link>
                         )}
                         
-                        <Nav.Link href="/map">Map</Nav.Link>
-                        <Nav.Link href="/" style={{paddingRight:'10px'}}>Browse</Nav.Link>
+                        <Nav.Link as={Link} to="/map">Map</Nav.Link>
+                        <Nav.Link as={Link} to="/" style={{paddingRight:'10px'}}>Browse</Nav.Link>
                         <Nav.Item style={{lineHeight:'2.6', fontWeight: "bold"}}>{zipCode}</Nav.Item>
                     </Nav>
                     </Navbar.Collapse>
