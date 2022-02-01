@@ -55,6 +55,7 @@ export default function BrowseCategory(props) {
     const scroll = (scrollOffset) => {
         slider.current.scrollLeft += scrollOffset;
       };
+      
     return (
         <div class="category-container" ref={containerRef}>
             <div id="category-header">
