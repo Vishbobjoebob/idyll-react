@@ -14,6 +14,7 @@ export function SearchProvider ({ children }) {
     const [price, setPrice] = useState('');
     const [rating, setRating] = useState('');
     const [search, setSearch] = useState('');
+    const [cuisine, setCuisine] = useState ('');
     const searchRef=useRef();
 
     // useEffect(() => {
@@ -22,11 +23,11 @@ export function SearchProvider ({ children }) {
     // },
     // [searchRef.current.value])
     
-    async function browseRoute(currentType, currentPrice, currentRating) {
-        navigate(`/search?search=${searchRef.current.value}&type=${currentType}&price=${currentPrice}&rating=${currentRating}`);
+    async function browseRoute(currentCuisine, currentType, currentPrice, currentRating) {
+        navigate(`/search?search=${searchRef.current.value}&cuisine=${currentCuisine}&type=${currentType}&price=${currentPrice}&rating=${currentRating}`);
     }
 
-    const value = {browseRoute, type, price, rating, setType, setPrice, setRating, searchRef}
+    const value = {browseRoute, type, price, rating, setType, setPrice, setRating, searchRef, cuisine, setCuisine}
 
     return (
         <SearchContext.Provider value = {value}>

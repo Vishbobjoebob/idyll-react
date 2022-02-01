@@ -8,8 +8,8 @@ overflow-x: hidden;
 .search-container {
     /* margin-top:64px; */
     width: 100%;
-    height: 81px;
     background: #FAFAFA;
+
 }
 
 .search-bar {
@@ -130,7 +130,6 @@ overflow-x: hidden;
     position:relative;
     top: 20px;
     display:inline;
-    z-index:9999;
 }
 
 #reset-btn {
@@ -156,6 +155,7 @@ overflow-x: hidden;
 #slider {
     display: flex;
     overflow-x:scroll;
+    overflow-y:hidden;
     scroll-behavior: smooth;
     transition:0.5s;
 }
@@ -187,8 +187,9 @@ overflow-x: hidden;
     margin-bottom: 15px;
     border-radius: 4px;
     transition:1s;
+    min-width: 40ch;
+    max-width: 50ch;
     height:250px;
-    width:270px;
     flex-shrink: 0;
     margin-right:25px;
 }
@@ -322,4 +323,76 @@ text-overflow: ellipsis;
     width:100%;
     display:flex;
     flex-wrap:wrap;
+}
+
+#cuisine-slider {
+    width:100%;
+    display: flex;
+    overflow-x:scroll;
+    overflow-y:visible;
+    scroll-behavior: smooth;
+    transition:0.5s;
+    z-index:99;
+}
+#cuisine-slider::-webkit-scrollbar {width: 0 !important;
+    display: none; }
+
+.cuisine-slider-item {
+    width:100px;
+    height:100px;
+    margin-right:10px;
+    flex-shrink:0;
+    text-align: center;
+    
+}
+.cuisine-slider-item:hover {
+    background: #f1f3f5;
+    cursor:pointer;
+}
+.cuisine-slider-item img:hover ~ .cuisine-slider-item {
+    background: #e4e7eb;
+}
+.cuisine-slider-item img {
+    width:75px;
+    height:75px;
+    z-index:-499;
+}
+.cuisine-slider-item-txt {
+    text-align: center;
+    z-index:-499;
+}
+#cuisine-slider-arrows {
+    position:absolute;
+    margin-top:25px;
+    z-index:399;
+    max-width:83rem;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.cuisine-slider-arrow {
+    width:40px;
+    height:40px;
+    border-radius:20px;
+    background:gray;
+    background:#e5e5e5;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.cuisine-slider-arrow:hover {
+    background:#f5f5f5;
+}
+
+#cuisine-slider-left-arrow {
+    
+}
+
+#cuisine-slider-right-arrow {
+    float:right;
+}
+
+.d-off {
+    visibility:hidden;
 }

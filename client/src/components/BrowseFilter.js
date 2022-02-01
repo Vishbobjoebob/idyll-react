@@ -15,24 +15,24 @@ export default function BrowseFilter(props) {
     // setType(props.type);
     // setPrice(props.price);
     // setRating(props.rating);
-    const {browseRoute, type, price, rating, setType, setPrice, setRating} = useSearch();
+    const {browseRoute, type, price, rating, cuisine, setType, setPrice, setRating, setCuisine} = useSearch();
 
     let navigate = useNavigate();
 
     
     const handleChangeType = (e) => {
         setType(e.target.value);
-        browseRoute(e.target.value, price, rating);
+        browseRoute(cuisine, e.target.value, price, rating);
     }
 
     const handleChangePrice = (e) => {
         setPrice(e.target.value)
-        browseRoute(type, e.target.value, rating);
+        browseRoute(cuisine, type, e.target.value, rating);
     }
 
     const handleChangeRating = (event, newRating) => {
         setRating(newRating)
-        browseRoute(type, price, newRating);
+        browseRoute(cuisine, type, price, newRating);
     }
 
 

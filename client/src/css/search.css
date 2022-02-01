@@ -47,29 +47,33 @@
 }
 #searchBox:focus ~ .content{
     opacity:1;
+    z-index:299;
     
 }
 #searchBox:focus ~ #popular-searches-header{
     z-index:-1;
 }
 .content {
+    transition-duration: 0.25s;
     position:absolute;
     border: 1px solid black;
     width: 300px;
     opacity:0;
-    z-index:299;
     background-color:#ffffff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 .search-item-header {
-    font-size:20px;
-    font-weight:bold;
+    font-size:17px;
+    font-weight:700;
     margin-left:15px;
     margin-top:7px;
 }
 /* HITS */
 .hit-wrapper {
     list-style-type:none;
+    z-index:99;
 }
 .hit-content:hover {
     background-color:#e5e5e5;
@@ -77,11 +81,13 @@
 .hit-content {
     padding:15px;
     display:flex;
+    flex-wrap:wrap;
 }
 .hit-img {
     width:115px;
     height:58px;
     border-radius:4px;
+    border: 1px black;
     object-fit:cover;
 }
 .hit-name {
@@ -89,7 +95,12 @@
     margin-left:10px;
 }
 .hit-price{
-    margin-bottom:0px;
+    
+}
+.hit-seller {
+    margin-top:30px;
+    font-size:15px;
+    
 }
 .other-results-wrapper {
     height:50px;
