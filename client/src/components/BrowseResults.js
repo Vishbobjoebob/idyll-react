@@ -1,4 +1,4 @@
-import React, { useRef} from "react"
+import React from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import { Container, Row, Col} from "react-bootstrap"
@@ -6,13 +6,14 @@ import { useSearchParams } from 'react-router-dom'
 import BrowseFilter from "./BrowseFilter"
 import CuisineFilter from "./CuisineFilter"
 import BrowseCard from "./BrowseCard"
-import {InstantSearch, MenuSelect, RangeInput, RatingMenu, Hits, SearchBox, connectSearchBox, connectHits, Stats, connectStats} from 'react-instantsearch-dom'
+import {InstantSearch, MenuSelect, connectSearchBox, connectHits, connectStats, RefinementList} from 'react-instantsearch-dom'
 import algoliasearch from "algoliasearch";
 import { useSearch } from "../contexts/SearchContext"
+import { useAuth } from "../contexts/AuthContext"
 export default function BrowseResults(props) {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
-    const {} = useSearch();
+    const { zipCode } = useAuth();
 
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
@@ -66,7 +67,8 @@ export default function BrowseResults(props) {
                     <InstantSearch searchClient={searchClient} indexName="searchPosts">
                         <BrowseFilter type={type} price={price} rating={rating}/>
                         <CustomStats/>
-                        
+
+                        <div id="display-off"><RefinementList attribute="zipCode" defaultRefinement={[String(zipCode).substring(0,3)]}/></div>
                         {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
                         {cuisine ? (<MenuSelect id="menu-select" defaultRefinement={cuisine} attribute="cuisine"/>):(null)}
                         {search ? (<InvisibleCustomSearchBox defaultRefinement={search}/>):(null)}
