@@ -1,4 +1,4 @@
-import React, { useRef} from "react"
+import React from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import { Container, Row, Col} from "react-bootstrap"

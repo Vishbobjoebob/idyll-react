@@ -396,3 +396,7 @@ text-overflow: ellipsis;
 .d-off {
     visibility:hidden;
 }
+
+#display-off {
+    display:none;
+}

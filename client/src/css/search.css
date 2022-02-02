@@ -14,6 +14,9 @@
 .content {
     display: none;
 }
+#display-off {
+    display: none;
+}
 
 #search-box {
     width: 100%;

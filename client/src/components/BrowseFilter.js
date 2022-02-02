@@ -1,4 +1,4 @@
-import React, { useState} from "react"
+import React from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import InputLabel from '@mui/material/InputLabel';
@@ -15,7 +15,7 @@ export default function BrowseFilter(props) {
     // setType(props.type);
     // setPrice(props.price);
     // setRating(props.rating);
-    const {browseRoute, type, price, rating, cuisine, setType, setPrice, setRating, setCuisine} = useSearch();
+    const {browseRoute, type, price, rating, cuisine, setType, setPrice, setRating} = useSearch();
 
     let navigate = useNavigate();
 

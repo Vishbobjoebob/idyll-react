@@ -1,9 +1,10 @@
 import React, {useRef, useState} from "react"
 import { useNavigate } from "react-router-dom";
-import {InstantSearch, connectSearchBox, connectHits, Index} from 'react-instantsearch-dom';
+import {InstantSearch, connectSearchBox, connectHits, Index, RefinementList} from 'react-instantsearch-dom';
 import algoliasearch from "algoliasearch";
 import {Search} from 'react-bootstrap-icons';
 import { useSearch } from "../contexts/SearchContext";
+import { useAuth } from "../contexts/AuthContext";
 import '../css/index.css'
 import '../css/search.css'
 import '../css/nav.css'
@@ -24,7 +25,7 @@ export default function SearchFilter(props) {
     //   }
 
     const {browseRoute, searchRef, type, price, rating, cuisine} = useSearch();
-
+    const {zipCode} = useAuth();
     const handleChange = (e) => {
         if (e.key=="Enter") {
             browseRoute(cuisine, type, price, rating);
@@ -52,7 +53,7 @@ export default function SearchFilter(props) {
         <div className="hit-wrapper">
         {hits.length > 0 ? (<h1 className="search-item-header"> Items </h1>):(null)}
           {hits.slice(0,2).map(function(hit) {
-                // if (hit.zipCode == props.zipCode) {
+                // if (hit.zipCode == String(zipCode).substring(0,3)) {
                     return(
                     <div className="hit-content">
                         <div className="hit-img-wrapper">
@@ -84,7 +85,7 @@ export default function SearchFilter(props) {
         <div className="hit-wrapper">
         {hits.length > 0 ? (<h1 className="search-item-header"> Chefs </h1>):(null)}
           {hits.slice(0,2).map(function(hit) {
-                // if (hit.zipCode == props.zipCode) {
+                // if (hit.zipCode == zipCode) {
                     return(
                     <div className="hit-content">
                         <div className="hit-img-wrapper">
@@ -115,11 +116,11 @@ export default function SearchFilter(props) {
         <InstantSearch searchClient={searchClient} indexName="searchPosts" >
             <CustomSearchBox/>
             <div className="content">
+                <div id="display-off"><RefinementList attribute="zipCode" defaultRefinement={[String(zipCode).substring(0,3)]}/></div>
                 <Index indexName="searchPosts">
                     <PostHits/>
                 </Index>
                 <Index indexName="searchSellers">
-                    {/* <h1 className="search-item-header">Chefs</h1> */}
                     <ChefHits/>
                 </Index>
                 <div className="other-results-wrapper" onClick={()=> browseRoute(cuisine, type, price, rating)}><div className="other-results">< Search size={20} color="black"/> See more results</div></div>
