@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const admin = require('./config/firebase-config')
-const middleware = require('./middleware')
+const middleware = require('./middleware');
 
 const app = express();
 const db = admin.firestore();
@@ -9,6 +9,24 @@ const port = process.env.PORT || 5000;
 
 app.use(cors())
 app.use(express.json());
+
+app.get('/getPost/:zipCode/:id', (req, res) => {
+    const id = req.params.id;
+    const zipCode = req.params.zipCode;
+
+    (async () => {
+        try {
+            
+        await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').get(id).then((querySnapshot) => {
+            return res.json(querySnapshot.docs[0].data());
+        });
+        } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+        }
+    })();
+})
+
 app.use("/api", middleware.decodeToken)
 
 app.get("/api/auth", (req, res) => {;
@@ -189,7 +207,6 @@ app.post('/api/signup', (req, res) => {
 app.get('/getBrowseData/:zipcode', (req, res) => {
     const zip = req.params.zipcode;
     const area = zip.substring(0,3);
-    console.log("brah");
 
     var categoryItems = {
         items:[]
@@ -224,16 +241,15 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                             dropOff : dropOff,
                             servings : servings,
                             waitTime : waitTime,
-                            pictureURLs : pictureURLs
+                            pictureURLs : pictureURLs,
+                            id: doc.id
                         }
-                        console.log(itemJSON);
                         categoryItems.items.push(itemJSON);
                     } else {
                         console.log("doc does not exist");
                     }
                 })
                 if (categoryItems.items.length > 0) { 
-                    console.log(categoryItems);
                     return res.status(200).send(categoryItems);
                 } else {
                     console.log("No items found");

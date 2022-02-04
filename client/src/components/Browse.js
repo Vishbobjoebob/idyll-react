@@ -18,7 +18,7 @@ export default function Browse(props) {
                         <div id="browse-container">
                             <BrowseCategory name="Local Favorites"/>
                             <BrowseCategory name="Fresh"/>
-                            <BrowseCategory name="Jensen Boo Sac"/>
+                            <BrowseCategory name="Bruh"/>
                         </div>
 
                     <Col></Col>

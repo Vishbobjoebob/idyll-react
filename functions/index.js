@@ -188,10 +188,11 @@ app.post('/api/signup', (req, res) => {
     }
 });
 
+// app.get('')
+
 app.get('/getBrowseData/:zipcode', (req, res) => {
     const zip = req.params.zipcode;
     const area = zip.substring(0,3);
-    console.log("brah");
 
     var categoryItems = {
         items:[]
@@ -226,16 +227,15 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                             dropOff : dropOff,
                             servings : servings,
                             waitTime : waitTime,
-                            pictureURLs : pictureURLs
+                            pictureURLs : pictureURLs,
+                            id: doc.id
                         }
-                        console.log(itemJSON);
                         categoryItems.items.push(itemJSON);
                     } else {
                         console.log("doc does not exist");
                     }
                 })
                 if (categoryItems.items.length > 0) { 
-                    console.log(categoryItems);
                     return res.status(200).send(categoryItems);
                 } else {
                     console.log("No items found");

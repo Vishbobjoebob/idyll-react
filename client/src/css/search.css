@@ -52,7 +52,7 @@
     color:green;
 }
 #searchBox:focus ~ .content{
-    display:block;
+    /* display:block; */
     opacity:1;
     z-index:299;
     
