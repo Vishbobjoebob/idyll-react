@@ -26,8 +26,8 @@ export default function BrowseCategory(props) {
     const getBrowseData = async(zip) =>{
         //http://localhost:5000/getBrowseData/30024
         //https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024
-        const res = await axios.get(`http://localhost:5000/getBrowseData/${zip}`);
-        // const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/${zip}`);
+        // const res = await axios.get(`http://localhost:5000/getBrowseData/${zip}`);
+        const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/${zip}`);
         return JSON.parse(JSON.stringify(res.data));
     }
 

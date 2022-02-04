@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useSearchParams} from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from "../contexts/AuthContext"
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function Details () {
     const [searchParams] = useSearchParams();
+    const [loading, setLoading] = useState(true);
+    const [dishData, setDishData] = useState(undefined);
 
     const {getZipCode, token} = useAuth();
 
@@ -19,7 +23,8 @@ function Details () {
                 }
             });
 
-            console.log(res.data);
+            setDishData(res.data);
+            setLoading(false);
         }
 
         fetchData();
@@ -27,8 +32,14 @@ function Details () {
     }, [])
 
     return ( 
-        <div className="test">
-            {searchParams.get('item')}
+        <div className="details px-4" style={{maxWidth: '83rem', margin: '0 auto', overflowWrap: 'break-word', paddingTop: '2rem'}}>
+            {loading ? (
+                <Skeleton count={6}/>
+            ) : (
+                null
+            )}
+            <h2></h2>
+            <p>{JSON.stringify(dishData)}</p>
         </div>
      );
 }
