@@ -169,26 +169,26 @@ app.post('/api/signup', (req, res) => {
                 return res.status(200).send({"success": false});
                 }
         })();
-        /*
-        (async() => {
-            try {
-                console.log(zipCode);
-                await db.collection('posts').doc(`!${zipCode}!`).collection('items').doc().set(dishObject).then(()=>{
-                    console.log("Uploaded sell data!")
-                });
-                return res.status(200).send({"success": true});
-                } catch (error) {
-                console.log(error);
-                return res.status(200).send({"success": false});
-                }
-        })();
-        */
     } else {
         return res.json({message: 'Unauthorized'});
     }
 });
 
-// app.get('')
+app.get('/getPost/:zipCode/:id', (req, res) => {
+    const id = req.params.id;
+    const zipCode = req.params.zipCode;
+
+    (async () => {
+        try {
+            await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').get(id).then((querySnapshot) => {
+                return res.json(querySnapshot.docs[0].data());
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+    })();
+})
 
 app.get('/getBrowseData/:zipcode', (req, res) => {
     const zip = req.params.zipcode;

@@ -3,6 +3,8 @@ import {Card, Image } from "react-bootstrap"
 import '../css/browse.css'
 import { ChevronRight, ChevronLeft } from "react-bootstrap-icons";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
+
 export default function BrowseCard(props) {
     const slider = React.useRef(null);
 
@@ -17,7 +19,7 @@ export default function BrowseCard(props) {
 
     return (
         <>
-            <Card id="card-container">
+            <Card as={Link} to={`/details?id=${props.id}`} id="card-container" style={{textDecoration: 'none', color: 'black'}}> 
                 <div id="card-img-slider">
                     {props.imgs && props.imgs.length > 1 ? (
                         <>

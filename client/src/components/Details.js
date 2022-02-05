@@ -16,8 +16,9 @@ function Details () {
 
         async function fetchData() {
             const zipCode = await getZipCode();
-
-            const res = await axios.get(`http://localhost:5000/getPost/${zipCode}/${searchParams.get('id')}`, {
+            //http://localhost:5000/getPost/${zipCode}/${searchParams.get('id')}
+            //https://us-central1-idyll-29e66.cloudfunctions.net/server/
+            const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getPost/${zipCode}/${searchParams.get('id')}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

@@ -16,13 +16,12 @@ app.get('/getPost/:zipCode/:id', (req, res) => {
 
     (async () => {
         try {
-            
-        await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').get(id).then((querySnapshot) => {
-            return res.json(querySnapshot.docs[0].data());
-        });
+            await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').get(id).then((querySnapshot) => {
+                return res.json(querySnapshot.docs[0].data());
+            });
         } catch (error) {
-        console.log(error);
-        return res.status(500).send(error);
+            console.log(error);
+            return res.status(500).send(error);
         }
     })();
 })
