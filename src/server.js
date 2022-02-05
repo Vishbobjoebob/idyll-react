@@ -16,8 +16,8 @@ app.get('/getPost/:zipCode/:id', (req, res) => {
 
     (async () => {
         try {
-            await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').get(id).then((querySnapshot) => {
-                return res.json(querySnapshot.docs[0].data());
+            await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').doc(id).get().then((doc) => {
+                return res.json(doc.data());
             });
         } catch (error) {
             console.log(error);
