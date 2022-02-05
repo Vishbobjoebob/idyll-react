@@ -9,12 +9,8 @@ import FoodIMG from "../images/food.png";
 
 export default function CuisineFilter(props) {
     // eslint-disable-next-line no-unused-vars
-
-    // setType(props.type);
-    // setPrice(props.price);
-    // setRating(props.rating);
     const {browseRoute, type, price, rating, cuisine, setCuisine} = useSearch();
-
+    // eslint-disable-next-line no-unused-vars
     let navigate = useNavigate();
 
     const slider = useRef();
@@ -23,11 +19,11 @@ export default function CuisineFilter(props) {
     const [rightArrowStyle, setRightArrowStyle] = useState("cuisine-slider-arrow");
 
     const changeArrowStyle = () => {
-        if (slider.current.scrollLeft == 0) {
+        if (slider.current.scrollLeft === 0) {
             setLeftArrowStyle("d-off");
             setRightArrowStyle("cuisine-slider-arrow");
         }
-        else if (slider.current.scrollLeft == slider.current.offsetWidth) {
+        else if (slider.current.scrollLeft === slider.current.offsetWidth) {
             setLeftArrowStyle("cuisine-slider-arrow");
             setRightArrowStyle("d-off");
         }
@@ -65,47 +61,47 @@ export default function CuisineFilter(props) {
                         </div>
                         <div id="cuisine-slider" ref={slider} onClick={handleCuisineClick}>
                             <div class="cuisine-slider-item" id="all-food" data-value="" >
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">All</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food" data-value="American">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">American</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food" data-value="Chinese">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Chinese</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food" data-value="French">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">French</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Indian</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Italian</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Japanese</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Korean</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Mexican</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Thai</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">
-                                <img className="food-icon-img" src={FoodIMG}></img>
+                                <img className="food-icon-img" alt="" src={FoodIMG}></img>
                                 <div className="cuisine-slider-item-txt">Thai</div>
                             </div>
                             <div class="cuisine-slider-item" id="all-food">

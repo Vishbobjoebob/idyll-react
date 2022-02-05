@@ -74,7 +74,6 @@ export default function Sell(props) {
             userData: userData,
         }
 
-
         if (localStorage.getItem('auth') !== 'true') {
             toast.error('You must be logged in to post a dish.', {
                 position: "top-right",
@@ -108,7 +107,6 @@ export default function Sell(props) {
         dishObject.pictureURLs = imageURLarray;
         let res = await axios({
             method: 'post',
-            // url:'http://localhost:5000/api/uploadPost',
             // url:'http://localhost:5000/api/uploadPost',
             url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadPost',
             data: dishObject, 
@@ -153,7 +151,6 @@ export default function Sell(props) {
             setLoading(false);
         }
     }
-
 
     return (
             <Container fluid className="px-4" style={{maxWidth: '55rem'}}>
@@ -296,5 +293,5 @@ export default function Sell(props) {
                         </div>
                 </Row>
             </Container>
-            )   
+        )   
 }

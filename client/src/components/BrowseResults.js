@@ -8,11 +8,10 @@ import CuisineFilter from "./CuisineFilter"
 import BrowseCard from "./BrowseCard"
 import {InstantSearch, MenuSelect, connectSearchBox, connectHits, connectStats, RefinementList} from 'react-instantsearch-dom'
 import algoliasearch from "algoliasearch";
-import { useSearch } from "../contexts/SearchContext"
 import { useAuth } from "../contexts/AuthContext"
+
 export default function BrowseResults(props) {
     const [searchParams] = useSearchParams();
-
     const { zipCode } = useAuth();
 
     const searchClient = algoliasearch(
@@ -35,21 +34,16 @@ export default function BrowseResults(props) {
             />
         )
     };
+
     const InvisibleCustomSearchBox = connectSearchBox(SearchBox);
 
     const Hits = ({ hits }) => (
         <div id="hit-browse-wrapper">
           {hits.map(function(hit) {
-                // if (hit.zipCode == props.zipCode) {
-                    return(
-                        <BrowseCard name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs}/>
-                    )
-                // }
-                // else  {
-                //     return (null);
-                // }
-            }
-        )}
+                return(
+                    <BrowseCard name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs}/>
+                )}
+            )}
         </div>
       );
     const CustomHits = connectHits(Hits);
@@ -57,6 +51,7 @@ export default function BrowseResults(props) {
     const Stats = ({ nbHits }) => (
         <h1 id="nb-results"> {nbHits} Results </h1>
       );
+      
     const CustomStats = connectStats(Stats)
     
     return (

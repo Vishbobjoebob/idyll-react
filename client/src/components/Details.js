@@ -38,7 +38,6 @@ function Details () {
             ) : (
                 null
             )}
-            <h2></h2>
             <p>{JSON.stringify(dishData)}</p>
         </div>
      );

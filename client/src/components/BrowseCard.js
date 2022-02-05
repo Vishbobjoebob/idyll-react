@@ -5,6 +5,7 @@ import { ChevronRight, ChevronLeft } from "react-bootstrap-icons";
 import Slider from "react-slick";
 export default function BrowseCard(props) {
     const slider = React.useRef(null);
+
     const settings = {
         arrows: false,
         dots: false,
@@ -13,6 +14,7 @@ export default function BrowseCard(props) {
         slidesToShow: 1,
         slidesToScroll: 1
       };
+
     return (
         <>
             <Card id="card-container">
@@ -26,7 +28,7 @@ export default function BrowseCard(props) {
                     <Slider ref={slider} {...settings}>
                         {props.imgs && props.imgs.map(img => {
                             return (<Image id="card-img" src={img}/>)
-                            })}
+                        })}
                     </Slider>
                 </div>
                 <Card.Body>

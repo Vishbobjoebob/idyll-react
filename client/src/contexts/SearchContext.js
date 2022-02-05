@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const SearchContext = React.createContext()
@@ -13,7 +13,6 @@ export function SearchProvider ({ children }) {
     const [type, setType] = useState('');
     const [price, setPrice] = useState('');
     const [rating, setRating] = useState('');
-    const [search, setSearch] = useState('');
     const [cuisine, setCuisine] = useState ('');
     const searchRef=useRef();
 

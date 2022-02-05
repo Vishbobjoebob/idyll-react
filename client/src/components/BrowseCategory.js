@@ -11,8 +11,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { useAuth } from "../contexts/AuthContext"
 
 export default function BrowseCategory(props) {
-    // const [width, setWidth] = useState(0);
-    // const [cardsNum, setCardsNum] = useState(3);
     const slider = useRef(null);
     const containerRef = useRef(null);
     const [sliderStyle, setSliderStyle] = useState("slider");
@@ -24,9 +22,10 @@ export default function BrowseCategory(props) {
     const [loading, setLoading] = useState(true);
 
     const getBrowseData = async(zip) =>{
-        //http://localhost:5000/getBrowseData/30024
-        //https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024
-        // const res = await axios.get(`http://localhost:5000/getBrowseData/${zip}`);
+        /*  endpoints:
+            http://localhost:5000/getBrowseData/30024
+            https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/30024
+        */
         const res = await axios.get(`https://us-central1-idyll-29e66.cloudfunctions.net/server/getBrowseData/${zip}`);
         return JSON.parse(JSON.stringify(res.data));
     }
@@ -46,8 +45,7 @@ export default function BrowseCategory(props) {
             setSliderStyle("slider-all");
             setSeeAll("Collapse")
             setShowArrow("off")
-        }
-        else {
+        } else {
             setSliderStyle("slider");
             setSeeAll("See All");
             setShowArrow("")
@@ -78,33 +76,11 @@ export default function BrowseCategory(props) {
                     categoryItems.map(item =>{
                         return <BrowseCard name={item.dishName} price={item.dishPrice} imgs={item.pictureURLs}/>;
                     })
-                ) : (
-                    null
-                )
+                    ) : (
+                        null
+                    )
                 }
             </div>
         </div>
     )
-
-        // const getListSize = () => {
-    //     const newWidth = containerRef.current.clientWidth;
-    //     setWidth(newWidth);
-    //     const newCardsNum = (width + 100)/(400);
-    //     setCardsNum(newCardsNum);
-    //   };
-    // useEffect(() => {
-    //     window.addEventListener("resize", getListSize);
-    //     if (cardsNum) {console.log(cardsNum)};
-    //     if (width) {console.log(width)};
-    //   }, [width]);
-    // const settings = {
-    //     arrows:true,
-    //     infinite:false,
-    //     speed: 500,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1,
-    //     // nextArrow: <ArrowRightCircleFill/>,
-    //     // prevArrow: <ArrowLeftCircleFill/>,
-    //     className: 'react__slick__slider__parent',
-    //   };
 }

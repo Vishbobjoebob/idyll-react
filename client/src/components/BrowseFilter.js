@@ -10,15 +10,9 @@ import { useNavigate } from "react-router-dom";
 import {useSearch} from "../contexts/SearchContext";
 
 export default function BrowseFilter(props) {
-    // eslint-disable-next-line no-unused-vars
-
-    // setType(props.type);
-    // setPrice(props.price);
-    // setRating(props.rating);
     const {browseRoute, type, price, rating, cuisine, setType, setPrice, setRating} = useSearch();
 
     let navigate = useNavigate();
-
     
     const handleChangeType = (e) => {
         setType(e.target.value);
@@ -35,13 +29,10 @@ export default function BrowseFilter(props) {
         browseRoute(cuisine, type, price, newRating);
     }
 
-
-        
     return (
         <>  
             <div id="dropdown-wrapper">
                 <div style={{display:"inline"}}>
-                    {/* <MenuSelect attribute="dishType"/> */}
                     <FormControl>
                         <InputLabel id="demo-simple-select-label">Type of Meal</InputLabel>
                         <Select defaultValue= {props.type} onChange={handleChangeType} label="Type of Meal" sx={{width:200,height:50, marginRight:"10px"}}>

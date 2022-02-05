@@ -7,8 +7,6 @@ import BrowseFilter from "./BrowseFilter"
 import CuisineFilter from "./CuisineFilter"
 
 export default function Browse(props) {
-    // eslint-disable-next-line no-unused-vars
-        
     return (
         <>
             <CuisineFilter/>
@@ -20,7 +18,6 @@ export default function Browse(props) {
                             <BrowseCategory name="Fresh"/>
                             <BrowseCategory name="Bruh"/>
                         </div>
-
                     <Col></Col>
                 </Row>
             </Container>

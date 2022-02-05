@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
 import { useAuth } from "../contexts/AuthContext"
 
-
 function ResetPasswordModal() {
     const [showReset, setShowReset] = useState(false);
     const [email, setEmail] = useState('');
