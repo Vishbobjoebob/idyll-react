@@ -228,7 +228,7 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                         const waitTime = doc.data()['waitTime'];
                         const pictureURLs = doc.data()['pictureURLs'];
                         const username = doc.data()['userData'].username;
-                        const fullName = doc.data()['userData'].firstName + doc.data()['userData'].lastName;
+                        const fullName = doc.data()['userData'].firstName +' ' +doc.data()['userData'].lastName;
 
                         var itemJSON = {
                             additionalComments : additionalComments,
