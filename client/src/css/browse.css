@@ -190,6 +190,7 @@ overflow-x: hidden;
     max-width: 20rem;
     flex-shrink: 0;
     padding-right:25px;
+    margin-bottom: 15px;
 }
 
 #card-container:hover {

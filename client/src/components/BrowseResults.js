@@ -41,7 +41,7 @@ export default function BrowseResults(props) {
         <div id="hit-browse-wrapper">
           {hits.map(function(hit) {
                 return(
-                    <BrowseCard name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs}/>
+                    <BrowseCard name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs} id={hit.objectID} username={hit.fullName.split(' ')[1]} style={{marginBottom: '10px'}} />
                 )}
             )}
         </div>
