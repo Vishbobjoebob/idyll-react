@@ -252,7 +252,7 @@ li {
 }
 
 #forgot-password {
-  margin-bottom: 20px;
+    float:right;
 }
 
 #submit-btn {
