@@ -187,8 +187,8 @@ overflow-x: hidden;
     margin-bottom: 15px;
     border-radius: 4px;
     transition:1s;
-    min-width: 40ch;
-    max-width: 50ch;
+    min-width: 20rem;
+    max-width: 20rem;
     height:250px;
     flex-shrink: 0;
     margin-right:25px;
@@ -200,18 +200,24 @@ overflow-x: hidden;
 }
 #card-img-slider {
     height:150px;
+    cursor: default;
 }
 #card-img {
     object-fit: cover;
     height:150px;
 }
-#card-container:hover #card-img{
-    opacity:0.5;
+#card-container #card-img{
+    transition-duration: 0.2s;
 }
+
+#card-container:hover #card-img{
+    opacity:0.85;
+}
+
 #card-title {
     white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight:700;
 }
 
@@ -284,13 +290,13 @@ text-overflow: ellipsis;
     z-index:99;
     top:65px;
     opacity:0.5;
-
+    left: 8px;
 }
 
 #card-arrow-right{
     position:absolute;
     top:65px;
-    right:0;
+    right:8px;
     z-index:99;
     opacity:0.5;
 }

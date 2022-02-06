@@ -14,14 +14,8 @@ export function SearchProvider ({ children }) {
     const [price, setPrice] = useState('');
     const [rating, setRating] = useState('');
     const [cuisine, setCuisine] = useState ('');
-    const searchRef=useRef();
+    const searchRef = useRef();
 
-    // useEffect(() => {
-    //     setSearch(search.current.value);
-    //     console.log(search);
-    // },
-    // [searchRef.current.value])
-    
     async function browseRoute(currentCuisine, currentType, currentPrice, currentRating) {
         navigate(`/search?search=${searchRef.current.value}&cuisine=${currentCuisine}&type=${currentType}&price=${currentPrice}&rating=${currentRating}`);
     }

@@ -19,26 +19,5 @@ class Middleware{
             return res.json({message:'Internal Error'})
         }
     }
-
-    // async signUpUser(req, res, next) {
-    //     const email = req.user.email;
-    //     const username = req.user.username
-    //     const firstName = req.user.firstName;
-    //     const lastName = req.user.lastName;
-    //     const phoneNumber = req.user.phoneNumber;
-        
-    //     try {
-    //         db.collection("users").doc(email).set({
-    //             email: email,
-    //             username: username,
-    //             firstName: firstName,
-    //             lastName: lastName,
-    //             phoneNumber: phoneNumber,
-    //         })
-    //     } catch(e) {
-
-    //     }
-
-    // }
 }
 module.exports = new Middleware();

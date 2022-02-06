@@ -19,11 +19,11 @@ export default function BrowseCard(props) {
 
     return (
         <>
-            <Card as={Link} to={`/details?id=${props.id}`} id="card-container" style={{textDecoration: 'none', color: 'black'}}> 
+            <Card id="card-container"> 
                 <div id="card-img-slider">
                     {props.imgs && props.imgs.length > 1 ? (
                         <>
-                            <div className="arrow-left" id="card-arrow-left" onClick={() => slider?.current?.slickPrev()}><ChevronLeft color={"black"} size={18} /></div>
+                            <div className="arrow-left" id="card-arrow-left" style={{pointerEvents: 'all', zIndex: '999'}} onClick={() => slider?.current?.slickPrev()}><ChevronLeft color={"black"} size={18} /></div>
                             <div className="arrow-right" id="card-arrow-right" onClick={() => slider?.current?.slickNext()}><ChevronRight color={"black"} size={18} /></div>
                         </>
                     ) : undefined}
@@ -33,10 +33,10 @@ export default function BrowseCard(props) {
                         })}
                     </Slider>
                 </div>
-                <Card.Body>
+                <Card.Body as={Link} to={`/details?id=${props.id}`} style={{textDecoration: 'none', color: 'black'}}>
                     <Card.Title id="card-title">{props.name}</Card.Title>
                     <Card.Text id="card-price">${props.price}</Card.Text>
-                    <Card.Text id="card-time">{props.time} min away</Card.Text>
+                    <Card.Text id="card-time">Posted by {props.username}</Card.Text>
                 </Card.Body>
             </Card>
         </>

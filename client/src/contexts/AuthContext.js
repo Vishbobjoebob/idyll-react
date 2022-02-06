@@ -4,7 +4,6 @@ import {auth} from '../config/firebase-config'
 import axios from 'axios'
 import firebase from "firebase/compat/app"; 
 
-
 const AuthContext = React.createContext()
 var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -33,9 +32,11 @@ export function AuthProvider ({ children }) {
 
             setAuthState(true);
             window.localStorage.setItem('auth', 'true')
+
             await setToken(idToken)
             await setCurrentUser(userCred)
             await signupUser(idToken, email, username, firstName, lastName, phoneNumber)
+
             return {res: userCred};
         } catch (err) {
             console.log(err);
@@ -62,8 +63,6 @@ export function AuthProvider ({ children }) {
             return {err: err};
         })
         if (userCred.user) {
-            // setAuthState(true);
-            // window.localStorage.setItem('auth', 'true')
             let idToken = await userCred.user.getIdToken().catch((err) => {
                 return {err: err};
             });
@@ -156,14 +155,7 @@ export function AuthProvider ({ children }) {
     [currentUser])
 
     const value = {currentUser, signup, login, signout, userData, zipCode, getZipCode, token, resetPassword, signupWithGoogle, signupUser, getUserData}
-
-    // useEffect(async() => {
-    //     if (token) {
-    //         const data = await getUserData(token);
-    //         console.log(data);
-    //     }
-    // },[token])
-
+    
     return (
         <AuthContext.Provider value = {value}>
             {children}

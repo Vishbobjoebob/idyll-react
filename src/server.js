@@ -227,6 +227,8 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                         const servings = doc.data()['servings'];
                         const waitTime = doc.data()['waitTime'];
                         const pictureURLs = doc.data()['pictureURLs'];
+                        const username = doc.data()['userData'].username;
+                        const fullName = doc.data()['userData'].firstName + doc.data()['userData'].lastName;
 
                         var itemJSON = {
                             additionalComments : additionalComments,
@@ -241,7 +243,9 @@ app.get('/getBrowseData/:zipcode', (req, res) => {
                             servings : servings,
                             waitTime : waitTime,
                             pictureURLs : pictureURLs,
-                            id: doc.id
+                            id: doc.id,
+                            username: username,
+                            fullName: fullName,
                         }
                         categoryItems.items.push(itemJSON);
                     } else {
