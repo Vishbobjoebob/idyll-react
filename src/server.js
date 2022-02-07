@@ -26,6 +26,22 @@ app.get('/getPost/:zipCode/:id', (req, res) => {
     })();
 })
 
+app.get('/getSeller/:zipCode/:id', (req, res) => {
+    const id = req.params.id;
+    const zipCode = req.params.zipCode;
+
+    (async () => {
+        try {
+            await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('sellers').doc(id).get().then((doc) => {
+                return res.json(doc.data());
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+    })();
+})
+
 app.use("/api", middleware.decodeToken)
 
 app.get("/api/auth", (req, res) => {;
