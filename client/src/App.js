@@ -16,14 +16,15 @@ function App() {
     <Router>
       <AuthProvider>
         <SearchProvider>
+          <NavDashboard/>
           <Routes>
-            <Route path="/" element ={<><NavDashboard/><Browse/></>}/>
+            <Route path="/" element ={<><Browse/></>}/>
             {/* <Route path="/" element ={<><SliderTest/></>}/> */}
-            <Route path="/sell" element ={<><NavDashboard/><Sell/></>}/>
-            <Route path="/resetpassword" element ={<><NavDashboard/><ResetPasswordModal/></>}/>
-            <Route path="/" element ={<><NavDashboard/><ResetPasswordModal/></>}/>
-            <Route path="/search" element ={<><NavDashboard/><BrowseResults/></>}/>
-            <Route path="/details" element={<><NavDashboard/><Details/></>}/>
+            <Route path="/sell" element ={<><Sell/></>}/>
+            <Route path="/resetpassword" element ={<><ResetPasswordModal/></>}/>
+            <Route path="/" element ={<><ResetPasswordModal/></>}/>
+            <Route path="/search" element ={<><BrowseResults/></>}/>
+            <Route path="/details" element={<><Details/></>}/>
           </Routes>
         </SearchProvider>
       </AuthProvider>

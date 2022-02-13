@@ -20,9 +20,14 @@ export function AuthProvider ({ children }) {
     let [userData, setUserData] = useState('');
 
     const getZipCode = async () => {
-        let res = await axios.get('https://ipapi.co/json/');
-        setZipCode(res.data.postal);
-        return res.data.postal;
+        if (localStorage.getItem('zipCode') !== null) { 
+            setZipCode(localStorage.getItem('zipCode'));
+            return localStorage.getItem('zipCode');
+        } else {
+            let res = await axios.get('https://ipapi.co/json/');
+            setZipCode(res.data.postal);
+            return res.data.postal;
+        }
     }
 
     async function signup(email, password, username, firstName, lastName, phoneNumber) {

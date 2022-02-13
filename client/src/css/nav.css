@@ -30,11 +30,15 @@ li {
     border-top-right-radius: 4px;
     position: relative;
     max-width: 300px;
+    visibility: none;
 }
 
-.searchwrapper:focus-within {
+.searchwrapper :focus-within {
     border: 1px solid #ccc;
+}
 
+.searchwrapper:focus-within .content {
+    visibility: visible;
 }
 
 

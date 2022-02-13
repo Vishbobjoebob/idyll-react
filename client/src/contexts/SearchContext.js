@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const SearchContext = React.createContext()
 
@@ -17,7 +17,9 @@ export function SearchProvider ({ children }) {
     const searchRef = useRef();
 
     async function browseRoute(currentCuisine, currentType, currentPrice, currentRating) {
-        navigate(`/search?search=${searchRef.current.value}&cuisine=${currentCuisine}&type=${currentType}&price=${currentPrice}&rating=${currentRating}`);
+        // <Navigate to={`/search?search=${searchRef.current.value}&cuisine=${currentCuisine}&type=${currentType}&price=${currentPrice}&rating=${currentRating}`}/>
+        console.log(searchRef.current.value);
+        window.history.replaceState({}, '', `/search?search=${searchRef.current.value}&cuisine=${currentCuisine}&type=${currentType}&price=${currentPrice}&rating=${currentRating}`);
     }
 
     const value = {browseRoute, type, price, rating, setType, setPrice, setRating, searchRef, cuisine, setCuisine}

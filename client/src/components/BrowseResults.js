@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState, useRef, useEffect} from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import { Container, Row, Col} from "react-bootstrap"
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import BrowseFilter from "./BrowseFilter"
 import CuisineFilter from "./CuisineFilter"
 import BrowseCard from "./BrowseCard"
@@ -11,19 +11,37 @@ import algoliasearch from "algoliasearch";
 import { useAuth } from "../contexts/AuthContext"
 
 export default function BrowseResults(props) {
+    const history = useNavigate() 
+
     const [searchParams] = useSearchParams();
     const { zipCode } = useAuth();
+
+    const [search, setSearch] = useState('');
+    const [type, setType] = useState('');
+    const [price, setPrice] = useState('');
+    const [rating, setRating] = useState('');
+    const [cuisine, setCuisine] = useState('')
+
 
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
         '12af5740b6d988432c9b23af2f5a9480'
       );
     
-    const search = searchParams.get('search')
-    const type = searchParams.get('type');
-    const price = searchParams.get('price');
-    const rating = searchParams.get('rating');
-    const cuisine = searchParams.get('cuisine');
+    useEffect(() => {
+        return history.listen((location) => { 
+            setSearch(searchParams.get('search'));
+            setType(searchParams.get('type'));
+            setPrice(searchParams.get('price'));
+            setCuisine(searchParams.get('cuisine'));
+            setRating(searchParams.get('rating'))
+         }) 
+    }, [history, searchParams])
+    // const search = searchParams.get('search')
+    // const type = searchParams.get('type');
+    // const price = searchParams.get('price');
+    // const rating = searchParams.get('rating');
+    // const cuisine = searchParams.get('cuisine');
 
     const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
         return (
