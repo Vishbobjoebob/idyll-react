@@ -1,8 +1,8 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import { Container, Row, Col} from "react-bootstrap"
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useLocation } from 'react-router-dom'
 import BrowseFilter from "./BrowseFilter"
 import CuisineFilter from "./CuisineFilter"
 import BrowseCard from "./BrowseCard"
@@ -14,11 +14,14 @@ export default function BrowseResults(props) {
     const [searchParams] = useSearchParams();
     const { zipCode } = useAuth();
 
+    const location = useLocation();
     const searchClient = algoliasearch(
         'G7XGFCN3QV',
         '12af5740b6d988432c9b23af2f5a9480'
       );
     
+    const url = window.location.pathname.split('/').pop();
+
     const search = searchParams.get('search')
     const type = searchParams.get('type');
     const price = searchParams.get('price');
@@ -54,6 +57,10 @@ export default function BrowseResults(props) {
       
     const CustomStats = connectStats(Stats)
     
+    useEffect(()=> {
+        console.log(location)
+    }, [location])
+
     return (
         <> 
             <CuisineFilter/>

@@ -35,21 +35,21 @@ export default function BrowseFilter(props) {
                 <div style={{display:"inline"}}>
                     <FormControl>
                         <InputLabel id="demo-simple-select-label">Type of Meal</InputLabel>
-                        <Select defaultValue= {props.type} onChange={handleChangeType} label="Type of Meal" sx={{width:200,height:50, marginRight:"10px"}}>
+                        <Select className="dropdown-gray" defaultValue= {props.type} onChange={handleChangeType} label="Type of Meal" sx={{width:150,height:50, marginRight:"10px"}}>
                             <MenuItem value={"Breakfast"}>Breakfast</MenuItem>
                             <MenuItem value={"Lunch"}>Lunch</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl>
                         <InputLabel id="demo-simple-select-label">Price</InputLabel>
-                        <Select defaultValue= {props.price} onChange={handleChangePrice} label="Price" sx={{width:200,height:50, marginRight:"10px"}}>
+                        <Select className="dropdown-gray" defaultValue= {props.price} onChange={handleChangePrice} label="Price" sx={{width:150,height:50, marginRight:"10px"}}>
                             <MenuItem value={"5"}>$5</MenuItem>
                             <MenuItem value={"10"}>$10</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl>
                         <InputLabel id="demo-simple-select-label">Rating</InputLabel>
-                        <Select defaultValue= {"Rating"} label="Rating" sx={{width:200,height:50, marginRight:"10px"}}>
+                        <Select className="dropdown-gray" defaultValue= {"Rating"} label="Rating" sx={{width:200,height:50, marginRight:"10px"}}>
                             <MenuItem value={"Rating"}><Rating name="simple-controlled" value={rating} onChange={handleChangeRating}/></MenuItem>
                         </Select>
                     </FormControl>
