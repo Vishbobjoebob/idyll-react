@@ -29,7 +29,7 @@ export default function BrowseCard(props) {
                     ) : undefined}
                     <Slider ref={slider} {...settings}>
                         {props.imgs && props.imgs.map(img => {
-                            return (<Image id="card-img" src={img}/>)
+                            return (<Image key={img} id="card-img" src={img}/>)
                         })}
                     </Slider>
                 </div>

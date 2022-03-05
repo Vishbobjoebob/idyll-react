@@ -1,55 +1,121 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import '../css/index.css'
 import '../css/browse.css'
 import { Container, Row, Col} from "react-bootstrap"
-import { useSearchParams, useLocation } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import BrowseFilter from "./BrowseFilter"
 import CuisineFilter from "./CuisineFilter"
 import BrowseCard from "./BrowseCard"
-import {InstantSearch, MenuSelect, connectSearchBox, connectHits, connectStats, RefinementList} from 'react-instantsearch-dom'
-import algoliasearch from "algoliasearch";
+import Browse from "./Browse"
+import { connectHits, connectStats, RefinementList, connectStateResults,}  from 'react-instantsearch-dom'
 import { useAuth } from "../contexts/AuthContext"
+// import {useSearch} from "../contexts/SearchContext"
 
 export default function BrowseResults(props) {
     const [searchParams] = useSearchParams();
     const { zipCode } = useAuth();
 
-    const location = useLocation();
-    const searchClient = algoliasearch(
-        'G7XGFCN3QV',
-        '12af5740b6d988432c9b23af2f5a9480'
-      );
-    
-    const url = window.location.pathname.split('/').pop();
+    let searchURL = searchParams.get("search");
+    let typeURL = searchParams.get('type');
+    let cuisineURL = searchParams.get('cuisine');
 
-    const search = searchParams.get('search')
-    const type = searchParams.get('type');
-    const price = searchParams.get('price');
-    const rating = searchParams.get('rating');
-    const cuisine = searchParams.get('cuisine');
+    // const {searchRef, type, rating, cuisine, price} = useSearch();
 
-    const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
-        return (
-            <input
-                id="menu-select"
-                type="text"
-                value={currentRefinement}
-            />
-        )
-    };
+    const Results = connectStateResults(({ searchState }) =>{
+        console.log(searchState);
 
-    const InvisibleCustomSearchBox = connectSearchBox(SearchBox);
+        if (searchState) {
+            if (searchState.query) {
+                if (searchState.query!=='') {
+                    return (
+                        <>
+                            <CustomStats/>
+                            <PostHits/>
+                        </>
+                    )
+                }
+                else {
+                    return (<Browse/>)
+                }
+            }
+            else if (searchState.menu) {
+                if (searchState.menu.dishType!=='') {
+                    return (
+                        <>
+                            <CustomStats/>
+                            <PostHits/>
+                        </>
+                    )
+                }
+                else if (searchState.menu.cuisine!=='') {
+                    return (
+                        <>
+                            <CustomStats/>
+                            <PostHits/>
+                        </>
+                    )
+                }
+                else {
+                    console.log("balls")
+                    return (<Browse/>)
+                }
+            }
+            else {
+                console.log(searchURL);
+                console.log(typeURL);
+                console.log(cuisineURL);
+                if ((searchURL!=='' && searchURL!==null) || (typeURL!=='' && typeURL!==null) || (cuisineURL!=='' && cuisineURL!==null)) {
+                    return (<>
+                        <CustomStats/>
+                        <PostHits/>
+                    </>)
+                }
+                else {
+                    return (<Browse/>)
+                }
+            }
+        }
+        else {
+            return (<Browse/>)
+        }
 
-    const Hits = ({ hits }) => (
-        <div id="hit-browse-wrapper">
-          {hits.map(function(hit) {
-                return(
-                    <BrowseCard name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs}/>
-                )}
+        // return (searchState && (searchState.query || (searchState.menu && searchState.menu.dishType!==''))? (
+        //     <>
+        //         <CustomStats/>
+        //         <PostHits/>
+        //     </>
+        // ) : (
+        //     <Browse/>
+        // )
+        // )
+    });
+    const postHits = ({ hits }) => (
+        <div className="hit-browse-wrapper">
+            {hits.length > 0 ? (<h1 className="search-item-header"> Items </h1>):(null)}
+            {
+                hits.map(function(hit) {
+                    return(
+                        <BrowseCard key={hit.objectID} name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs}/>
+                    )
+                }
             )}
         </div>
       );
-    const CustomHits = connectHits(Hits);
+    const PostHits = connectHits(postHits);
+    
+    // const chefHits = ({ hits }) => (
+    //     <div className="hit-browse-wrapper">
+    //         {hits.length > 0 ? (<h1 className="search-item-header"> Chefs </h1>):(null)}
+    //         {
+    //             hits.map(function(hit) {
+    //                 return(
+                        
+    //                 )
+    //         }
+    //     )}
+    //     </div>
+    //   );
+    // const ChefHits = connectHits(chefHits);
 
     const Stats = ({ nbHits }) => (
         <h1 id="nb-results"> {nbHits} Results </h1>
@@ -57,27 +123,27 @@ export default function BrowseResults(props) {
       
     const CustomStats = connectStats(Stats)
     
-    useEffect(()=> {
-        console.log(location)
-    }, [location])
-
+    // useEffect(()=> {
+    //   searchURL = searchParams.get('search');
+    //   typeURL = searchParams.get('type');
+      
+    // }, [])
     return (
         <> 
             <CuisineFilter/>
             <Container className="px-4" style={{maxWidth: '83rem'}} fluid>
                 <Row>
-                    <InstantSearch searchClient={searchClient} indexName="searchPosts">
-                        <BrowseFilter type={type} price={price} rating={rating}/>
-                        <CustomStats/>
+                    
+                    <BrowseFilter type={typeURL}/>
 
-                        <div id="display-off"><RefinementList attribute="zipCode" defaultRefinement={[String(zipCode).substring(0,3)]}/></div>
-                        {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
-                        {cuisine ? (<MenuSelect id="menu-select" defaultRefinement={cuisine} attribute="cuisine"/>):(null)}
-                        {search ? (<InvisibleCustomSearchBox defaultRefinement={search}/>):(null)}
-                        <CustomHits/>
-                    </InstantSearch>
+                    <div id="display-off"><RefinementList attribute="zipCode" defaultRefinement={[String(zipCode).substring(0,3)]}/></div>
+                    {/* {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
+                    {cuisine ? (<MenuSelect id="menu-select" defaultRefinement={cuisine} attribute="cuisine"/>):(null)}
+                    {searchRef.current ? (<InvisibleCustomSearchBox defaultRefinement={searchRef.current.value}/>):(null)} */}
+                    <Results/>
 
                     <Col></Col>
+                    
                 </Row>
             </Container>
         </>

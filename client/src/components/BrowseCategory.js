@@ -74,7 +74,7 @@ export default function BrowseCategory(props) {
             <div id={sliderStyle} ref={slider}>
                 {categoryItems ? (
                     categoryItems.map(item =>{
-                        return <BrowseCard name={item.dishName} price={item.dishPrice} imgs={item.pictureURLs} id={item.id} username={item.username}/>;
+                        return <BrowseCard key={item.id} name={item.dishName} price={item.dishPrice} imgs={item.pictureURLs} id={item.id} username={item.username}/>;
                     })
                     ) : (
                         null

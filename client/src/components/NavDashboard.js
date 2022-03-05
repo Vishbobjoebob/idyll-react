@@ -189,6 +189,13 @@ export default function NavDashboard(props) {
         handleShowSignupChoose();
     }
 
+    async function handleSearchClick(e) {
+        e.preventDefault();
+        if (window.location.pathname === "/") {
+            navigate("/search")
+        }
+    }
+
     return (
         <>
             <div className="Toastify">
@@ -202,14 +209,11 @@ export default function NavDashboard(props) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <div className="searchwrapper">
+                        <div className="searchwrapper" onClick={handleSearchClick}>
                             <Search id="search-icon" size={20} style={{marginTop: '11px', pointerEvents: 'none'}} color="black" /> 
                             {/* <input type="text" class="search-click" name="" placeholder="" /> */}
                             <SearchFilter/>
                         </div>
-                        {/* <div class="search-icon-div" style={{paddingTop: '6px'}} onClick={handleShowSearch}> 
-                            <Search id="search-icon" size={20} color="black" /> 
-                        </div> */}
                         {(currentUser && userData.firstName) ? (
                             <><NavDropdown title={userData.username} id="basic-nav-dropdown">
                                     <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
@@ -277,7 +281,7 @@ export default function NavDashboard(props) {
                                             <label htmlFor="dish-price" id="password-label"> Password </label>
                                             <input ref = {passwordRefLogin} className="form-control green-border" type="password" id="password password-box" name="password" autoComplete="off" placeholder="Password"  required/><br></br>
 
-                                            <input class="form-check-input" type="checkbox" value="" id="remember-me"/> 
+                                            <input className="form-check-input" type="checkbox" value="" id="remember-me"/> 
                                             <label ref = {rememberMeRefLogin} className="form-check-label pl-2" for="remember-me" id="remember-me-label"> Remember Me </label>
                                             <br></br>
                                             <a href="/#" class="" onClick={() => {handleClose(); toggleResetPasswordMenu();}} id="forgot-password">Forgot password?</a>
@@ -285,12 +289,12 @@ export default function NavDashboard(props) {
                                             <input id="submit-btn" className="btn btn-primary mb-3" type="submit" value="Login"/>
                                         </form>
 
-                                        <div class="separator">
-                                            <div id = "left-line" class="line-bruh"></div>
+                                        <div className="separator">
+                                            <div id = "left-line" className="line-bruh"></div>
                                             <div id = "or"> OR </div>
-                                            <div id = "left-line" class="line-bruh"></div>
+                                            <div id = "left-line" className="line-bruh"></div>
                                         </div>
-                                        <div class="alternative-auth">
+                                        <div className="alternative-auth">
                                             <a id="google" href="/"><img id="logo" alt='' src={google_logo} width='54px' onClick={signupGoogle}/></a>
                                             <a id="apple" href="/"><img id="logo" alt='' src={apple_logo} width='122px'/></a>
                                         </div>
@@ -344,18 +348,18 @@ export default function NavDashboard(props) {
                                         <Modal.Title>Sign Up for Idyll</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <div class="signup-options">
-                                            <div class="option" id="email-and-password-option" onClick={switchToSignup}>
-                                                <div class="subpicture" id="email-pic"><PersonFill class="center-pic" color="black" size = {37}></PersonFill></div>
-                                                <a class="option-text" href="/#">Use email/password</a>
+                                        <div className="signup-options">
+                                            <div className="option" id="email-and-password-option" onClick={switchToSignup}>
+                                                <div className="subpicture" id="email-pic"><PersonFill className="center-pic" color="black" size = {37}></PersonFill></div>
+                                                <a className="option-text" href="/#">Use email/password</a>
                                             </div>
-                                            <div class="option" id="google-option" >
-                                                <div class="subpicture" id="google-pic"> <img class="center-pic" alt='' src={google_logo} width='36px'></img></div>
-                                                <a class="option-text" href="/#">Continue with Google</a>
+                                            <div className="option" id="google-option" >
+                                                <div className="subpicture" id="google-pic"> <img className="center-pic" alt='' src={google_logo} width='36px'></img></div>
+                                                <a className="option-text" href="/#">Continue with Google</a>
                                             </div>
-                                            <div class="option" id="apple-option" >
-                                                <div class="subpicture" id="apple-pic"> <img class="center-pic"  alt='' src={apple_logo} width='73px'></img></div>
-                                                <a class="option-text" href="/#">Continue With Apple</a>
+                                            <div className="option" id="apple-option" >
+                                                <div className="subpicture" id="apple-pic"> <img className="center-pic"  alt='' src={apple_logo} width='73px'></img></div>
+                                                <a className="option-text" href="/#">Continue With Apple</a>
                                             </div>
                                         </div>
 
@@ -371,7 +375,7 @@ export default function NavDashboard(props) {
                                         <Modal.Title> Contact Information </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <div class="signup-options">
+                                        <div className="signup-options">
                                             <label htmlFor="phone-num" className="control-label label-name"> Phone Number </label>
                                             <input ref = {firstNameRef} className="form-control" type="text" id="phone-num" name="phone-num" autoComplete="off" required/><br></br>
                                         </div>
