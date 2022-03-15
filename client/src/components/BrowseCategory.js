@@ -16,6 +16,7 @@ export default function BrowseCategory(props) {
     const [sliderStyle, setSliderStyle] = useState("slider");
     const [seeAll, setSeeAll] = useState("See All")
     const [showArrow, setShowArrow] = useState("")
+    const [customStyle, setCustomStyle] = useState("card-container")
     // eslint-disable-next-line no-unused-vars
     const { getZipCode } = useAuth();
     const [categoryItems, setCategoryItems] = useState();
@@ -45,10 +46,12 @@ export default function BrowseCategory(props) {
             setSliderStyle("slider-all");
             setSeeAll("Collapse")
             setShowArrow("off")
+            setCustomStyle("card-container-flex")
         } else {
             setSliderStyle("slider");
             setSeeAll("See All");
             setShowArrow("")
+            setCustomStyle("card-container")
         }
       };
 
@@ -74,7 +77,7 @@ export default function BrowseCategory(props) {
             <div id={sliderStyle} ref={slider}>
                 {categoryItems ? (
                     categoryItems.map(item =>{
-                        return <BrowseCard key={item.id} name={item.dishName} price={item.dishPrice} imgs={item.pictureURLs} id={item.id} username={item.username}/>;
+                        return <BrowseCard customStyle={customStyle} key={item.id} name={item.dishName} price={item.dishPrice} imgs={item.pictureURLs} id={item.id} username={item.username}/>;
                     })
                     ) : (
                         null

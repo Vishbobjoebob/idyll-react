@@ -1,0 +1,89 @@
+.info-column {
+    width:21rem;
+    height:auto;
+    border-right: 1px solid #DEDEDB;
+    border-left: 1px solid #DEDEDB;
+    padding:30px;
+}
+
+.seller-img-wrapper {
+    
+    text-align: center;
+}
+
+.seller-img {
+    width:276px;
+    height:350px;
+    object-fit: cover;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+    text-align:center;
+}
+
+.seller-name {
+    margin-top:20px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: left;
+    color: #31C940;
+}
+
+#seller-rating {
+    color: #FFAA1D;
+    float:right;
+    margin-top:5px;
+}
+
+.seller-description-wrapper {
+    margin-top:20px;
+}
+
+.seller-description {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #858A85;
+}
+
+.seller-info-details-label {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.seller-info-details {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+/* identical to box height */
+
+
+color: #858A85;
+}
+
+.seller-chat-btn {
+    margin-top: 20px;
+    width:100%;
+    height:50px;
+    background: #5AC865;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    color:white;
+}
+
+.seller-chat-btn:hover {
+    background:#31C940;
+}

@@ -6,9 +6,11 @@ import ResetPasswordModal from "./components/ResetPasswordModal";
 import BrowseResults from "./components/BrowseResults";
 import Details from "./components/Details";
 import SellerDetails from "./components/SellerDetails"
+import Profile from "./components/profile/Profile"
 import { AuthProvider } from './contexts/AuthContext';
 import { SearchProvider } from "./contexts/SearchContext";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import {InstantSearch} from "react-instantsearch-dom";
 import algoliasearch from "algoliasearch";
 
@@ -25,15 +27,6 @@ const searchClient = {
   },
 };
 
-// const search = InstantSearch({
-//   searchFunction(helper) {
-//     const container = document.querySelector('#results');
-//     container.style.display = helper.state.query === '' ? 'none' : '';
-
-//     helper.search();
-//   }
-// });
-
   return (
     <Router>
       <AuthProvider>
@@ -44,10 +37,11 @@ const searchClient = {
               {/* <Route path="/" element ={<><SliderTest/></>}/> */}
               <Route path="/sell" element ={<><Sell/></>}/>
               <Route path="/resetpassword" element ={<><ResetPasswordModal/></>}/>
-              <Route path="/" element ={<><ResetPasswordModal/></>}/>
+              <Route path="/" element ={<Navigate to="/search"/>}/>
               <Route path="/search" element ={<><BrowseResults key={window.location.pathname}/></>}/>
               <Route path="/details" element={<><Details/></>}/>
               <Route path="/sellerDetails" element={<><SellerDetails/></>}/>
+              <Route path="/profile" element={<><Profile/></>}/>
             </Routes>
           </InstantSearch>
         </SearchProvider>

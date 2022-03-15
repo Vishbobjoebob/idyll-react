@@ -19,7 +19,7 @@ export default function BrowseCard(props) {
 
     return (
         <>
-            <Card id="card-container"> 
+            <Card id={props.customStyle}> 
                 <div id="card-img-slider">
                     {props.imgs && props.imgs.length > 1 ? (
                         <>

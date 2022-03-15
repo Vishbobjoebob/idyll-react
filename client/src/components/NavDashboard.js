@@ -7,7 +7,7 @@ import google_logo from '../images/google_logo.png'
 import apple_logo from '../images/apple_logo.png'
 import {Modal, Container, Alert, NavDropdown, Navbar, Nav, } from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
-import {PersonFill, ChevronCompactLeft, Search} from "react-bootstrap-icons"
+import {PersonFill, ChevronCompactLeft, Search, CartFill, Cart} from "react-bootstrap-icons"
 import { ToastContainer, toast } from 'react-toastify';
 import SearchFilter from "./SearchFilter"
 import 'react-toastify/dist/ReactToastify.css';
@@ -218,7 +218,8 @@ export default function NavDashboard(props) {
                             <><NavDropdown title={userData.username} id="basic-nav-dropdown">
                                     <NavDropdown.ItemText> Welcome, {userData.firstName} </NavDropdown.ItemText>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="/" onClick={signout}>Log Out</NavDropdown.Item>
+                                    <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                                    <NavDropdown.Item color="red" href="/" onClick={signout}>Log Out</NavDropdown.Item>
                                 </NavDropdown><Nav.Link as={Link} to="/sell">Sell</Nav.Link></>
                         ) : (
                             <Nav.Link onClick={handleShow}> Log In </Nav.Link>

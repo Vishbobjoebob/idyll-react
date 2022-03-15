@@ -1,0 +1,22 @@
+.user-profile-mobile-menu-wrapper {
+    display:none;
+    height:66px;
+    background-color: #ADF3B4;
+    width: calc(100% + 135px);
+    margin-left:-75px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 75px;
+    padding-right:60px;
+}
+
+.user-profile-mobile-menu-select-wrapper {
+    width:100%;
+    background: #C4C4C4;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);    
+}
+@media(max-width:640px) {
+    .user-profile-mobile-menu-wrapper {
+        display:flex;
+    }
+}

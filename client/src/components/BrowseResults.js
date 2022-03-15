@@ -90,16 +90,18 @@ export default function BrowseResults(props) {
         // )
     });
     const postHits = ({ hits }) => (
-        <div className="hit-browse-wrapper">
+        <>
             {hits.length > 0 ? (<h1 className="search-item-header"> Items </h1>):(null)}
-            {
-                hits.map(function(hit) {
-                    return(
-                        <BrowseCard key={hit.objectID} name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs}/>
-                    )
-                }
-            )}
-        </div>
+            <div className="hit-browse-wrapper">
+                {
+                    hits.map(function(hit) {
+                        return(
+                            <BrowseCard id={hit.objectID} key={hit.objectID} name={hit.dishName} price={hit.dishPrice} imgs={hit.pictureURLs} username={hit.fullName}/>
+                        )
+                    }
+                )}
+            </div>
+        </>
       );
     const PostHits = connectHits(postHits);
     
@@ -131,7 +133,7 @@ export default function BrowseResults(props) {
     return (
         <> 
             <CuisineFilter/>
-            <Container className="px-4" style={{maxWidth: '83rem'}} fluid>
+            <Container className="px-4" style={{maxWidth: '83rem', minWidth:'24rem'}} fluid>
                 <Row>
                     
                     <BrowseFilter type={typeURL}/>
