@@ -169,7 +169,7 @@ function Apply (props) {
                 </Form>
                 
             </Container>
-            <Container style={{height:'4rem', borderTop:"1px solid #DEDEDB", position:'absolute', bottom:'0px'}} fluid>
+            <Container style={{height:'4rem', borderTop:"1px solid #DEDEDB", position:'relative', bottom:'0px'}} fluid>
                 <div className="verify-seller-link-question"> <div>Already applied?</div> <a href="/verifySeller"><div className="verify-seller-link"> Verify here!</div></a></div>
             </Container>
         </Container>

@@ -1,7 +1,7 @@
 #apply-container {
     max-width: 650px;
     background:#ffffff;
-    height:600px;
+    min-height:calc(100vh-83px);
     /* border:1px solid #DEDEDB; */
     border-radius:10px;
 }
