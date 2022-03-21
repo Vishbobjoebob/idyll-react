@@ -2,6 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const admin = require('./config/firebase-config')
 const middleware = require('./middleware');
+const fetch = require('node-fetch')
 
 const app = express();
 const db = admin.firestore();
@@ -248,6 +249,47 @@ app.post('/api/uploadApplication', (req, res) => {
         (async() => {
             try {
                 const applicationUpload = await db.collection('chefApplications').add(application);
+                fetch(
+                    'https://discord.com/api/webhooks/955340429417664604/uvdRZ9F8eet05BZxxu5rcjx1GK_rHgK4LteDHWURtPzd2zXb3aCa7y-2YP9khz7M_VzR',
+                    {
+                      method: 'post',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        "content": null,
+                        "embeds": [
+                          {
+                            "title": "New Chef Application",
+                            "color": 5814783,
+
+                            "fields": [
+                              {
+                                "name": "Email",
+                                "value": userData.email,
+                              },
+                              {
+                                "name": "Full Name",
+                                "value": userData.firstName + " " + userData.lastName,
+                              },
+                              {
+                                "name": "Phone Number",
+                                "value": userData.phoneNumber,
+                              },
+                              {
+                                "name": "Chef Description",
+                                "value": chefDescription,
+                              },
+                              {
+                                  "name": "Raw JSON",
+                                  "value": '```' +JSON.stringify(application) +'```',
+                              }
+                            ]
+                          }
+                        ]
+                      })
+                    }
+                  );
                 return res.status(200).send({"success": true});
                 } catch (error) {
                 console.log(error);

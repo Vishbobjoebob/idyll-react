@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import 'react-loading-skeleton/dist/skeleton.css'
 import '../../css/verify-seller/apply.css'
-import { Container, Row, Dropdown, Form} from "react-bootstrap"
+import { Container, Row, Dropdown, Form, Button} from "react-bootstrap"
 import Select, {components} from "react-select"
 import {ArrowRightCircleFill, ArrowLeftCircleFill} from "react-bootstrap-icons"
 import {useNavigate} from "react-router-dom"
@@ -63,8 +63,8 @@ function Apply (props) {
 
         let res = await axios({
             method: 'post',
-            // url:'http://localhost:5000/api/uploadApplication',
-            url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadApplication',
+            url:'http://localhost:5000/api/uploadApplication',
+            // url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadApplication',
             data: application, 
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -161,7 +161,9 @@ function Apply (props) {
                     <div style={{display: "flex", width:"100%", justifyContent:"right", alignItems:"center", marginTop:"30px"}}>
                         {loading ? 
                             <Loader className="loader" type="ThreeDots" color="#568850" height={80} width={80} /> :
-                            <button className="apply-continue-btn"> Apply <ArrowRightCircleFill size={20} color={"white"}/> </button>
+                            <Button style={{zIndex: '100'}} type="submit" className="apply-continue-btn"> 
+                                Apply <ArrowRightCircleFill size={20} color={"white"}/> 
+                            </Button>
                         }
                     </div>
                 </Form>
