@@ -6,16 +6,29 @@ import sellerIMG from "../../images/henrylfg.PNG"
 import Rating from '@mui/material/Rating';
 import {BookmarkCheckFill, HouseFill, LockFill, PencilFill, GearWideConnected} from "react-bootstrap-icons"
 import EditAccountInfo from "./EditAccountInfo"
+import AccountOverview from "./AccountOverview"
 import MobileMenu from './MobileMenu';
+import { useAuth } from "../../contexts/AuthContext"
+import { Routes, Route } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
 
 
-function Profile () {
+function Profile (props) {
+
+    const {userData} = useAuth();
+    const navigate = useNavigate();
+    const [componentURLValue, setComponentURLValue] = useState();
+
+    useEffect(()=>{
+        setComponentURLValue(window.location.pathname);
+    },[window.location.pathname])
+
     return ( 
-        // <div style={{width:'100vw', height:'100vh', padding:0, background:'#ADF3B4'}}>
-            <Container className="px-0 mb-4" style={{maxWidth: '83rem', minWidth:'24rem', background:'#ffffff', display:'flex'}} fluid>
+        <Container style={{padding:0, background:'#83E999'}} fluid>
+            <Container className="px-0" style={{maxWidth: '83rem', minWidth:'24rem', background:'#ffffff', display:'flex'}} fluid>
                 <div className="user-profile-navbar">
                     <div className="user-profile-name-wrapper">
-                        <h1 className="user-profile-name"> Henry Tang </h1>
+                        <h1 className="user-profile-name"> {userData.firstName + " " + userData.lastName} </h1>
                     </div>
                     <div className="user-profile-img-wrapper">
                         <img className="user-profile-img" src={sellerIMG}></img>
@@ -31,7 +44,7 @@ function Profile () {
                                 </div>
                             </div>
                         </div>
-                        <div className="side-selection-bar-element">
+                        <div className="side-selection-bar-element" onClick={()=> navigate("/profile/accountOverview")}>
                             <div className="side-selection-bar-element-label" id="sidebar-element">
                             <div className="side-selection-bar-element-label-icon">
                                     <HouseFill size={24}/> 
@@ -41,7 +54,7 @@ function Profile () {
                                 </div>
                             </div>
                         </div>
-                        <div className="side-selection-bar-element">
+                        <div className="side-selection-bar-element" onClick={() => navigate("/profile/editAccountInfo")}>
                             {/* <div className="side-selection-bar-element-selected"/> */}
                             <div className="side-selection-bar-element-label" id="sidebar-element">
                             <div className="side-selection-bar-element-label-icon">
@@ -76,21 +89,19 @@ function Profile () {
                 </div>
                 <Container style={{
                     maxWidth: '65.5rem', 
-                    height:'calc(100vh-80px)', 
                     paddingLeft:'60px',
                     paddingRight:'60px',  
                     background:'#ffffff', 
                     float:'right', 
-                    position:'relative', 
-                    borderRight: '1px solid #DEDEDB'}} 
+                    position:'relative'}} 
                     fluid>
                     
-                    <MobileMenu/>
-                    <EditAccountInfo/>
+                    <MobileMenu componentURLValue={componentURLValue}/>    
                     
+                    {props.profileComponent}
                 </Container>
             </Container>
-        // </div>
+        </Container>
      );
 }
 

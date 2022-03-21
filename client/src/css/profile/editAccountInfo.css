@@ -68,6 +68,11 @@
     margin-right:30px;
 
     color: #969090;
+    background-color: #FFFFFF;
+}
+
+.edit-account-info-cancel-btn:hover {
+    color: #000;
 }
 
 .edit-account-info-submit-btn {

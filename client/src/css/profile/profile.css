@@ -53,7 +53,6 @@
     border-top: 1px solid #DEDEDB;
     display:flex;
     align-items:center;
-    transition:0.5s;
 }
 
 .side-selection-bar-element-selected {
@@ -64,7 +63,7 @@
 
 .side-selection-bar-element:hover {
     cursor:pointer;
-    background:#FAFAFA;
+    background:#F0F0F0;
 }
 .side-selection-bar-element-label {
     font-family: 'Inter';

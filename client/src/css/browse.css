@@ -198,12 +198,11 @@ overflow-x: hidden;
 #card-container {
     /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);  */
     margin-bottom: 15px;
-    border-radius: 4px;
+    border-radius: 10px;
     transition:1s;
     width:20rem;
-    height:250px;
     flex-shrink: 0;
-    margin-right:25px;
+    margin-right:15px;
 }
 
 #card-container:hover {
@@ -217,6 +216,8 @@ overflow-x: hidden;
 #card-img {
     object-fit: cover;
     height:150px;
+    border-top-right-radius: 5px;
+    border-top-left-radius:5px;
 }
 #card-container #card-img{
     transition-duration: 0.2s;
@@ -230,19 +231,33 @@ overflow-x: hidden;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight:700;
+    font-weight:600;
+    font-size:16px;
 }
 
 #card-price {
-    margin-top:5%;
-    padding:none;
+    font-size:14px;
+    color:#858A85;
+    padding:0;
+    margin-bottom: 0;
+}
+#card-author {
+    font-size:14px;
+    color:#858A85;
+    padding:0;
+    margin-bottom: 0;
 }
 
 #card-time {
     margin-top:-40px;
     float:right;
+    font-size:14px;
+    color:#858A85;
 }
 
+#card-cart:hover {
+    background-color: #f0f0f0;
+}
 .browse-row {
     display:flex;
     
@@ -355,9 +370,8 @@ overflow-x: hidden;
     display: none; }
 
 .cuisine-slider-item {
-    width:85px;
+    width:80px;
     height:85px;
-    margin-right:10px;
     flex-shrink:0;
     text-align: center;
     
@@ -370,12 +384,15 @@ overflow-x: hidden;
     background: #e4e7eb;
 }
 .cuisine-slider-item img {
-    width:60px;
-    height:60px;
+    margin-top:10px;
+    width:45px;
+    height:45px;
     z-index:-499;
+    padding-bottom:10px;
 }
 .cuisine-slider-item-txt {
-    font-size:14px;
+    font-size:13px;
+    font-weight:600;
     text-align: center;
     z-index:-499;
 }

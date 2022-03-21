@@ -13,6 +13,10 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {Navigate} from 'react-router-dom'
 import {InstantSearch} from "react-instantsearch-dom";
 import algoliasearch from "algoliasearch";
+import EditAccountInfo from "./components/profile/EditAccountInfo";
+import AccountOverview from "./components/profile/AccountOverview";
+import VerifySeller from "./components/seller-verification/VerifySeller";
+import Apply from "./components/seller-verification/Apply"
 
 function App() {  
   const algoliaClient = algoliasearch(
@@ -41,7 +45,11 @@ const searchClient = {
               <Route path="/search" element ={<><BrowseResults key={window.location.pathname}/></>}/>
               <Route path="/details" element={<><Details/></>}/>
               <Route path="/sellerDetails" element={<><SellerDetails/></>}/>
-              <Route path="/profile" element={<><Profile/></>}/>
+              <Route path="/profile" element ={<Navigate to="/profile/accountOverview"/>}/>
+              <Route path="/profile/accountOverview" element ={<Profile profileComponent={<AccountOverview/>}/>}/>
+              <Route path="/profile/editAccountInfo" element ={<Profile profileComponent={<EditAccountInfo/>}/>}/>
+              <Route path="/verifySeller" element ={<VerifySeller/>}/>
+              <Route path="/apply" element ={<Apply/>}/>
             </Routes>
           </InstantSearch>
         </SearchProvider>

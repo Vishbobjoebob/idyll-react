@@ -1,0 +1,122 @@
+#verify-seller-container {
+    max-width: 510px;
+    background:#ffffff;
+    height:392px;
+    /* border:1px solid #DEDEDB; */
+    border-radius:10px;
+    margin-top:50px;
+}
+.verify-seller-header {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.verify-seller-input {
+    display:flex;
+    width:100%;
+    background: #ffffff;
+    border-radius: 10px;
+    height: 48px;
+    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top:50px;
+    border:1px solid #DEDEDB
+    
+}
+.verify-seller-input:hover {
+    border:1px solid black
+}
+
+.verify-seller-input-label {
+    width:48px;
+    background: #F5F5F5;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verify-seller-input-box {
+    background-color: "#F5F5F5";
+    width: calc(100% - 48px);
+    padding:10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.verify-seller-input:focus-within {
+    border:1px solid #000000;
+}
+
+.verify-seller-input-box:focus {
+    outline:none;
+}
+
+.form-red-txt {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    margin-top:20px;
+
+
+    color: #E25637;
+}
+
+.verify-seller-button {
+    width: 100%;
+    height: 49px;
+
+     background: #E3CB75;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+
+    margin-top:30px;
+
+    color: #FFFFFF;
+}
+
+.verify-seller-button:hover {
+    background: #C7AF5C;
+}
+
+.verify-seller-link-question {
+    display:flex;
+    width:100%;
+    justify-content:center;
+    font-weight: 400;
+    font-size:16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    margin-top:20px;
+
+    color: #000000;
+
+}
+
+.verify-seller-link {
+    margin-left:5px;
+}
+
+@media(max-width: 510px) {
+    #verify-seller-container {
+        margin-top:20px;
+        border-top:none;
+        border-bottom:none;
+    }
+}

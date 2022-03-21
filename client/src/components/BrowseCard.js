@@ -4,7 +4,7 @@ import '../css/browse.css'
 import { ChevronRight, ChevronLeft } from "react-bootstrap-icons";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-
+import {Cart} from "react-bootstrap-icons"
 export default function BrowseCard(props) {
     const slider = React.useRef(null);
 
@@ -19,7 +19,7 @@ export default function BrowseCard(props) {
 
     return (
         <>
-            <Card id={props.customStyle}> 
+            <Card border="light" bg="light" id={props.customStyle}> 
                 <div id="card-img-slider">
                     {props.imgs && props.imgs.length > 1 ? (
                         <>
@@ -34,9 +34,14 @@ export default function BrowseCard(props) {
                     </Slider>
                 </div>
                 <Card.Body as={Link} to={`/details?id=${props.id}`} style={{textDecoration: 'none', color: 'black'}}>
-                    <Card.Title id="card-title">{props.name}</Card.Title>
-                    <Card.Text id="card-price">${props.price}</Card.Text>
-                    <Card.Text id="card-time">Posted by {props.username}</Card.Text>
+                    <Card.Title id="card-title">{props.name}
+                        <div id="card-cart" style={{width:'21px', height:'24px', float:'right', borderRadius: '5px'}}><Cart size={21} color={"#83E999"}/></div>
+                    </Card.Title>
+                    
+                    <div style={{marginTop:'20px', display:'flex', justifyContent:'space-between', padding:0}}>
+                        <Card.Text id="card-author">{props.username}</Card.Text>
+                        <Card.Text id="card-price" style={{float:'right'}}>${props.price}</Card.Text>
+                    </div>
                 </Card.Body>
             </Card>
         </>

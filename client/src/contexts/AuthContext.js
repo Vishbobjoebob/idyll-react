@@ -23,6 +23,8 @@ export function AuthProvider ({ children }) {
         let res = await axios.get('https://ipapi.co/json/');
         setZipCode(res.data.postal);
         return res.data.postal;
+        // setZipCode(30024);
+        // return 30024;
     }
 
     async function signup(email, password, username, firstName, lastName, phoneNumber) {

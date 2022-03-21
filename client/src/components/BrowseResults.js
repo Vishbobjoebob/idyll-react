@@ -132,21 +132,23 @@ export default function BrowseResults(props) {
     // }, [])
     return (
         <> 
-            <CuisineFilter/>
-            <Container className="px-4" style={{maxWidth: '83rem', minWidth:'24rem'}} fluid>
-                <Row>
-                    
-                    <BrowseFilter type={typeURL}/>
+            <Container style={{ position:'relative', padding:0, background:'#83E999'}} fluid>
+                <CuisineFilter/>
+                <Container className="px-4" style={{maxWidth: '83rem', minWidth:'24rem', background:'#ffffff'}} fluid>
+                    <Row>
+                        
+                        <BrowseFilter type={typeURL}/>
 
-                    <div id="display-off"><RefinementList attribute="zipCode" defaultRefinement={[String(zipCode).substring(0,3)]}/></div>
-                    {/* {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
-                    {cuisine ? (<MenuSelect id="menu-select" defaultRefinement={cuisine} attribute="cuisine"/>):(null)}
-                    {searchRef.current ? (<InvisibleCustomSearchBox defaultRefinement={searchRef.current.value}/>):(null)} */}
-                    <Results/>
-
-                    <Col></Col>
-                    
-                </Row>
+                        <div id="display-off"><RefinementList attribute="zipCode" defaultRefinement={[String(zipCode).substring(0,3)]}/></div>
+                        {/* {type ? (<MenuSelect id="menu-select" defaultRefinement={type} attribute="dishType"/>):(null)}
+                        {cuisine ? (<MenuSelect id="menu-select" defaultRefinement={cuisine} attribute="cuisine"/>):(null)}
+                        {searchRef.current ? (<InvisibleCustomSearchBox defaultRefinement={searchRef.current.value}/>):(null)} */}
+                        <Results/>
+                            
+                        <Col></Col>
+                        
+                    </Row>
+                </Container>
             </Container>
         </>
     )

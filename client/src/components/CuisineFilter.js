@@ -5,7 +5,21 @@ import { useNavigate } from "react-router-dom";
 import {useSearch} from "../contexts/SearchContext";
 import {Container, Row, Col} from "react-bootstrap"
 import {ChevronLeft, ChevronRight} from "react-bootstrap-icons";
-import FoodIMG from "../images/food.png";
+import all_food from "../images/food-icons/all_food.png"
+import african_food from "../images/food-icons/african_food.png"
+import american_food from "../images/food-icons/american_food.png";
+import british_food from "../images/food-icons/british_food.png";
+import chinese_food from "../images/food-icons/chinese_food.png";
+import french_food from "../images/food-icons/french_food.png";
+import german_food from "../images/food-icons/german_food.png"
+import greek_food from "../images/food-icons/greek_food.png"
+import indian_food from "../images/food-icons/indian_food.png";
+import italian_food from "../images/food-icons/italian_food.png";
+import japanese_food from "../images/food-icons/japanese_food.png";
+import korean_food from "../images/food-icons/korean_food.png";
+import mexican_food from "../images/food-icons/mexican_food.png";
+import thai_food from "../images/food-icons/thai_food.png";
+
 import {connectMenu} from 'react-instantsearch-dom'
 
 export default function CuisineFilter(props) {
@@ -53,69 +67,60 @@ export default function CuisineFilter(props) {
             handleCuisineClick(event);
         }}>
                 <div className="cuisine-slider-item" id="all-food" data-value="" >
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={all_food}></img>
                     <div className="cuisine-slider-item-txt">All</div>
                 </div>
+                <div className="cuisine-slider-item" id="all-food" data-value="" >
+                    <img className="food-icon-img" alt="" src={african_food}></img>
+                    <div className="cuisine-slider-item-txt">African</div>
+                </div>
                 <div className="cuisine-slider-item" id="all-food" data-value="American">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={american_food}></img>
                     <div className="cuisine-slider-item-txt">American</div>
                 </div>
+                <div className="cuisine-slider-item" id="all-food" data-value="British">
+                    <img className="food-icon-img" alt="" src={british_food}></img>
+                    <div className="cuisine-slider-item-txt">British</div>
+                </div>
                 <div className="cuisine-slider-item" id="all-food" data-value="Chinese">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={chinese_food}></img>
                     <div className="cuisine-slider-item-txt">Chinese</div>
                 </div>
                 <div className="cuisine-slider-item" id="all-food" data-value="French">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={french_food}></img>
                     <div className="cuisine-slider-item-txt">French</div>
                 </div>
+                <div className="cuisine-slider-item" id="all-food" data-value="German">
+                    <img className="food-icon-img" alt="" src={german_food}></img>
+                    <div className="cuisine-slider-item-txt">German</div>
+                </div>
+                <div className="cuisine-slider-item" id="all-food" data-value="Greek">
+                    <img className="food-icon-img" alt="" src={greek_food}></img>
+                    <div className="cuisine-slider-item-txt">Greek</div>
+                </div>
                 <div className="cuisine-slider-item" id="all-food">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={indian_food}></img>
                     <div className="cuisine-slider-item-txt">Indian</div>
                 </div>
                 <div className="cuisine-slider-item" id="all-food">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={italian_food}></img>
                     <div className="cuisine-slider-item-txt">Italian</div>
                 </div>
                 <div className="cuisine-slider-item" id="all-food">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={japanese_food}></img>
                     <div className="cuisine-slider-item-txt">Japanese</div>
                 </div>
                 <div className="cuisine-slider-item" id="all-food">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={korean_food}></img>
                     <div className="cuisine-slider-item-txt">Korean</div>
                 </div>
                 <div className="cuisine-slider-item" id="all-food">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={mexican_food}></img>
                     <div className="cuisine-slider-item-txt">Mexican</div>
                 </div>
                 <div className="cuisine-slider-item" id="all-food">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
+                    <img className="food-icon-img" alt="" src={thai_food}></img>
                     <div className="cuisine-slider-item-txt">Thai</div>
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    <img className="food-icon-img" alt="" src={FoodIMG}></img>
-                    <div className="cuisine-slider-item-txt">Thai</div>
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    
-                </div>
-                <div className="cuisine-slider-item" id="all-food">
-                    
                 </div>
             </div>
     );
@@ -123,8 +128,7 @@ export default function CuisineFilter(props) {
     const CuisineSelect = connectMenu(cuisineSelect);
     return (
         <>  
-            <div className="search-container">
-                <Container className="px-4" style={{maxWidth: '83rem'}} fluid>
+             <Container className="px-4" style={{maxWidth: '83rem', background: '#FBFBFB'}} fluid>
                     <Row>
                         <div id="cuisine-slider-arrows">
                                 <div className={leftArrowStyle} id="cuisine-slider-left-arrow" onClick={() => scroll(-350)}>
@@ -137,8 +141,7 @@ export default function CuisineFilter(props) {
                         <CuisineSelect attribute={"cuisine"}/>
                         <Col></Col>
                     </Row>
-                </Container>
-            </div>
+            </Container>
             <div id="green-line"></div>
             
         </>

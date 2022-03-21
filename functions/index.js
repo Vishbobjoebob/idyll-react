@@ -38,12 +38,14 @@ app.get('/api/getData', (req, res)=>{
                     const lastName = doc.data()['lastName']
                     const username = doc.data()['username']
                     const phoneNumber = doc.data()['phoneNumber']
+                    const email = doc.data()['email']
                     console.log(firstName);
                     return res.json({
                         firstName: firstName,
                         lastName: lastName,
                         username: username,
-                        phoneNumber: phoneNumber
+                        phoneNumber: phoneNumber,
+                        email: email,
                     })
                     
                 } else {
@@ -147,6 +149,47 @@ app.post('/api/signup', (req, res) => {
             try {
                 const mainPostDocRef = await db.collection('posts').doc(`!${zipCode.substring(0,3)}!`).collection('items').add(dishObject);
                 const searchPostDocRef = await db.collection('searchPosts').doc(mainPostDocRef.id).set(dishObject);
+                return res.status(200).send({"success": true});
+                } catch (error) {
+                console.log(error);
+                return res.status(200).send({"success": false});
+                }
+        })();
+    } else {
+        return res.json({message: 'Unauthorized'});
+    }
+});
+
+app.post('/api/uploadApplication', (req, res) => {
+    const userData = req.body.userData;
+    const chefDescription = req.body.chefDescription;
+    const cuisines = req.body.cuisines;
+    const itemDescription = req.body.itemDescription;
+    const imageUpload = req.body.imageUpload;
+
+    let application = {
+        chefDescription: chefDescription,
+        cuisines: cuisines,
+        itemDescription: itemDescription,
+        imageUpload: imageUpload
+    }
+
+    console.log(application);
+
+    console.log('before auth')
+    const auth = req.user;
+
+    if (auth) {
+        console.log('in auth');
+
+        userData.uid = auth.uid;
+        userData.email = auth.email;
+
+        application.userData = userData;
+
+        (async() => {
+            try {
+                const applicationUpload = await db.collection('chefApplications').add(application);
                 return res.status(200).send({"success": true});
                 } catch (error) {
                 console.log(error);

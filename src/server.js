@@ -218,7 +218,46 @@ app.post('/api/signup', (req, res) => {
         return res.json({message: 'Unauthorized'});
     }
 });
+app.post('/api/uploadApplication', (req, res) => {
+    const userData = req.body.userData;
+    const chefDescription = req.body.chefDescription;
+    const cuisines = req.body.cuisines;
+    const itemDescription = req.body.itemDescription;
+    const imageUpload = req.body.imageUpload;
 
+    let application = {
+        chefDescription: chefDescription,
+        cuisines: cuisines,
+        itemDescription: itemDescription,
+        imageUpload: imageUpload
+    }
+
+    console.log(application);
+
+    console.log('before auth')
+    const auth = req.user;
+
+    if (auth) {
+        console.log('in auth');
+
+        userData.uid = auth.uid;
+        userData.email = auth.email;
+
+        application.userData = userData;
+
+        (async() => {
+            try {
+                const applicationUpload = await db.collection('chefApplications').add(application);
+                return res.status(200).send({"success": true});
+                } catch (error) {
+                console.log(error);
+                return res.status(200).send({"success": false});
+                }
+        })();
+    } else {
+        return res.json({message: 'Unauthorized'});
+    }
+});
 app.get('/getBrowseData/:zipcode', (req, res) => {
     const zip = req.params.zipcode;
     const area = zip.substring(0,3);
