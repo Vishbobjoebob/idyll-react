@@ -132,7 +132,7 @@ export default function BrowseResults(props) {
     // }, [])
     return (
         <> 
-            <Container style={{ position:'relative', padding:0, background:'#83E999'}} fluid>
+            <Container style={{ position:'relative', padding:0, background:'#F1F1F1'}} fluid>
                 <CuisineFilter/>
                 <Container className="px-4" style={{maxWidth: '83rem', minWidth:'24rem', background:'#ffffff'}} fluid>
                     <Row>

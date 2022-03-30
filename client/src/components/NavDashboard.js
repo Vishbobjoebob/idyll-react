@@ -201,7 +201,7 @@ export default function NavDashboard(props) {
             <div className="Toastify">
                  <ToastContainer />
             </div>
-            <Navbar sticky="top" style={{borderBottom: "5px solid #15BF3A", background: 'white'}} expand="lg" className="px-4 py-0">
+            <Navbar sticky="top" style={{borderBottom: "5px solid #83EC8D", background: 'white'}} expand="lg" className="px-4 py-0">
                 <Container>
                     <Navbar.Brand as={Link} to="/">
                      <img src={logo} className="img" alt=""></img>

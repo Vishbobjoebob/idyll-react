@@ -203,6 +203,7 @@ app.post('/api/uploadApplication', (req, res) => {
                           {
                             "title": "New Chef Application",
                             "color": 5814783,
+
                             "fields": [
                               {
                                 "name": "Email",
@@ -210,7 +211,7 @@ app.post('/api/uploadApplication', (req, res) => {
                               },
                               {
                                 "name": "Full Name",
-                                "value": userData.firstNName + " " + userData.lastName,
+                                "value": userData.firstName + " " + userData.lastName,
                               },
                               {
                                 "name": "Phone Number",
@@ -219,6 +220,10 @@ app.post('/api/uploadApplication', (req, res) => {
                               {
                                 "name": "Chef Description",
                                 "value": chefDescription,
+                              },
+                              {
+                                  "name": "Raw JSON",
+                                  "value": '```' +JSON.stringify(application) +'```',
                               }
                             ]
                           }
@@ -236,7 +241,6 @@ app.post('/api/uploadApplication', (req, res) => {
         return res.json({message: 'Unauthorized'});
     }
 });
-
 app.get('/getPost/:zipCode/:id', (req, res) => {
     const id = req.params.id;
     const zipCode = req.params.zipCode;

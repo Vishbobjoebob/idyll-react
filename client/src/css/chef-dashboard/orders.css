@@ -1,0 +1,263 @@
+.orders-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: 10px; */
+    grid-auto-rows: minmax(100px, auto);
+    height:100%;
+}
+
+.first-col {
+    grid-column: 1;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:30px;
+    padding-left:30px;
+    padding-right:25px;
+    width:100%;
+}
+
+.second-col {
+    grid-column: 2;
+    height:100%;
+    padding-top:30px;
+    padding-left:30px;
+    padding-right:25px;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.third-col {
+    grid-column: 3;
+    height:100%;
+    padding-top:30px;
+    padding-left:30px;
+    padding-right:25px;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats-wrapper {
+    background-color: #fff;
+    height:200px;
+    width:100%;
+    border: 1px solid #DEDEDB;
+    border-radius: 15px;
+}
+
+.stats-wrapper-first-row {
+    width:100%;
+    height: 100px;
+    background-color: #fff;
+    box-sizing: border-box;
+    display:flex;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+}
+
+.new-orders-stat-wrapper {
+    height:100px;
+    width:100%;
+    justify-content: center;
+    border-bottom: 1px solid #DEDEDB;
+    border-right: 1px solid #DEDEDB;
+}
+
+.pending-orders-stat-wrapper {
+    height:100px;
+    width:100%;
+    justify-content: center;
+    border-bottom: 1px solid #DEDEDB;
+}
+
+.completed-orders-stat-wrapper {
+    height:100px;
+    width:100%;
+    justify-content: center;
+    border-bottom: 1px solid #DEDEDB;
+    border-left: 1px solid #DEDEDB;
+}
+
+.stat {
+    margin-top:25px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    text-align: center;
+}
+
+#new-orders-stat {  
+    color: #28A935;
+}
+
+#pending-orders-stat {
+    color: #F5B02A;
+}
+
+#completed-orders-stat {
+    color: #2155DC;
+}
+
+.stat-text {
+    text-align: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDC2BD;
+
+}
+
+.money-stat-wrapper {
+    width: 100%;
+
+    height:100px;
+    align-self:flex-end;
+}
+
+.money {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #000000;
+    margin-top:20px;
+}
+
+.money-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #BDC2BD;
+}
+
+.new-orders-wrapper {
+    background-color: #fff;
+    height:auto;
+    max-height:100%;
+    width:100%;
+    border: 1px solid #DEDEDB;
+    border-radius: 15px;
+    margin-top:50px;
+}
+
+.new-orders-header {
+    width:100%;
+    height:60px;
+    background-color: #5EDC6B;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    padding-left:30px;
+    padding-right:30px;
+    color: #FFFFFF;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display:flex;
+    align-items: center;
+}
+
+.pending-orders-wrapper {
+    background-color: #fff;
+    height:auto;
+    max-height:100%;
+    width:100%;
+    border: 1px solid #DEDEDB;
+    border-radius: 15px;
+}
+
+.pending-orders-header {
+    width:100%;
+    height:60px;
+    background-color: #FF964A;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    padding-left:30px;
+    padding-right:30px;
+    color: #FFFFFF;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    display:flex;
+    align-items: center;
+}
+
+.completed-orders-wrapper {
+    background-color: #fff;
+    height:auto;
+    max-height:100%;
+    width:100%;
+    border: 1px solid #DEDEDB;
+    border-radius: 15px;
+}
+
+.completed-orders-header {
+    width:100%;
+    height:60px;
+    background-color: #5B9AF9;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    padding-left:30px;
+    padding-right:30px;
+    color: #FFFFFF;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    display:flex;
+    align-items: center;
+}
+@media(max-width: 1450px) {
+    .orders-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        height:auto
+    }
+
+    .third-col {
+        grid-column: 1/3;
+
+    }
+}
+
+@media(max-width:1034px) {
+    .orders-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .first-col {
+        grid-column:1/3;
+    }
+    .second-col {
+        grid-column:1/3;
+    }
+    .third-col{
+        grid-column:1/3;
+    }
+}
+

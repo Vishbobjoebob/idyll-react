@@ -63,8 +63,8 @@ function Apply (props) {
 
         let res = await axios({
             method: 'post',
-            url:'http://localhost:5000/api/uploadApplication',
-            // url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadApplication',
+            // url:'http://localhost:5000/api/uploadApplication',
+            url:'https://us-central1-idyll-29e66.cloudfunctions.net/server/api/uploadApplication',
             data: application, 
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -161,9 +161,9 @@ function Apply (props) {
                     <div style={{display: "flex", width:"100%", justifyContent:"right", alignItems:"center", marginTop:"30px"}}>
                         {loading ? 
                             <Loader className="loader" type="ThreeDots" color="#568850" height={80} width={80} /> :
-                            <Button style={{zIndex: '100'}} type="submit" className="apply-continue-btn"> 
+                            <button style={{zIndex: '100'}} type="submit" className="apply-continue-btn"> 
                                 Apply <ArrowRightCircleFill size={20} color={"white"}/> 
-                            </Button>
+                            </button>
                         }
                     </div>
                 </Form>

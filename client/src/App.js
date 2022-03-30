@@ -17,6 +17,7 @@ import EditAccountInfo from "./components/profile/EditAccountInfo";
 import AccountOverview from "./components/profile/AccountOverview";
 import VerifySeller from "./components/seller-verification/VerifySeller";
 import Apply from "./components/seller-verification/Apply"
+import ChefDashboard from "./components/chef-dashboard/ChefDashboard"
 
 function App() {  
   const algoliaClient = algoliasearch(
@@ -39,7 +40,7 @@ const searchClient = {
             <NavDashboard/>
             <Routes>
               {/* <Route path="/" element ={<><SliderTest/></>}/> */}
-              <Route path="/sell" element ={<><Sell/></>}/>
+              <Route path="/sell" element ={<><ChefDashboard/></>}/>
               <Route path="/resetpassword" element ={<><ResetPasswordModal/></>}/>
               <Route path="/" element ={<Navigate to="/search"/>}/>
               <Route path="/search" element ={<><BrowseResults key={window.location.pathname}/></>}/>
